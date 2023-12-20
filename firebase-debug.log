@@ -1,0 +1,269 @@
+[debug] [2023-12-20T01:04:53.734Z] ----------------------------------------------------------------------
+[debug] [2023-12-20T01:04:53.735Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2023-12-20T01:04:53.735Z] CLI Version:   12.5.2
+[debug] [2023-12-20T01:04:53.735Z] Platform:      darwin
+[debug] [2023-12-20T01:04:53.735Z] Node Version:  v18.18.0
+[debug] [2023-12-20T01:04:53.739Z] Time:          Tue Dec 19 2023 22:04:53 GMT-0300 (hora estándar de Argentina)
+[debug] [2023-12-20T01:04:53.739Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-12-20T01:04:53.778Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-12-20T01:04:53.779Z] > authorizing via signed-in user (events.fire.img@gmail.com)
+[debug] [2023-12-20T01:04:53.779Z] [iam] checking project xtra-talent for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-12-20T01:04:53.780Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/xtra-talent:testIamPermissions [none]
+[debug] [2023-12-20T01:04:53.780Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/xtra-talent:testIamPermissions x-goog-quota-user=projects/xtra-talent
+[debug] [2023-12-20T01:04:53.780Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/xtra-talent:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-12-20T01:04:54.831Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/xtra-talent:testIamPermissions 200
+[debug] [2023-12-20T01:04:54.832Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/xtra-talent:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-12-20T01:04:54.834Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/xtra-talent [none]
+[debug] [2023-12-20T01:04:55.226Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/xtra-talent 200
+[debug] [2023-12-20T01:04:55.227Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/xtra-talent {"projectId":"xtra-talent","projectNumber":"204270796123","displayName":"xtra-talent","name":"projects/xtra-talent","resources":{"hostingSite":"xtra-talent"},"state":"ACTIVE","etag":"1_02b0aa23-5b5f-47d7-a1f2-70aa9fb3add8"}
+[debug] [2023-12-20T01:04:56.562Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/xtra-talent/sites pageToken=&pageSize=10
+[debug] [2023-12-20T01:04:57.949Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/xtra-talent/sites 200
+[debug] [2023-12-20T01:04:57.950Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/xtra-talent/sites {"sites":[{"name":"projects/xtra-talent/sites/xtra-talent","defaultUrl":"https://xtra-talent.web.app","appId":"1:204270796123:web:6e32b1386f7d81b1cc6e7e","type":"DEFAULT_SITE"}]}
+[debug] [2023-12-20T01:04:57.951Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:204270796123:web:6e32b1386f7d81b1cc6e7e/config [none]
+[debug] [2023-12-20T01:04:59.080Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:204270796123:web:6e32b1386f7d81b1cc6e7e/config 200
+[debug] [2023-12-20T01:04:59.080Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:204270796123:web:6e32b1386f7d81b1cc6e7e/config {"projectId":"xtra-talent","appId":"1:204270796123:web:6e32b1386f7d81b1cc6e7e","storageBucket":"xtra-talent.appspot.com","apiKey":"AIzaSyDY4ufCc43jofEcbBAyJZ3XG8D5uGjfyOA","authDomain":"xtra-talent.firebaseapp.com","messagingSenderId":"204270796123","measurementId":"G-7PRS1B4RXT"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[info]    ▲ Next.js 14.0.4
+
+   Creating an optimized production build ...
+
+[info]  ✓ Compiled successfully
+
+[info]    Linting and checking validity of types ...
+
+[info] 
+./src/components/login.jsx
+119:9  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
+
+[info]    Collecting page data ...
+
+[info]    Generating static pages (0/5) ...
+
+[info]    Generating static pages (1/5) 
+
+[info]    Generating static pages (2/5) 
+
+[info]    Generating static pages (3/5) 
+
+[info]  ✓ Generating static pages (5/5) 
+
+[info]    Finalizing page optimization ...
+
+[info]    Collecting build traces ...
+
+[info] 
+
+[info] Route (app)                              Size     First Load JS
+┌ ○ /                                    38.6 kB         120 kB
+└ ○ /_not-found                          875 B          82.7 kB
++ First Load JS shared by all            81.8 kB
+  ├ chunks/938-3f4b901b9cad0e8e.js       26.7 kB
+  ├ chunks/fd9d1056-cf46a9edc84a6575.js  53.3 kB
+  ├ chunks/main-app-1cb3ff429b2e2077.js  220 B
+  └ chunks/webpack-0ebe45df035bfcec.js   1.65 kB
+
+
+
+[info] ○  (Static)  prerendered as static content
+
+
+[debug] [2023-12-20T01:05:11.496Z] TypeError: Cannot destructure property 'customConfig' of '(intermediate value)(intermediate value)(intermediate value)' as it is null.
+    at loadConfig (/Users/misaeltevez/Desktop/IMG TAILWIND/XtremeTalent/xtra-talent/node_modules/next/dist/server/config.js:641:41)
+    at getConfig (/usr/local/lib/node_modules/firebase-tools/lib/frameworks/next/index.js:390:28)
+    at build (/usr/local/lib/node_modules/firebase-tools/lib/frameworks/next/index.js:68:65)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async prepareFrameworks (/usr/local/lib/node_modules/firebase-tools/lib/frameworks/index.js:216:33)
+    at async deploy (/usr/local/lib/node_modules/firebase-tools/lib/deploy/index.js:55:13)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-12-20T01:05:31.114Z] ----------------------------------------------------------------------
+[debug] [2023-12-20T01:05:31.115Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2023-12-20T01:05:31.115Z] CLI Version:   12.5.2
+[debug] [2023-12-20T01:05:31.115Z] Platform:      darwin
+[debug] [2023-12-20T01:05:31.115Z] Node Version:  v18.18.0
+[debug] [2023-12-20T01:05:31.120Z] Time:          Tue Dec 19 2023 22:05:31 GMT-0300 (hora estándar de Argentina)
+[debug] [2023-12-20T01:05:31.120Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-12-20T01:05:31.156Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-12-20T01:05:31.156Z] > authorizing via signed-in user (events.fire.img@gmail.com)
+[debug] [2023-12-20T01:05:31.156Z] [iam] checking project xtra-talent for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-12-20T01:05:31.158Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/xtra-talent:testIamPermissions [none]
+[debug] [2023-12-20T01:05:31.158Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/xtra-talent:testIamPermissions x-goog-quota-user=projects/xtra-talent
+[debug] [2023-12-20T01:05:31.158Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/xtra-talent:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-12-20T01:05:32.197Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/xtra-talent:testIamPermissions 200
+[debug] [2023-12-20T01:05:32.197Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/xtra-talent:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-12-20T01:05:32.198Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/xtra-talent [none]
+[debug] [2023-12-20T01:05:32.569Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/xtra-talent 200
+[debug] [2023-12-20T01:05:32.569Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/xtra-talent {"projectId":"xtra-talent","projectNumber":"204270796123","displayName":"xtra-talent","name":"projects/xtra-talent","resources":{"hostingSite":"xtra-talent"},"state":"ACTIVE","etag":"1_02b0aa23-5b5f-47d7-a1f2-70aa9fb3add8"}
+[debug] [2023-12-20T01:05:33.678Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/xtra-talent/sites pageToken=&pageSize=10
+[debug] [2023-12-20T01:05:35.064Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/xtra-talent/sites 200
+[debug] [2023-12-20T01:05:35.064Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/xtra-talent/sites {"sites":[{"name":"projects/xtra-talent/sites/xtra-talent","defaultUrl":"https://xtra-talent.web.app","appId":"1:204270796123:web:6e32b1386f7d81b1cc6e7e","type":"DEFAULT_SITE"}]}
+[debug] [2023-12-20T01:05:35.065Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:204270796123:web:6e32b1386f7d81b1cc6e7e/config [none]
+[debug] [2023-12-20T01:05:36.057Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:204270796123:web:6e32b1386f7d81b1cc6e7e/config 200
+[debug] [2023-12-20T01:05:36.057Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:204270796123:web:6e32b1386f7d81b1cc6e7e/config {"projectId":"xtra-talent","appId":"1:204270796123:web:6e32b1386f7d81b1cc6e7e","storageBucket":"xtra-talent.appspot.com","apiKey":"AIzaSyDY4ufCc43jofEcbBAyJZ3XG8D5uGjfyOA","authDomain":"xtra-talent.firebaseapp.com","messagingSenderId":"204270796123","measurementId":"G-7PRS1B4RXT"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[info]    ▲ Next.js 14.0.4
+
+   Creating an optimized production build ...
+
+[info]  ✓ Compiled successfully
+
+[info]    Linting and checking validity of types ...
+
+[info] 
+./src/components/login.jsx
+119:9  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
+
+[info]    Collecting page data ...
+
+[info]    Generating static pages (0/5) ...
+
+[info]    Generating static pages (1/5) 
+
+[info]    Generating static pages (2/5) 
+
+[info]    Generating static pages (3/5) 
+
+[info]  ✓ Generating static pages (5/5) 
+
+[info]    Finalizing page optimization ...
+   Collecting build traces ...
+
+[info] 
+
+[info] Route (app)                              Size     First Load JS
+┌ ○ /                                    38.6 kB         120 kB
+└ ○ /_not-found                          875 B          82.7 kB
++ First Load JS shared by all            81.8 kB
+  ├ chunks/938-3f4b901b9cad0e8e.js       26.7 kB
+  ├ chunks/fd9d1056-cf46a9edc84a6575.js  53.3 kB
+  ├ chunks/main-app-1cb3ff429b2e2077.js  220 B
+  └ chunks/webpack-0ebe45df035bfcec.js   1.65 kB
+
+
+
+[info] ○  (Static)  prerendered as static content
+
+
+[debug] [2023-12-20T01:05:45.362Z] TypeError: Cannot destructure property 'customConfig' of '(intermediate value)(intermediate value)(intermediate value)' as it is null.
+    at loadConfig (/Users/misaeltevez/Desktop/IMG TAILWIND/XtremeTalent/xtra-talent/node_modules/next/dist/server/config.js:641:41)
+    at getConfig (/usr/local/lib/node_modules/firebase-tools/lib/frameworks/next/index.js:390:28)
+    at build (/usr/local/lib/node_modules/firebase-tools/lib/frameworks/next/index.js:68:65)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async prepareFrameworks (/usr/local/lib/node_modules/firebase-tools/lib/frameworks/index.js:216:33)
+    at async deploy (/usr/local/lib/node_modules/firebase-tools/lib/deploy/index.js:55:13)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-12-20T01:06:48.559Z] ----------------------------------------------------------------------
+[debug] [2023-12-20T01:06:48.560Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2023-12-20T01:06:48.560Z] CLI Version:   12.5.2
+[debug] [2023-12-20T01:06:48.560Z] Platform:      darwin
+[debug] [2023-12-20T01:06:48.561Z] Node Version:  v18.18.0
+[debug] [2023-12-20T01:06:48.565Z] Time:          Tue Dec 19 2023 22:06:48 GMT-0300 (hora estándar de Argentina)
+[debug] [2023-12-20T01:06:48.566Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-12-20T01:06:48.602Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-12-20T01:06:48.602Z] > authorizing via signed-in user (events.fire.img@gmail.com)
+[debug] [2023-12-20T01:06:48.602Z] [iam] checking project xtra-talent for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-12-20T01:06:48.603Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/xtra-talent:testIamPermissions [none]
+[debug] [2023-12-20T01:06:48.603Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/xtra-talent:testIamPermissions x-goog-quota-user=projects/xtra-talent
+[debug] [2023-12-20T01:06:48.603Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/xtra-talent:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-12-20T01:06:49.656Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/xtra-talent:testIamPermissions 200
+[debug] [2023-12-20T01:06:49.657Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/xtra-talent:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-12-20T01:06:49.658Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/xtra-talent [none]
+[debug] [2023-12-20T01:06:50.087Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/xtra-talent 200
+[debug] [2023-12-20T01:06:50.087Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/xtra-talent {"projectId":"xtra-talent","projectNumber":"204270796123","displayName":"xtra-talent","name":"projects/xtra-talent","resources":{"hostingSite":"xtra-talent"},"state":"ACTIVE","etag":"1_02b0aa23-5b5f-47d7-a1f2-70aa9fb3add8"}
+[debug] [2023-12-20T01:06:51.205Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/xtra-talent/sites pageToken=&pageSize=10
+[debug] [2023-12-20T01:06:52.526Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/xtra-talent/sites 200
+[debug] [2023-12-20T01:06:52.527Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/xtra-talent/sites {"sites":[{"name":"projects/xtra-talent/sites/xtra-talent","defaultUrl":"https://xtra-talent.web.app","appId":"1:204270796123:web:6e32b1386f7d81b1cc6e7e","type":"DEFAULT_SITE"}]}
+[debug] [2023-12-20T01:06:52.528Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:204270796123:web:6e32b1386f7d81b1cc6e7e/config [none]
+[debug] [2023-12-20T01:06:53.302Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:204270796123:web:6e32b1386f7d81b1cc6e7e/config 200
+[debug] [2023-12-20T01:06:53.302Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:204270796123:web:6e32b1386f7d81b1cc6e7e/config {"projectId":"xtra-talent","appId":"1:204270796123:web:6e32b1386f7d81b1cc6e7e","storageBucket":"xtra-talent.appspot.com","apiKey":"AIzaSyDY4ufCc43jofEcbBAyJZ3XG8D5uGjfyOA","authDomain":"xtra-talent.firebaseapp.com","messagingSenderId":"204270796123","measurementId":"G-7PRS1B4RXT"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[info]    ▲ Next.js 14.0.4
+
+[info] 
+   Creating an optimized production build ...
+
+[info]  ✓ Compiled successfully
+
+[info]    Linting and checking validity of types ...
+
+[info] 
+./src/components/login.jsx
+119:9  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
+
+[info]    Collecting page data ...
+
+[info]    Generating static pages (0/5) ...
+
+[info]    Generating static pages (1/5) 
+
+[info]    Generating static pages (2/5) 
+
+[info]    Generating static pages (3/5) 
+
+[info]  ✓ Generating static pages (5/5) 
+
+[info]    Finalizing page optimization ...
+   Collecting build traces ...
+
+[info] 
+
+[info] Route (app)                              Size     First Load JS
+┌ ○ /                                    38.6 kB         120 kB
+└ ○ /_not-found                          875 B          82.7 kB
++ First Load JS shared by all            81.8 kB
+  ├ chunks/938-3f4b901b9cad0e8e.js       26.7 kB
+  ├ chunks/fd9d1056-cf46a9edc84a6575.js  53.3 kB
+  ├ chunks/main-app-1cb3ff429b2e2077.js  220 B
+  └ chunks/webpack-0ebe45df035bfcec.js   1.65 kB
+
+
+
+[info] ○  (Static)  prerendered as static content
+
+
+[debug] [2023-12-20T01:07:02.628Z] TypeError: Cannot destructure property 'customConfig' of '(intermediate value)(intermediate value)(intermediate value)' as it is null.
+    at loadConfig (/Users/misaeltevez/Desktop/IMG TAILWIND/XtremeTalent/xtra-talent/node_modules/next/dist/server/config.js:641:41)
+    at getConfig (/usr/local/lib/node_modules/firebase-tools/lib/frameworks/next/index.js:390:28)
+    at build (/usr/local/lib/node_modules/firebase-tools/lib/frameworks/next/index.js:68:65)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async prepareFrameworks (/usr/local/lib/node_modules/firebase-tools/lib/frameworks/index.js:216:33)
+    at async deploy (/usr/local/lib/node_modules/firebase-tools/lib/deploy/index.js:55:13)
+[error] 
+[error] Error: An unexpected error has occurred.
