@@ -1,10 +1,10 @@
-import { Dashboard } from "@/components/dashboard";
-import { Register } from "@/components/registerInterno";
+
+import Login from "@/components/login";
 
 export default function page() {
   return (
     <div>
-      <Dashboard />
+      <Login />
     </div>
   );
 }

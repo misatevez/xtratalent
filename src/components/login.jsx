@@ -2,9 +2,15 @@
  * v0 by Vercel.
  * @see https://v0.dev/t/k8dyNyHXaze
  */
+
+'use client'
+
 import { Button } from "@/components/ui/button"
+import { useRouter } from 'next/navigation'
+
 
 export default function Login() {
+  const router = useRouter()
   return (
     <>
       <div className="min-h-screen bg-white flex">
@@ -81,7 +87,7 @@ export default function Login() {
                     </div>
                   </div>
                   <div>
-                    <Button className="w-full" variant="default">
+                    <Button onClick={() => router.push('/dashboard')} className="w-full" variant="default">
                       Iniciar sesión
                     </Button>
                   </div>
