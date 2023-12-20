@@ -15,7 +15,7 @@ export default function Login() {
     <>
       <div className="min-h-screen bg-white flex">
         <div className="flex-1 flex items-center justify-center p-12">
-          <div className="max-w-md w-full">
+          <div className="max-w-lg w-full">
             <div>
               {/* <img
                 alt="Logo"
@@ -86,9 +86,12 @@ export default function Login() {
                       </a>
                     </div>
                   </div>
-                  <div>
-                    <Button onClick={() => router.push('/dashboard')} className="w-full" variant="default">
+                  <div className="mt-6 grid grid-cols-2 gap-3">
+                    <Button onClick={() => router.push('/dashboard')} className="w-full" variant="outline">
                       Iniciar sesión
+                    </Button>
+                    <Button onClick={() => router.push('/registro')} className="w-full" variant="outline">
+                      Registrarse
                     </Button>
                   </div>
                 </div>
@@ -99,20 +102,19 @@ export default function Login() {
                 <div className="absolute inset-0 flex items-center">
                   <div className="w-full border-t border-gray-300" />
                 </div>
-                <div className="relative flex justify-center text-sm">
+                <div className="relative flex justify-center text-sm mt-20">
                   <span className="px-2 bg-white text-gray-500">¿Necesitas ayuda?</span>
                 </div>
               </div>
               <div className="mt-6 grid grid-cols-2 gap-3">
                 <div>
                   <Button className="w-full" variant="outline">
-                    <SmartphoneIcon className="text-green-500" />
                     WhatsApp
                   </Button>
                 </div>
                 <div>
                   <Button className="w-full" variant="outline">
-                    <MailIcon className="text-blue-500" />
+
                     Email
                   </Button>
                 </div>
