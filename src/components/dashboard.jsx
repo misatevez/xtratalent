@@ -20,7 +20,6 @@ export function Dashboard( {children} ) {
       <aside
         className="w-64 h-full bg-gray-200 dark:bg-gray-700 border-r fixed top-0 left-0 overflow-auto">
         <div className="flex items-center justify-center h-16 border-b">
-          {/* <img alt="SaaS App Logo" className="h-8 w-auto" src="/placeholder.svg" /> */}
           <h1 className="text-3xl font-bold text-gray-700 dark:text-gray-200 ml-4">XtraTalent</h1>
         </div>
         <nav className="flex flex-col p-4">
@@ -72,16 +71,16 @@ export function Dashboard( {children} ) {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <div>
-                  {/* <img
+                  <img
                     alt="Avatar"
                     className="rounded-full"
                     height="32"
-                    src="/placeholder.svg"
+                    src="https://generated.vusercontent.net/placeholder.svg"
                     style={{
                       aspectRatio: "32/32",
                       objectFit: "cover",
                     }}
-                    width="32" /> */}
+                    width="32" />
                   <span className="sr-only">Toggle user menu</span>
                   </div>
                 </DropdownMenuTrigger>

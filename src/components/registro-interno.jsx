@@ -12,7 +12,7 @@ export function RegistroInterno() {
   return (
     (
         <main className="p-8 space-y-8 mt-8 mb-8 mx-auto max-w-7xl">
-          <h1 className="text-4xl font-bold mb-6 text-center text-blue-400">MODULO 3-1 REGISTRO - ALTA DE PERSONAL</h1>
+          <h1 className="text-4xl font-bold mb-6 text-center text-blue-400">ALTA DE PERSONAL</h1>
           <h2 className="text-3xl font-semibold mb-4 text-center text-blue-300">DATOS PERSONALES</h2>
           <div className="flex items-center gap-6 mb-4">
             <div className="w-40 h-40 bg-gray-300 rounded">
@@ -20,7 +20,7 @@ export function RegistroInterno() {
                 alt="User Photo"
                 className="w-full h-full object-cover rounded"
                 height="160"
-                src="/placeholder.svg"
+                src="https://generated.vusercontent.net/placeholder.svg"
                 style={{
                   aspectRatio: "320/160",
                   objectFit: "cover",

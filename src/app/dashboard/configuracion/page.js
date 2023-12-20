@@ -1,7 +1,7 @@
+import { Configuraciones } from "@/components/configuraciones";
+
 export default function page() {
     return (
-        <div>
-           Configuracion
-        </div>
+<Configuraciones />
     );
 }
