@@ -37,7 +37,7 @@ export function Dashboard( {children} ) {
           </Link>
           <Link
             className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
-            href="/dashboard/seguridad">
+            href="/dashboard/evaluaciones">
             <FileQuestionIcon className="w-6 h-6" />
             Evaluaciones
           </Link>
