@@ -15,7 +15,7 @@ export function SelectoraEvaluacion() {
           <div className="flex items-center space-x-4">
             <Button className="bg-white text-purple-500 hover:bg-gray-200">Crear evaluacion</Button>
             <Button className="bg-white text-purple-500 hover:bg-gray-200">Asignar evaluaciones</Button>
-            <Button className="bg-white text-purple-500 hover:bg-gray-200">Editar Evaluaciones</Button>
+            <Button className="bg-white text-purple-500 hover:bg-gray-200">Editar evaluaciones</Button>
           </div>
         </main>
     )

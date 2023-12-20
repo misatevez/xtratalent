@@ -1,6 +1,10 @@
-
+import { DashboardInicial } from "@/components/dashboard-inicial";
 
 export default function page() {
-    return null;
+    return (
+        <div>
+            <DashboardInicial />    
+        </div>
+    );
 }
 
