@@ -9,59 +9,8 @@ import { Input } from "@/components/ui/input"
 
 export function NuevosGruposCorporativos() {
   return (
-    (<div key="1" className="bg-[#e5e7eb] p-4">
-      <div className="bg-white p-4 rounded-md shadow-md">
-        <h1 className="text-xl font-bold text-center text-[#2c5282] mb-4">
-          MODULO 2-1-1 GRUPOS CORPORATIVOS, TIPOS ENTIDADES Y SUB-TIPOS
-        </h1>
-        <div className="flex justify-end">
-          <Button className="bg-[#e53e3e] text-white">
-            VER
-            <SignalIcon className="ml-1" />
-          </Button>
-        </div>
-        <div className="overflow-x-auto mt-4">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-[100px]">Grupo Tipo</TableHead>
-                <TableHead className="w-[200px]">Nombre del GRUPO</TableHead>
-                <TableHead className="w-[150px]">Fecha Registro</TableHead>
-                <TableHead className="w-[150px]">Última Modificación</TableHead>
-                <TableHead className="w-[100px]" />
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow>
-                <TableCell>Público</TableCell>
-                <TableCell>Sector Público – Gobierno – Estatal</TableCell>
-                <TableCell>01/11/2023</TableCell>
-                <TableCell>28/11/2023</TableCell>
-                <TableCell>
-                  <Button variant="ghost">Editar</Button>
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Privado</TableCell>
-                <TableCell>Sector Privado Empresarial</TableCell>
-                <TableCell>01/11/2023</TableCell>
-                <TableCell>28/11/2023</TableCell>
-                <TableCell>
-                  <Button variant="ghost">Editar</Button>
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </div>
-        <div className="flex mt-4 space-x-4">
-          <Button variant="outline">Reporte</Button>
-          <Button variant="outline">Generar PDF</Button>
-        </div>
-        <div className="flex justify-between items-center mt-4">
-          <Button variant="ghost">Regresar</Button>
-          <Button>Nuevo GRUPO</Button>
-        </div>
-      </div>
+    (
+      <div className=" p-4 mx-auto w-full max-w-2xl mt-4">
       <div className="bg-white p-4 rounded-md shadow-md mt-4">
         <h2 className="text-lg font-bold text-[#2c5282] mb-4">NUEVO GRUPO - CORPORACIÓN</h2>
         <div className="grid grid-cols-2 gap-4">
@@ -98,13 +47,15 @@ export function NuevosGruposCorporativos() {
             className="resize-none border rounded-md w-full p-2"
             id="group-description"
             placeholder="El grupo especial..."
-            rows="4" />
+            rows="4"
+          />
         </div>
         <div className="flex justify-end mt-4">
           <Button>Guardar</Button>
         </div>
       </div>
-    </div>)
+    </div>
+    )
   );
 }
 

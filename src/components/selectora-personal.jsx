@@ -18,8 +18,8 @@ export function SelectoraPersonal() {
           <div className="flex items-center space-x-4">
             <Button onClick={() => router.push('/dashboard/registro/altapersonal')} className="bg-white text-purple-500 hover:bg-gray-200">Alta personal</Button>
             <Button onClick={() => router.push('/dashboard')} className="bg-white text-purple-500 hover:bg-gray-200">Buscar personal</Button>
-            <Button onClick={() => router.push('/dashboard')} className="bg-white text-purple-500 hover:bg-gray-200">Crear entidades</Button>
-            <Button  onClick={() => router.push('/dashboard')}className="bg-white text-purple-500 hover:bg-gray-200">Buscar entidades</Button>
+            <Button onClick={() => router.push('/dashboard/registro/crearentidades')} className="bg-white text-purple-500 hover:bg-gray-200">Crear entidades</Button>
+            <Button  onClick={() => router.push('/dashboard/registro/buscarentidades')}className="bg-white text-purple-500 hover:bg-gray-200">Buscar entidades</Button>
           </div>
         </main>
     )
