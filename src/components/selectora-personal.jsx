@@ -17,7 +17,7 @@ export function SelectoraPersonal() {
           <h1 className="text-4xl font-bold mb-6 text-center">Administracion de personal</h1>
           <div className="flex items-center space-x-4">
             <Button onClick={() => router.push('/dashboard/registro/altapersonal')} className="bg-white text-purple-500 hover:bg-gray-200">Alta personal</Button>
-            <Button onClick={() => router.push('/dashboard')} className="bg-white text-purple-500 hover:bg-gray-200">Buscar personal</Button>
+            <Button onClick={() => router.push('/dashboard/registro/buscarpersonal')} className="bg-white text-purple-500 hover:bg-gray-200">Buscar personal</Button>
             <Button onClick={() => router.push('/dashboard/registro/crearentidades')} className="bg-white text-purple-500 hover:bg-gray-200">Crear entidades</Button>
             <Button  onClick={() => router.push('/dashboard/registro/buscarentidades')}className="bg-white text-purple-500 hover:bg-gray-200">Buscar entidades</Button>
             <Button  onClick={() => router.push('/dashboard/registro/reset')}className="bg-white text-purple-500 hover:bg-gray-200">Resetear contraseñas</Button>
