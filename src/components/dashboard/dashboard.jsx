@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
 import { useRouter } from 'next/navigation'
 import { RegistroInterno } from "../personal/registro-interno"
-import { NuevosGruposCorporativos } from "../entidades/entidad/nuevos-entidad"
+import { NuevosGruposCorporativos } from "../entidades/gruposcorporativos/nuevos-grupocorporativo"
 
 export function Dashboard( {children} ) {
   const router = useRouter()

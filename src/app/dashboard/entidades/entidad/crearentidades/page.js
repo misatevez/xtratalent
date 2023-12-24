@@ -1,9 +1,10 @@
-import { NuevaEntidad } from "@/components/entidades/entidad/nuevos-entidad";
+import { NuevasEntidadEmpresa } from "@/components/entidades/entidad/nuevas-entidades";
+
 
 
 export default function page() {
     return (
- <NuevaEntidad/>
+        <NuevasEntidadEmpresa />
     );
 }
 

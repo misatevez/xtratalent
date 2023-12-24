@@ -4,11 +4,11 @@ import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
 
-export default function BuscarDepartamento() {
+export default function BuscarGrupoCoorporativo() {
     return (
       <div className="bg-white p-4 rounded-md shadow-md m-auto text-center">
       <h1 className="text-xl font-bold text-center text-[#2c5282] mb-4">
-       TABLA - DEPARTAMENTOS
+       Buscar Grupos Coorporativos
       </h1>
       <div className="flex justify-center">
         <Input className="mr-2" placeholder="Search" type="text" />
@@ -56,7 +56,7 @@ export default function BuscarDepartamento() {
       </div>
       <div className="flex justify-between items-center mt-4">
         <Button variant="outline">Regresar</Button>
-        <Button variant="outline">Nuevo tipo Entidad</Button>
+        <Button variant="outline">Nuevo GRUPO</Button>
       </div>
     </div>
     );

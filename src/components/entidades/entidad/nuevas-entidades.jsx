@@ -7,16 +7,16 @@ import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
 
-export function NuevaEntidad() {
+export function NuevasEntidadEmpresa() {
   return (
     (
       <div className=" p-4 mx-auto w-full max-w-2xl mt-4">
       <div className="bg-white p-4 rounded-md shadow-md mt-4">
-        <h2 className="text-lg font-bold text-[#2c5282] mb-4">NUEVO ENTIDAD</h2>
+        <h2 className="text-lg font-bold text-[#2c5282] mb-4">Nuevo Tipo Entidad</h2>
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium mb-1" htmlFor="group-type">
-              Grupo Tipo Corporativo:
+              Tipo Entidades
             </label>
             <Select>
               <SelectTrigger id="group-type">
@@ -35,13 +35,13 @@ export function NuevaEntidad() {
         </div>
         <div className="mt-4">
           <label className="block text-sm font-medium mb-1" htmlFor="group-name">
-            Nombre GRUPO:
+            Nombre tipo Entidad:
           </label>
           <Input id="group-name" placeholder="Especial" />
         </div>
         <div className="mt-4">
           <label className="block text-sm font-medium mb-1" htmlFor="group-description">
-            Descripción Grupo:
+            Descripción tipo Entidad:
           </label>
           <textarea
             className="resize-none border rounded-md w-full p-2"
