@@ -8,7 +8,7 @@ import { DropdownMenuTrigger, DropdownMenuItem, DropdownMenuContent, DropdownMen
 import { Button } from "@/components/ui/button"
 import { useRouter } from 'next/navigation'
 
-export function SelectoraSubEntidades() {
+export function SelectoraEntidadesEmpresas() {
   const router = useRouter()
 
   return (
@@ -17,9 +17,9 @@ export function SelectoraSubEntidades() {
           className="p-8 space-y-8 mt-8 mb-8 mx-auto max-w-7xl bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-lg shadow-lg text-white">
           <h1 className="text-4xl font-bold mb-6 text-center">Administracion de Entidad Empresa</h1>
           <div className="flex items-center space-x-4">
-            <Button onClick={() => router.push('/dashboard/entidades/gruposcorporativos')} className="bg-white text-purple-500 hover:bg-gray-200">Crear Entidad Empresa</Button>
-            <Button  onClick={() => router.push('/dashboard/entidades/entidad')}className="bg-white text-purple-500 hover:bg-gray-200">Crear Entidad Empresa</Button>
-            <Button  onClick={() => router.push('/dashboard/entidades/entidad')}className="bg-white text-purple-500 hover:bg-gray-200">Areas Direcciones</Button>
+            <Button onClick={() => router.push('/dashboard/entidades/subentidades/entidades-empressa')} className="bg-white text-purple-500 hover:bg-gray-200">Crear Entidad Empresa</Button>
+            <Button  onClick={() => router.push('/dashboard/entidades/subentidades/entidades-empresas')}className="bg-white text-purple-500 hover:bg-gray-200">Buscar Entidad Empresa</Button>
+            <Button  onClick={() => router.push('/dashboard/entidades/subentidades/entidades-empresas/area-direcciones')}className="bg-white text-purple-500 hover:bg-gray-200">Areas Direcciones</Button>
           </div>
         </main>
     )
