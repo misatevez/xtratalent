@@ -1,7 +1,8 @@
-import { PerfilesUsuario } from "@/components/seguridad/perfiles-usuario";
+import { SelectoraContenido } from "@/components/contenido/selectora-contenido";
+
 
 export default function page() {
     return (
-        <PerfilesUsuario />
+        <SelectoraContenido />
     );
 }

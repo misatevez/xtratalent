@@ -1,7 +1,7 @@
+import { SelectoraLicencia } from "@/components/licencia/selectora-licencia";
+
 export default function page() {
     return (
-        <div>
-            Licencia
-        </div>
+        <SelectoraLicencia />
     );
 }
