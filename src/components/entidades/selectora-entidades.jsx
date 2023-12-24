@@ -19,6 +19,7 @@ export function SelectoraEntidades() {
             <Button onClick={() => router.push('/dashboard/entidades/gruposcorporativos')} className="bg-white text-purple-500 hover:bg-gray-200">Grupos corporativos</Button>
             <Button  onClick={() => router.push('/dashboard/entidades/entidad')}className="bg-white text-purple-500 hover:bg-gray-200">Entidades</Button>
             <Button  onClick={() => router.push('/dashboard/entidades/subentidades')}className="bg-white text-purple-500 hover:bg-gray-200">Subentidades</Button>
+            <Button  onClick={() => router.push('/dashboard/entidades/puestos')}className="bg-white text-purple-500 hover:bg-gray-200">Puestos</Button>
           </div>
         </main>
     )

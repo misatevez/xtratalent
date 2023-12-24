@@ -19,7 +19,6 @@ export function SelectoraDepartamentos() {
           <div className="flex items-center space-x-4">
             <Button onClick={() => router.push('/dashboard/entidades/subentidades/entidades-empressa/area-direcciones/departamentos')} className="bg-white text-purple-500 hover:bg-gray-200">Crear Departamentos</Button>
             <Button  onClick={() => router.push('/dashboard/entidades/subentidades/entidades-empresas/area-direcciones/departamentos')}className="bg-white text-purple-500 hover:bg-gray-200">Buscar Departamentos</Button>
-            <Button  onClick={() => router.push('/dashboard/entidades/subentidades/entidades-empresas/area-direcciones/departamentos/puestos')}className="bg-white text-purple-500 hover:bg-gray-200">Puestos</Button>
           </div>
         </main>
     )
