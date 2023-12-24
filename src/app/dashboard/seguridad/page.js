@@ -1,8 +1,9 @@
-import Menuseguridad from "@/components/seguridad/menu-seguridad";
+import SelectoraSeguridad from "@/components/seguridad/selectora-seguridad";
+
 
 export default function page() {
     return (
-       <Menuseguridad />
+        <SelectoraSeguridad    />
     );
 }
 

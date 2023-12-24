@@ -15,7 +15,7 @@ export function SelectoraPuestos() {
     (
         <main
           className="p-8 space-y-8 mt-8 mb-8 mx-auto max-w-7xl bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-lg shadow-lg text-white">
-          <h1 className="text-4xl font-bold mb-6 text-center">Administracion de Puestos</h1>
+          <h1 className="text-4xl font-bold mb-6 text-center justify-center">Administrar Puestos</h1>
           <div className="flex items-center space-x-4">
             <Button onClick={() => router.push('/dashboard/entidades/subentidades/entidades-empressa/area-direcciones/departamentos')} className="bg-white text-purple-500 hover:bg-gray-200">Crear Puestos</Button>
             <Button  onClick={() => router.push('/dashboard/entidades/subentidades/entidades-empresas/area-direcciones/departamentos')}className="bg-white text-purple-500 hover:bg-gray-200">Buscar Puestos</Button>

@@ -6,16 +6,16 @@ import Link from "next/link"
 import { DropdownMenuTrigger, DropdownMenuItem, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 
-export function SelectoraEvaluacion() {
+export function SelectoraPreguntas() {
   return (
     (
         <main
           className="p-8 space-y-8 mt-8 mb-8 mx-auto max-w-7xl bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-lg shadow-lg text-white">
-          <h1 className="text-4xl font-bold mb-6 text-center">Evaluaciones</h1>
-          <div className="flex items-center space-x-4">
-            <Button className="bg-white text-purple-500 hover:bg-gray-200">Crear evaluacion</Button>
-            <Button className="bg-white text-purple-500 hover:bg-gray-200">Asignar evaluaciones</Button>
-            <Button className="bg-white text-purple-500 hover:bg-gray-200">Editar evaluaciones</Button>
+          <h1 className="text-4xl font-bold mb-6 text-center">Preguntas</h1>
+          <div className="flex items-center justify-center space-x-4">
+            <Button className="bg-white text-purple-500 hover:bg-gray-200">Crear Preguntas</Button>
+            <Button className="bg-white text-purple-500 hover:bg-gray-200">Buscar Preguntas</Button>
+            <Button className="bg-white text-purple-500 hover:bg-gray-200">Asignar Preguntas</Button>
           </div>
         </main>
     )

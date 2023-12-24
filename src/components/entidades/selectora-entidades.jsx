@@ -14,8 +14,8 @@ export function SelectoraEntidades() {
     (
         <main
           className="p-8 space-y-8 mt-8 mb-8 mx-auto max-w-7xl bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-lg shadow-lg text-white">
-          <h1 className="text-4xl font-bold mb-6 text-center">Administracion de Entidades</h1>
-          <div className="flex items-center space-x-4">
+          <h1 className="text-4xl font-bold mb-6 text-center">Administrar Entidades</h1>
+          <div className="flex items-center justify-center space-x-4">
             <Button onClick={() => router.push('/dashboard/entidades/gruposcorporativos')} className="bg-white text-purple-500 hover:bg-gray-200">Grupos corporativos</Button>
             <Button  onClick={() => router.push('/dashboard/entidades/entidad')}className="bg-white text-purple-500 hover:bg-gray-200">Entidades</Button>
             <Button  onClick={() => router.push('/dashboard/entidades/subentidades')}className="bg-white text-purple-500 hover:bg-gray-200">Subentidades</Button>

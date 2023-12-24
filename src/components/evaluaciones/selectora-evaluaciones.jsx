@@ -14,12 +14,12 @@ export function SelectoraEvaluaciones() {
     (
         <main
           className="p-8 space-y-8 mt-8 mb-8 mx-auto max-w-7xl bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-lg shadow-lg text-white">
-          <h1 className="text-4xl font-bold mb-6 text-center">Evaluaciones</h1>
-          <div className="flex items-center space-x-4">
+          <h1 className="text-4xl font-bold mb-6 text-center">Administracion de evaluaciones</h1>
+          <div className="flex items-center justify-center space-x-4">
             <Button onClick={() => router.push('/dashboard/evaluaciones/evaluacion')} className="bg-white text-purple-500 hover:bg-gray-200">Evaluaciones</Button>
             <Button onClick={() => router.push('/dashboard/evaluaciones/categorias')} className="bg-white text-purple-500 hover:bg-gray-200">Categorias</Button>
-            <Button className="bg-white text-purple-500 hover:bg-gray-200">Temas</Button>
-            <Button className="bg-white text-purple-500 hover:bg-gray-200">Preguntas</Button>
+            <Button onClick={() => router.push('/dashboard/evaluaciones/temas')} className="bg-white text-purple-500 hover:bg-gray-200">Temas</Button>
+            <Button onClick={() => router.push('/dashboard/evaluaciones/preguntas')} className="bg-white text-purple-500 hover:bg-gray-200">Preguntas</Button>
           </div>
         </main>
     )

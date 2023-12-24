@@ -1,8 +1,8 @@
-import CatalogosEvaluaciones from "@/components/evaluaciones/catalogos-evaluaciones";
+import { SelectoraCategorias } from "@/components/evaluaciones/categorias/selectora-categorias";
 
 export default function page() {
     return (
-        <CatalogosEvaluaciones />
+        <SelectoraCategorias />
     );
 }
 
