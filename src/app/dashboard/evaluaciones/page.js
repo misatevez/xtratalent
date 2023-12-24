@@ -1,4 +1,4 @@
-import { SelectoraEvaluaciones } from "@/components/selectora-evaluaciones";
+import { SelectoraEvaluaciones } from "@/components/evaluaciones/selectora-evaluaciones";
 
 export default function page() {
     return (

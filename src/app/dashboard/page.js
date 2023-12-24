@@ -1,4 +1,4 @@
-import { DashboardInicial } from "@/components/dashboard-inicial";
+import { DashboardInicial } from "@/components/dashboard/dashboard-inicial";
 
 export default function page() {
     return (

@@ -1,4 +1,4 @@
-import { RegistroPublico } from "@/components/registro-publico";
+import { RegistroPublico } from "@/components/publico/registro-publico";
 
 export default function page() {
     return (

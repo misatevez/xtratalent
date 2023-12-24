@@ -1,4 +1,4 @@
-import { PerfilesUsuario } from "@/components/perfiles-usuario";
+import { PerfilesUsuario } from "@/components/seguridad/perfiles-usuario";
 
 export default function page() {
     return (

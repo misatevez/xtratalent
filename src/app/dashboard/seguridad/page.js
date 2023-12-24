@@ -1,4 +1,4 @@
-import Menuseguridad from "@/components/menu-seguridad";
+import Menuseguridad from "@/components/seguridad/menu-seguridad";
 
 export default function page() {
     return (

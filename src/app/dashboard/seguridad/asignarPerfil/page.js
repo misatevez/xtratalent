@@ -1,4 +1,4 @@
-import AsignarPerfil from "@/components/asignar-perfil";
+import AsignarPerfil from "@/components/seguridad/asignar-perfil";
 
 export default function page() {
     return (
