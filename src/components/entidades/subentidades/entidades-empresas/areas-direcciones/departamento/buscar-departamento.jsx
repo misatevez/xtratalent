@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button"
 import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table"
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
+import ListaEntidadesEmpresa from "../../lista-entidades-empresa";
+import ListaDirecciones from "../lista-direcciones";
 
 export default function BuscarDepartamento() {
     return (
@@ -10,6 +12,14 @@ export default function BuscarDepartamento() {
       <h1 className="text-xl font-bold text-center text-[#2c5282] mb-4">
        TABLA - DEPARTAMENTOS
       </h1>
+      <div className="grid grid-cols-2 gap-4 mb-4">
+          <div>
+          <ListaEntidadesEmpresa />
+          </div>
+          <div>
+          <ListaDirecciones />
+          </div>
+        </div>
       <div className="flex justify-center">
         <Input className="mr-2" placeholder="Search" type="text" />
         <Button variant="outline">
@@ -21,28 +31,23 @@ export default function BuscarDepartamento() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">Grupo Tipo</TableHead>
-              <TableHead className="w-[200px]">Nombre del GRUPO</TableHead>
-              <TableHead className="w-[150px]">Fecha Registro</TableHead>
-              <TableHead className="w-[150px]">Última Modificación</TableHead>
-              <TableHead className="w-[100px]" />
+              <TableHead className="w-[200px]">Nombre Área-Dirección</TableHead>
+              <TableHead className="w-[200px]">Departamento</TableHead>
+              <TableHead className="w-[50px]">Fecha Registro</TableHead>
+              <TableHead className="w-[50px]">Vacantes Activas</TableHead>
+              <TableHead className="w-[50px]">Vacantes Procesadas</TableHead>
+              <TableHead className="w-[50px]">Última Modificación</TableHead>
+              <TableHead className="w-[100px]">Acción</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             <TableRow>
-              <TableCell>Público</TableCell>
-              <TableCell>Sector Público – Gobierno – Estatal</TableCell>
+              <TableCell>Dirección Ejecutiva</TableCell>
+              <TableCell>Asesoria</TableCell>
               <TableCell>01/11/2023</TableCell>
-              <TableCell>28/11/2023</TableCell>
-              <TableCell>
-                <Button variant="ghost">Editar</Button>
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Privado</TableCell>
-              <TableCell>Sector Privado Empresarial</TableCell>
+              <TableCell>02</TableCell>
+              <TableCell>12</TableCell>
               <TableCell>01/11/2023</TableCell>
-              <TableCell>28/11/2023</TableCell>
               <TableCell>
                 <Button variant="ghost">Editar</Button>
               </TableCell>
@@ -50,13 +55,9 @@ export default function BuscarDepartamento() {
           </TableBody>
         </Table>
       </div>
-      <div className="flex mt-4 space-x-4 justify-center">
-        <Button variant="outline">Reporte</Button>
-        <Button variant="outline">Generar PDF</Button>
-      </div>
       <div className="flex justify-between items-center mt-4">
-        <Button variant="outline">Regresar</Button>
-        <Button variant="outline">Nuevo tipo Entidad</Button>
+      <Button variant="outline">Generar PDF</Button>
+        <Button variant="outline">Nuevo departamento</Button>
       </div>
     </div>
     );

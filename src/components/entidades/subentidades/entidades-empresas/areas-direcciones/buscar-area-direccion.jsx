@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table"
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
+import ListaEntidadesEmpresa from "../lista-entidades-empresa";
 
 export default function BuscarDireccion() {
     return (
@@ -10,6 +11,11 @@ export default function BuscarDireccion() {
       <h1 className="text-xl font-bold text-center text-[#2c5282] mb-4">
        TABLA - AREAS - DIRECCIONES
       </h1>
+      <div className="grid grid-cols-1 gap-4 mb-4">
+          <div>
+          <ListaEntidadesEmpresa />
+          </div>
+        </div>
       <div className="flex justify-center">
         <Input className="mr-2" placeholder="Search" type="text" />
         <Button variant="outline">
@@ -21,28 +27,23 @@ export default function BuscarDireccion() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">Grupo Tipo</TableHead>
-              <TableHead className="w-[200px]">Nombre del GRUPO</TableHead>
-              <TableHead className="w-[150px]">Fecha Registro</TableHead>
-              <TableHead className="w-[150px]">Última Modificación</TableHead>
-              <TableHead className="w-[100px]" />
+              <TableHead className="w-[200px]">Nombre Entidad</TableHead>
+              <TableHead className="w-[200px]">Nombre Área-Direccion</TableHead>
+              <TableHead className="w-[50px]">Fecha Registro</TableHead>
+              <TableHead className="w-[50px]">Vacantes activas</TableHead>
+              <TableHead className="w-[50px]">Vacantes procesadas</TableHead>
+              <TableHead className="w-[50px]">Última Modificación</TableHead>
+              <TableHead className="w-[100px]">Acción</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             <TableRow>
-              <TableCell>Público</TableCell>
-              <TableCell>Sector Público – Gobierno – Estatal</TableCell>
+              <TableCell>Fondo de Desarrollo Social</TableCell>
+              <TableCell>Direccion Ejecutiva</TableCell>
               <TableCell>01/11/2023</TableCell>
-              <TableCell>28/11/2023</TableCell>
-              <TableCell>
-                <Button variant="ghost">Editar</Button>
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Privado</TableCell>
-              <TableCell>Sector Privado Empresarial</TableCell>
+              <TableCell>02</TableCell>
+              <TableCell>12</TableCell>
               <TableCell>01/11/2023</TableCell>
-              <TableCell>28/11/2023</TableCell>
               <TableCell>
                 <Button variant="ghost">Editar</Button>
               </TableCell>

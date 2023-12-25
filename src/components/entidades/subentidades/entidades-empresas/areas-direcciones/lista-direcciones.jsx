@@ -1,10 +1,10 @@
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
 
-export default function ListaEntidadesEmpresa() {
+export default function ListaDirecciones() {
     return (
       <>
        <label className="block text-sm font-medium mb-1" htmlFor="group-type">
-              Entidad Empresa:
+              Área-Dirección:
             </label>
           
         <Select>
@@ -12,7 +12,7 @@ export default function ListaEntidadesEmpresa() {
           <SelectValue placeholder="Seleccione uno" />
         </SelectTrigger>
         <SelectContent position="popper">
-          <SelectItem value="public">Fondo de Desarrollo Social</SelectItem>
+          <SelectItem value="public">Dirección Ejecutiva</SelectItem>
         </SelectContent>
       </Select>
       </>
