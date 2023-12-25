@@ -19,7 +19,7 @@ export function SelectoraSubEntidades() {
           <div className="flex items-center space-x-4 justify-center">
             <Button onClick={() => router.push('/dashboard/entidades/subentidades/crearsubentidades')} className="bg-white text-purple-500 hover:bg-gray-200">Crear Subentidades</Button>
             <Button  onClick={() => router.push('/dashboard/entidades/subentidades/buscarsubentidades')}className="bg-white text-purple-500 hover:bg-gray-200">Buscar Subentidades</Button>
-            <Button  onClick={() => router.push('/dashboard/entidades/subentidades/area-direcciones')}className="bg-white text-purple-500 hover:bg-gray-200">Area direcciones</Button>
+            <Button  onClick={() => router.push('/dashboard/entidades/subentidades/entidades-empresas')}className="bg-white text-purple-500 hover:bg-gray-200">Entidades empresas</Button>
           </div>
         </main>
     )
