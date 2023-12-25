@@ -8,7 +8,7 @@ import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@
 import { Input } from "@/components/ui/input"
 import ListaGruposcorporativos from "../gruposcorporativos/lista-gruposcorporativos";
 
-export function NuevasEntidad() {
+export default function NuevasEntidad() {
   return (
     (
       <div className=" p-4 mx-auto w-full max-w-2xl mt-4">
