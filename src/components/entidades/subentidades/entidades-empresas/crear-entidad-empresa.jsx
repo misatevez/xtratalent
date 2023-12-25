@@ -8,14 +8,15 @@ import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@
 import { Input } from "@/components/ui/input"
 import ListaEntidades from "../../entidad/lista-entidades";
 import ListaGruposcorporativos from "../../gruposcorporativos/lista-gruposcorporativos";
+import ListaSubEntidades from "../lista-subentidades";
 
-export function NuevasSubEntidadesEmpresas() {
+export function NuevasEntidadesEmpresas() {
   return (
     (
       <div className=" p-4 mx-auto w-full max-w-2xl mt-4">
       <div className="bg-white p-4 rounded-md shadow-md mt-4">
-        <h2 className="text-lg font-bold text-[#2c5282] mb-4">Nuevo Sub Tipo Entidad</h2>
-        <div className="grid grid-cols-2 gap-4">
+        <h2 className="text-lg font-bold text-[#2c5282] mb-4">Nuevo Registro -Entidad Empresa-</h2>
+        <div className="grid grid-cols-3 gap-4">
         <div>
           <ListaGruposcorporativos />
         </div>
@@ -23,24 +24,27 @@ export function NuevasSubEntidadesEmpresas() {
 
             <ListaEntidades />
           </div>
-          
+          <div>
+
+            <ListaSubEntidades />
+          </div>
 
           <div />
         </div>
         <div className="mt-4">
           <label className="block text-sm font-medium mb-1" htmlFor="group-name">
-            Nombre Sub-Tipo Entidad:
+            Nombre Entidad Empresa:
           </label>
-          <Input id="group-name" placeholder="Ministerio de comunicaciones" />
+          <Input id="group-name" placeholder="Secretaria de Cultura" />
         </div>
         <div className="mt-4">
           <label className="block text-sm font-medium mb-1" htmlFor="group-description">
-            Descripción Sub-Tipo Entidad:
+            Descripción Entidad Empresa:
           </label>
           <textarea
             className="resize-none border rounded-md w-full p-2"
             id="group-description"
-            placeholder="El ministerio de ..."
+            placeholder="El secretaria de cultura ..."
             rows="4"
           />
         </div>

@@ -6,10 +6,9 @@ import { Button } from "@/components/ui/button"
 import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table"
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
-import ListaEntidades from "./lista-entidades";
 import ListaGruposcorporativos from "../gruposcorporativos/lista-gruposcorporativos";
 
-export function NuevasEntidadEmpresa() {
+export function NuevasEntidad() {
   return (
     (
       <div className=" p-4 mx-auto w-full max-w-2xl mt-4">

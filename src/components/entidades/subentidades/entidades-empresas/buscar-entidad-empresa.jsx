@@ -5,19 +5,23 @@ import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@
 import { Input } from "@/components/ui/input"
 import ListaGruposcorporativos from "../../gruposcorporativos/lista-gruposcorporativos";
 import ListaEntidades from "../../entidad/lista-entidades";
+import ListaSubEntidades from "../lista-subentidades";
 
-export default function BuscarSubTipoEntidadEmpresa() {
+export default function BuscarEntidadEmpresa() {
     return (
       <div className="bg-white p-4 rounded-md shadow-md m-auto text-center">
       <h1 className="text-xl font-bold text-center text-[#2c5282] mb-4">
        Tabla - Registro - Entidades - Empresa
       </h1>
-      <div className="grid grid-cols-2 gap-4 mb-4">
+      <div className="grid grid-cols-3 gap-4 mb-4">
       <div>
           <ListaGruposcorporativos />
         </div>
           <div>
             <ListaEntidades />
+          </div>
+          <div>
+            <ListaSubEntidades />
           </div>
         </div>
       <div className="flex justify-center">
@@ -31,27 +35,26 @@ export default function BuscarSubTipoEntidadEmpresa() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">Grupo Tipo</TableHead>
-              <TableHead className="w-[200px]">Nombre del GRUPO</TableHead>
-              <TableHead className="w-[150px]">Fecha Registro</TableHead>
-              <TableHead className="w-[150px]">Última Modificación</TableHead>
-              <TableHead className="w-[100px]" />
+              <TableHead className="w-[100px]">Grupo</TableHead>
+              <TableHead className="w-[200px]">Tipo Entidad</TableHead>
+              <TableHead className="w-[200px]">Sub-Tipo Entidad</TableHead>
+              <TableHead className="w-[200px]">Nombre Entidad</TableHead>
+              <TableHead className="w-[100px]">Fecha Registro</TableHead>
+              <TableHead className="w-[50px]">Vacantes activas</TableHead>
+              <TableHead className="w-[50px]">Vacantes procesadas</TableHead>
+              <TableHead className="w-[100px]">Última Modificación</TableHead>
+              <TableHead className="w-[100px]">Accion</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             <TableRow>
               <TableCell>Público</TableCell>
-              <TableCell>Sector Público – Gobierno – Estatal</TableCell>
+              <TableCell>Administracion central</TableCell>
+              <TableCell>Presidencia</TableCell>
+              <TableCell>Secretaria de obras social</TableCell>
               <TableCell>01/11/2023</TableCell>
-              <TableCell>28/11/2023</TableCell>
-              <TableCell>
-                <Button variant="ghost">Editar</Button>
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Privado</TableCell>
-              <TableCell>Sector Privado Empresarial</TableCell>
-              <TableCell>01/11/2023</TableCell>
+              <TableCell>02</TableCell>
+              <TableCell>12</TableCell>
               <TableCell>28/11/2023</TableCell>
               <TableCell>
                 <Button variant="ghost">Editar</Button>
