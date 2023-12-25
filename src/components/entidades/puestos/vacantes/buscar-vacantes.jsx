@@ -96,7 +96,7 @@ export default function BuscarVacante() {
       </div>
       <div className="flex justify-between items-center mt-4">
       <Button variant="outline">Generar PDF</Button>
-        <Button variant="outline">Nuevo puesto</Button>
+        <Button variant="outline">Nueva vacante</Button>
       </div>
     </div>
     );

@@ -18,7 +18,6 @@ export function NuevasDireccion() {
           <div>
           <ListaEntidadesEmpresa />
           </div>
-          <div />
         </div>
         <div className="mt-4">
           <label className="block text-sm font-medium mb-1" htmlFor="group-name">
