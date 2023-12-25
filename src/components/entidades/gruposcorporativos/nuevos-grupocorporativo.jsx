@@ -4,8 +4,9 @@
  */
 import { Button } from "@/components/ui/button"
 import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table"
-import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
+
 import { Input } from "@/components/ui/input"
+import ListaGruposcorporativos from "./lista-gruposcorporativos";
 
 export function NuevoGrupoCoorporativo() {
   return (
@@ -15,21 +16,7 @@ export function NuevoGrupoCoorporativo() {
         <h2 className="text-lg font-bold text-[#2c5282] mb-4">Nuevo grupo coorporacion</h2>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium mb-1" htmlFor="group-type">
-              Grupo Tipo Corporativo:
-            </label>
-            <Select>
-              <SelectTrigger id="group-type">
-                <SelectValue placeholder="Seleccione uno" />
-              </SelectTrigger>
-              <SelectContent position="popper">
-                <SelectItem value="public">Sector Público</SelectItem>
-                <SelectItem value="private">Sector Privado</SelectItem>
-                <SelectItem value="ngo">Fideicomisos y Otras Entidades</SelectItem>
-                <SelectItem value="international">Organizaciones Internacionales</SelectItem>
-                <SelectItem value="other">Otro Tipo</SelectItem>
-              </SelectContent>
-            </Select>
+           <ListaGruposcorporativos />
           </div>
           <div />
         </div>

@@ -1,10 +1,11 @@
-import { NuevasSubEntidadesEmpresas } from "@/components/entidades/subentidades/entidades-empresas/crear-entidad-empresa";
+import { NuevasSubEntidades } from "@/components/entidades/subentidades/crear-subentidades";
+
 
 
 
 export default function page() {
     return (
-        <NuevasSubEntidadesEmpresas />
+        <NuevasSubEntidades />
     );
 }
 

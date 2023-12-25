@@ -1,9 +1,9 @@
-import BuscarSubTipoEntidadEmpresa from "@/components/entidades/subentidades/entidades-empresas/buscar-entidad-empresa";
+import BuscarSubEntidad from "@/components/entidades/subentidades/buscar-subentidades";
 
 
 export default function page() {
     return (
-        <BuscarSubTipoEntidadEmpresa />
+        <BuscarSubEntidad />
     );
 }
 

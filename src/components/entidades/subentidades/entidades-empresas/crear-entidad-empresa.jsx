@@ -6,47 +6,41 @@ import { Button } from "@/components/ui/button"
 import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table"
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
+import ListaEntidades from "../../entidad/lista-entidades";
+import ListaGruposcorporativos from "../../gruposcorporativos/lista-gruposcorporativos";
 
 export function NuevasSubEntidadesEmpresas() {
   return (
     (
       <div className=" p-4 mx-auto w-full max-w-2xl mt-4">
       <div className="bg-white p-4 rounded-md shadow-md mt-4">
-        <h2 className="text-lg font-bold text-[#2c5282] mb-4">Nuevo Registro -Entidad Empresa-</h2>
+        <h2 className="text-lg font-bold text-[#2c5282] mb-4">Nuevo Sub Tipo Entidad</h2>
         <div className="grid grid-cols-2 gap-4">
+        <div>
+          <ListaGruposcorporativos />
+        </div>
           <div>
-            <label className="block text-sm font-medium mb-1" htmlFor="group-type">
-              Tipo Entidades
-            </label>
-            <Select>
-              <SelectTrigger id="group-type">
-                <SelectValue placeholder="Seleccione uno" />
-              </SelectTrigger>
-              <SelectContent position="popper">
-                <SelectItem value="public">Sector Público</SelectItem>
-                <SelectItem value="private">Sector Privado</SelectItem>
-                <SelectItem value="ngo">Fideicomisos y Otras Entidades</SelectItem>
-                <SelectItem value="international">Organizaciones Internacionales</SelectItem>
-                <SelectItem value="other">Otro Tipo</SelectItem>
-              </SelectContent>
-            </Select>
+
+            <ListaEntidades />
           </div>
+          
+
           <div />
         </div>
         <div className="mt-4">
           <label className="block text-sm font-medium mb-1" htmlFor="group-name">
-            Nombre tipo Entidad:
+            Nombre Sub-Tipo Entidad:
           </label>
-          <Input id="group-name" placeholder="Especial" />
+          <Input id="group-name" placeholder="Ministerio de comunicaciones" />
         </div>
         <div className="mt-4">
           <label className="block text-sm font-medium mb-1" htmlFor="group-description">
-            Descripción tipo Entidad:
+            Descripción Sub-Tipo Entidad:
           </label>
           <textarea
             className="resize-none border rounded-md w-full p-2"
             id="group-description"
-            placeholder="El grupo especial..."
+            placeholder="El ministerio de ..."
             rows="4"
           />
         </div>

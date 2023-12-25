@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button"
 import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table"
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
+import ListaGruposcorporativos from "../../gruposcorporativos/lista-gruposcorporativos";
+import ListaEntidades from "../../entidad/lista-entidades";
 
 export default function BuscarSubTipoEntidadEmpresa() {
     return (
@@ -10,6 +12,14 @@ export default function BuscarSubTipoEntidadEmpresa() {
       <h1 className="text-xl font-bold text-center text-[#2c5282] mb-4">
        Tabla - Registro - Entidades - Empresa
       </h1>
+      <div className="grid grid-cols-2 gap-4 mb-4">
+      <div>
+          <ListaGruposcorporativos />
+        </div>
+          <div>
+            <ListaEntidades />
+          </div>
+        </div>
       <div className="flex justify-center">
         <Input className="mr-2" placeholder="Search" type="text" />
         <Button variant="outline">

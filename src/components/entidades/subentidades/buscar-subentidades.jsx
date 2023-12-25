@@ -3,13 +3,26 @@ import { Button } from "@/components/ui/button"
 import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table"
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
+import ListaGruposcorporativos from "../gruposcorporativos/lista-gruposcorporativos";
+import ListaEntidades from "../entidad/lista-entidades";
 
-export default function BuscarSubTipoEntidades() {
+
+
+
+export default function BuscarSubEntidad() {
     return (
       <div className="bg-white p-4 rounded-md shadow-md m-auto text-center">
       <h1 className="text-xl font-bold text-center text-[#2c5282] mb-4">
-       Sub-Tipos Entidades - Empresas
+       SUB-TIPOS Entidades - Empresas
       </h1>
+      <div className="grid grid-cols-2 gap-4 mb-4">
+      <div>
+          <ListaGruposcorporativos />
+        </div>
+          <div>
+            <ListaEntidades />
+          </div>
+        </div>
       <div className="flex justify-center">
         <Input className="mr-2" placeholder="Search" type="text" />
         <Button variant="outline">
@@ -21,26 +34,18 @@ export default function BuscarSubTipoEntidades() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">Grupo Tipo</TableHead>
-              <TableHead className="w-[200px]">Nombre del GRUPO</TableHead>
+              <TableHead className="w-[100px]">Grupo Corporativo</TableHead>
+              <TableHead className="w-[200px]">Tipo Entidad</TableHead>
+              <TableHead className="w-[200px]">SubTipo Entidad</TableHead>
               <TableHead className="w-[150px]">Fecha Registro</TableHead>
               <TableHead className="w-[150px]">Última Modificación</TableHead>
-              <TableHead className="w-[100px]" />
             </TableRow>
           </TableHeader>
           <TableBody>
             <TableRow>
               <TableCell>Público</TableCell>
-              <TableCell>Sector Público – Gobierno – Estatal</TableCell>
-              <TableCell>01/11/2023</TableCell>
-              <TableCell>28/11/2023</TableCell>
-              <TableCell>
-                <Button variant="ghost">Editar</Button>
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Privado</TableCell>
-              <TableCell>Sector Privado Empresarial</TableCell>
+              <TableCell>Administracion central</TableCell>
+              <TableCell>Ministerio de desarrollo social</TableCell>
               <TableCell>01/11/2023</TableCell>
               <TableCell>28/11/2023</TableCell>
               <TableCell>
