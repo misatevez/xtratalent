@@ -12,17 +12,16 @@ export function RegistroInterno() {
   // Estado inicial para el formulario
   const [formState, setFormState] = useState({
     password: '',
-    entidad: 'Ejemplo, S.A.',
-    tipo_usuario: 'Internal',
+    entidad: '',
+    tipo_usuario: '',
     correo_electronico: '',
-    nombre: 'Misael',
-    codigo_plaza_vacante: 20,
+    codigo_plaza_vacante: null,
     profesion_ocupacion: '',
-    codigo_perfil_puesto: 20,
-    anos_experiencia: 20,
+    codigo_perfil_puesto: null,
+    anos_experiencia: null,
     direccion_calle_avenida: '',
     direccion_colonia: '',
-    direccion_zona: 20,
+    direccion_zona: null,
     direccion_departamento: '',
     direccion_municipio: '',
     primer_nombre: '',
@@ -31,15 +30,15 @@ export function RegistroInterno() {
     apellido_paterno: '',
     fecha_nacimiento: '',
     numero_dpi: '',
-    numero_afiliacion_igss: 20,
-    numero_nit: '1234',
-    lugar_nacimiento: 'Alsina',
-    pais_origen: 'Argentina',
-    estado_civil: 'Casado',
-    genero_sexo: 'Masculino',
+    numero_afiliacion_igss: null,
+    numero_nit: null,
+    lugar_nacimiento: '',
+    pais_origen: '',
+    estado_civil: '',
+    genero_sexo: '',
     numero_pasaporte: '',
     telefono_casa: '',
-    telefono_particular: '1538008472',
+    telefono_particular: null,
     telefono_movil_cel: '',
   });
 
@@ -92,14 +91,15 @@ export function RegistroInterno() {
               <label className="flex flex-col gap-2">
                 <span className="text-lg font-semibold">ENTIDAD EMPRESA</span>
                 <select name="entidad" value={formState.entidad} onChange={handleInputChange} className="border rounded p-2">
-                  <option>Ejemplo, S.A.</option>
+                <option value="">Seleccione una entidad</option>
+                <option value="Ejemplo, S.A.">Ejemplo, S.A.</option>
                 </select>
               </label>
               <label className="flex flex-col gap-2">
                 <span className="text-lg font-semibold">CANDIDATO USUARIO</span>
                 <select name="tipo_usuario" value={formState.tipo_usuario} onChange={handleInputChange} className="border rounded p-2">
-                  <option>Externo – Evaluado</option>
-                  <option>Interno – Usuario</option>
+                  <option value="externo">Externo  Evaluado</option>
+                  <option value="interno">Interno  Usuario</option>
                 </select>
               </label>
               <label className="flex flex-col gap-2">
@@ -155,7 +155,7 @@ export function RegistroInterno() {
             <label className="flex flex-col gap-2">
               <span className="text-lg font-semibold">País de Origen</span>
               <select name="pais_origen" value={formState.pais_origen} onChange={handleInputChange} className="border rounded p-2">
-                <option>Guatemala</option>
+                <option value="Guatemala">Guatemala</option>
               </select>
             </label>
           </div>
@@ -209,7 +209,7 @@ export function RegistroInterno() {
               <select
               name="lugar_nacimiento" value={formState.lugar_nacimiento} onChange={handleInputChange}
               className="border rounded p-2">
-                <option>Guatemala</option>
+                <option value="Guatemala">Guatemala</option>
               </select>
             </label>
             <label className="flex flex-col gap-2">
@@ -237,7 +237,8 @@ export function RegistroInterno() {
               <select 
               name="estado_civil" value={formState.estado_civil} onChange={handleInputChange}
               className="border rounded p-2">
-                <option>Soltero</option>
+                <option value="Soltero">Soltero</option>
+                <option value="Casado">Casado</option>
               </select>
             </label>
             <label className="flex flex-col gap-2">
@@ -245,7 +246,8 @@ export function RegistroInterno() {
               <select
               name="genero_sexo" value={formState.genero_sexo} onChange={handleInputChange}
               className="border rounded p-2">
-                <option>Masculino</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
               </select>
             </label>
             <label className="flex flex-col gap-2">
