@@ -1,17 +1,18 @@
 'use client'
 import supabase from "@/lib/supabaseClient";
 import { useState } from "react";
-import FormGC from "./FormGC";
+
 import { Notificacion } from "@/components/notification";
+import FormSubTipoEntidad from "./formSubTipoEntidad";
 
 
-export function NuevoGrupoCoorporativo() {
+export function NuevoSubTipoEntidad() {
 
   // Estado inicial para el formulario
   const [formState, setFormState] = useState({
     nombre: '',
     descripcion: '',
-    id_grupotipo: ''
+    id_grupocorporativo: ''
   });
   
   const [notification, setNotification] = useState({
@@ -40,7 +41,7 @@ const handleSubmit = async (e) => {
   console.log(formState)
 
   // Insertar en Supabase
-  const { data, error } = await supabase.from('grupo_corporativo').insert([formState]);
+  const { data, error } = await supabase.from('subtipo_entidad').insert([formState]);
 
   if (error) {
     setNotification({
@@ -52,7 +53,7 @@ const handleSubmit = async (e) => {
     setNotification({
       visible: true,
       titulo: "Éxito",
-      mensaje: "Se ha creado su grupo corporativo" // Ajusta según necesites
+      mensaje: "Se ha creado su subtipo de entidad" // Ajusta según necesites
     });
   }
 };
@@ -61,7 +62,7 @@ const handleSubmit = async (e) => {
     (
       <>
       <div className=" p-4 mx-auto w-full max-w-2xl mt-4">
-      <FormGC titulo="Crear Grupo Corporativo" 
+      <FormSubTipoEntidad titulo="Crear SubTipo Entidad" 
      formState={formState} 
      handleInputChange={handleInputChange} 
      handleSubmit={handleSubmit}

@@ -18,7 +18,7 @@ export function SelectoraEntidades() {
           <div className="flex items-center justify-center space-x-4">
           <Button onClick={() => router.push('/dashboard/entidades/tipogrupocorporativo')} className="bg-white text-purple-500 hover:bg-gray-200">Tipo de grupo corporativo</Button>
             <Button onClick={() => router.push('/dashboard/entidades/gruposcorporativos')} className="bg-white text-purple-500 hover:bg-gray-200">Grupos corporativos</Button>
-            <Button onClick={() => router.push('/dashboard/entidades/gruposcorporativos')} className="bg-white text-purple-500 hover:bg-gray-200">Subtipo Entidad</Button>
+            <Button onClick={() => router.push('/dashboard/entidades/subtipoentidad')} className="bg-white text-purple-500 hover:bg-gray-200">Subtipo Entidad</Button>
             <Button  onClick={() => router.push('/dashboard/entidades/entidad')}className="bg-white text-purple-500 hover:bg-gray-200">Entidades empresa</Button>
             <Button  onClick={() => router.push('/dashboard/entidades/subentidades')}className="bg-white text-purple-500 hover:bg-gray-200">Subentidades</Button>
             <Button  onClick={() => router.push('/dashboard/entidades/puestos')}className="bg-white text-purple-500 hover:bg-gray-200">Puestos</Button>

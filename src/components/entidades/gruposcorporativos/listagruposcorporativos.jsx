@@ -5,13 +5,13 @@ import { useEffect, useState } from "react";
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select";
 import supabase from "@/lib/supabaseClient";
 
-export default function ListaTipodeGrupoCorporativo( { onGrupoTipoChange, selectedTipoId } ) {
+export default function ListaGruposCorporativos( { onGrupoTipoChange, selectedTipoId } ) {
   const [tipos, setTipos] = useState([]);
 
  // Dentro de useEffect en ListaTipodeGrupoCorporativo
 useEffect(() => {
   const fetchTipos = async () => {
-    const { data, error } = await supabase.from('grupotipo').select('id_grupotipo, nombre');
+    const { data, error } = await supabase.from('grupo_corporativo').select('id_grupocorporativo, nombre');
     if (error) {
       console.error("Error al obtener los tipos de grupos corporativos: ", error);
     } else {
@@ -25,7 +25,7 @@ useEffect(() => {
   return (
     <>
       <label className="block text-sm font-medium mb-1" htmlFor="group-type">
-        Grupo Tipo Corporativo:
+        Grupos Corporativos:
       </label>
       <Select onValueChange={onGrupoTipoChange} value={selectedTipoId?.toString()}>
         <SelectTrigger id="group-type">
@@ -34,7 +34,7 @@ useEffect(() => {
         
         <SelectContent position="popper">
           {tipos.map((tipo, index) => (
-            <SelectItem key={index} value={tipo.id_grupotipo.toString()}>{tipo.nombre}</SelectItem>
+            <SelectItem key={index} value={tipo.id_grupocorporativo.toString()}>{tipo.nombre}</SelectItem>
           ))}
         </SelectContent>
 

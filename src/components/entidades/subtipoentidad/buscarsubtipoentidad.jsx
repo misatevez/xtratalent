@@ -8,13 +8,12 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { Notificacion } from "@/components/notification";
 
-export default function BuscarGrupoCorporativo() {
+export default function BuscarSubTipoEntidad() {
   const router = useRouter();
   const [grupos, setGrupos] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedGrupoId, setSelectedGrupoId] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [userDetails, setUserDetails] = useState(null);
   const [notification, setNotification] = useState({
     visible: false,
     titulo: "",
@@ -23,13 +22,13 @@ export default function BuscarGrupoCorporativo() {
 
   useEffect(() => {
     async function fetchData() {
-      const { data, error } = await supabase.from('grupo_corporativo').select(`
-      id_grupocorporativo,
+      const { data, error } = await supabase.from('subtipo_entidad').select(`
+      id_subtipo_entidad,
       nombre,
       descripcion,
-      fecha_creado,
-      fecha_actualizado,
-      grupotipo:grupotipo (id_grupotipo, nombre)
+        fecha_creado,
+        fecha_actualizado,
+      grupo_corporativo:grupo_corporativo (id_grupocorporativo, nombre)
     `);
       if (error) {
         console.error(error);
@@ -63,7 +62,7 @@ export default function BuscarGrupoCorporativo() {
   const handleDeleteGrupo = async () => {
     if (!selectedGrupoId) return;
     setLoading(true);
-    const { error } = await supabase.from('grupo_corporativo').delete().eq('id_grupocorporativo', selectedGrupoId);
+    const { error } = await supabase.from('subtipo_entidad').delete().eq('id_subtipo_entidad', selectedGrupoId);
     if (error) {
       console.error("Error deleting group: ", error);
       setNotification({
@@ -72,7 +71,7 @@ export default function BuscarGrupoCorporativo() {
         mensaje: "Error al eliminar grupo: " + error.message
       });
     } else {
-      setGrupos(prevGrupos => prevGrupos.filter(grupo => grupo.id_grupocorporativo !== selectedGrupoId));
+      setGrupos(prevGrupos => prevGrupos.filter(grupo => grupo.id_subtipo_entidad !== selectedGrupoId));
       setSelectedGrupoId(null);
       setNotification({
         visible: true,
@@ -86,7 +85,7 @@ export default function BuscarGrupoCorporativo() {
   const filteredGrupos = grupos.filter(grupo =>
     grupo.nombre.toLowerCase().includes(searchTerm) ||
     grupo.descripcion.toLowerCase().includes(searchTerm) ||
-    grupo.grupotipo.nombre.toLowerCase().includes(searchTerm) 
+    grupo.grupo_corporativo.nombre.toLowerCase().includes(searchTerm) 
   );
 
   if (loading) {
@@ -96,7 +95,7 @@ export default function BuscarGrupoCorporativo() {
   return (
     <>
       <div className="bg-white p-4 rounded-md shadow-md m-auto text-center">
-        <h1 className="text-xl font-bold text-[#2c5282] mb-4">Buscar Grupos Corporativos</h1>
+        <h1 className="text-xl font-bold text-[#2c5282] mb-4">Buscar Sub Entidades</h1>
         <div className="flex justify-center">
           <Input className="mr-2" placeholder="Search" type="text" onChange={handleSearchChange} />
           <Button variant="outline">Buscar</Button>
@@ -106,8 +105,8 @@ export default function BuscarGrupoCorporativo() {
             <TableHeader>
               <TableRow>
                 <TableHead className="w-[100px]">Grupo Tipo</TableHead>
-                <TableHead className="w-[200px]">Nombre del Grupo corporativo</TableHead>
-                <TableHead className="w-[200px]">Descripcion del Grupo corporativo</TableHead>
+                <TableHead className="w-[200px]">Nombre del Subtipo Entidad</TableHead>
+                <TableHead className="w-[200px]">Descripcion del Subtipo Entidad</TableHead>
                 <TableHead className="w-[150px]">Fecha Registro</TableHead>
                 <TableHead className="w-[150px]">Última Modificación</TableHead>
                 <TableHead className="w-[100px]">Seleccionar</TableHead>
@@ -116,15 +115,15 @@ export default function BuscarGrupoCorporativo() {
             <TableBody>
               {filteredGrupos.map((grupo, index) => (
                 <TableRow key={index}>
-                  <TableCell>{grupo.grupotipo.nombre}</TableCell>
+                  <TableCell>{grupo.grupo_corporativo.nombre}</TableCell>
                   <TableCell>{grupo.nombre}</TableCell>
                   <TableCell>{grupo.descripcion}</TableCell>
                   <TableCell>{grupo.fecha_creado}</TableCell>
                   <TableCell>{grupo.fecha_actualizado}</TableCell>
                   <TableCell><input
                   type="checkbox"
-                  checked={selectedGrupoId === grupo.id_grupocorporativo}
-                  onChange={() => handleCheckboxChange(grupo.id_grupocorporativo)}
+                  checked={selectedGrupoId === grupo.id_subtipo_entidad}
+                  onChange={() => handleCheckboxChange(grupo.id_subtipo_entidad)}
                   className="accent-blue-500 h-5 w-5"
                 /></TableCell>
                 </TableRow>
@@ -136,7 +135,7 @@ export default function BuscarGrupoCorporativo() {
       <Button
           className={`bg-blue-500 text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
           disabled={!selectedGrupoId}
-          onClick={() => router.push(`/dashboard/entidades/gruposcorporativos/${selectedGrupoId}`)}
+          onClick={() => router.push(`/dashboard/entidades/subtipoentidad/${selectedGrupoId}`)}
         >
           Modificar tipo
         </Button>
