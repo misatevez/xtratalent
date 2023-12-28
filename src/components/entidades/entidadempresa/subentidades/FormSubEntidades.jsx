@@ -1,15 +1,17 @@
 import React from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import ListaSubTipoEntidad from '../subtipoentidad/listasubtipoentidad';
+import ListaEntidadesEmpresas from '../lista-entidad-empresa';
 
 
 
-export default function FormEntidadEmpresa({ formState, handleInputChange, handleSubmit, titulo }) {
 
-  const handleGrupoTipoChange = (id_subtipo_entidad) => {
+
+export default function FormSubEntidad({ formState, handleInputChange, handleSubmit, titulo }) {
+
+  const handleGrupoTipoChange = (id_entidad_empresa) => {
     // Actualiza el estado del formulario para incluir el nuevo id de tipo de grupo seleccionado
-    handleInputChange({ target: { name: 'id_subtipo_entidad', value: id_subtipo_entidad } });
+    handleInputChange({ target: { name: 'id_entidad_empresa', value: id_entidad_empresa } });
   };
 
     return (
@@ -19,27 +21,27 @@ export default function FormEntidadEmpresa({ formState, handleInputChange, handl
         <div className="grid grid-cols-2 gap-4">
 
           <div>
-          <ListaSubTipoEntidad 
-           selectedTipoId={formState.id_subtipo_entidad} 
+          <ListaEntidadesEmpresas 
+           selectedTipoId={formState.id_entidad_empresa} 
           onGrupoTipoChange={handleGrupoTipoChange} />
           </div>
 
         </div>
         <div className="mt-4">
           <label className="block text-sm font-medium mb-1" htmlFor="group-name">
-            Nombre Entidad Empresa:
+            Nombre subentidad:
           </label>
           <Input name="nombre" value={formState.nombre} onChange={handleInputChange} id="group-name" placeholder="Especial" />
         </div>
         <div className="mt-4">
           <label className="block text-sm font-medium mb-1" htmlFor="group-description">
-            Descripción Entidad Empresa:
+            Descripción Subentidad:
           </label>
           <textarea
           name="descripcion" value={formState.descripcion} onChange={handleInputChange}
             className="resize-none border rounded-md w-full p-2"
             id="group-description"
-            placeholder="La entidad empresa..."
+            placeholder="La Subentidad..."
             rows="4"
           />
         </div>

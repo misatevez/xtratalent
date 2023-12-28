@@ -1,8 +1,8 @@
-import { SelectoraEntidadesEmpresas } from "@/components/entidades/entidadempresa/entidades-empresas/selectora-entidades-empresas";
+import { SelectoraSubEntidades } from "@/components/entidades/entidadempresa/subentidades/selectora-subentidades";
 
 export default function page() {
     return (
-      <SelectoraEntidadesEmpresas />
+      <SelectoraSubEntidades />
     );
 }
 

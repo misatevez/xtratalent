@@ -1,4 +1,4 @@
-import BuscarDireccion from "@/components/entidades/entidadempresa/entidades-empresas/areas-direcciones/buscar-area-direccion";
+import BuscarDireccion from "@/components/entidades/entidadempresa/subentidades/areas-direcciones/buscar-area-direccion";
 
 export default function page() {
     return (

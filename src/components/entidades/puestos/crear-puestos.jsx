@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button"
 import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table"
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
-import ListaDirecciones from "../entidadempresa/entidades-empresas/areas-direcciones/lista-direcciones";
-import ListaDepartamentos from "../entidadempresa/entidades-empresas/areas-direcciones/departamento/lista-departamentos";
+import ListaDirecciones from "../entidadempresa/subentidades/areas-direcciones/lista-direcciones";
+import ListaDepartamentos from "../entidadempresa/subentidades/areas-direcciones/departamento/lista-departamentos";
 
 
 export function CrearPuestos() {

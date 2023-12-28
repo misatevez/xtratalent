@@ -1,4 +1,4 @@
-import { NuevasDireccion } from "@/components/entidades/entidadempresa/entidades-empresas/areas-direcciones/crear-area-direccion";
+import { NuevasDireccion } from "@/components/entidades/entidadempresa/subentidades/areas-direcciones/crear-area-direccion";
 
 export default function page() {
     return (

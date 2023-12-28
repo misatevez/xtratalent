@@ -1,4 +1,4 @@
-import { NuevoDepartamento } from "@/components/entidades/entidadempresa/entidades-empresas/areas-direcciones/departamento/crear-departamentos";
+import { NuevoDepartamento } from "@/components/entidades/entidadempresa/subentidades/areas-direcciones/departamento/crear-departamentos";
 
 export default function page() {
     return (

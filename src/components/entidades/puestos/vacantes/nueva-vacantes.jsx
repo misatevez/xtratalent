@@ -6,9 +6,9 @@ import { Button } from "@/components/ui/button"
 import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table"
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
-import ListaEntidadesEmpresa from "../../entidadempresa/entidades-empresas/lista-entidades-empresa";
-import ListaDirecciones from "../../entidadempresa/entidades-empresas/areas-direcciones/lista-direcciones";
-import ListaDepartamentos from "../../entidadempresa/entidades-empresas/areas-direcciones/departamento/lista-departamentos";
+import ListaEntidadesEmpresa from "../../entidadempresa/subentidades/lista-entidades-empresa";
+import ListaDirecciones from "../../entidadempresa/subentidades/areas-direcciones/lista-direcciones";
+import ListaDepartamentos from "../../entidadempresa/subentidades/areas-direcciones/departamento/lista-departamentos";
 import ListaPuestos from "../lista-puestos";
 import ListaRenglones from "../renglones-presupuestarios/lista-renglones";
 

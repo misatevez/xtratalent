@@ -1,8 +1,8 @@
-import BuscarEntidadEmpresa from "@/components/entidades/entidadempresa/entidades-empresas/buscar-entidad-empresa";
+import BuscarSubEntidad from "@/components/entidades/entidadempresa/subentidades/buscar-subentidad";
 
 export default function page() {
     return (
-        <BuscarEntidadEmpresa />
-    );
+        <BuscarSubEntidad/>
+        );
 }
 
