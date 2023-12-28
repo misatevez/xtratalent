@@ -7,7 +7,7 @@ import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
 import ListaEntidades from "../../entidad/lista-entidades";
-import ListaGruposcorporativos from "../../gruposcorporativos/lista-gruposcorporativos";
+import ListaGruposcorporativos from "../../gruposcorporativos/lista-tipodeGC";
 import ListaSubEntidades from "../lista-subentidades";
 
 export function NuevasEntidadesEmpresas() {

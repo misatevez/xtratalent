@@ -6,14 +6,14 @@ import { Button } from "@/components/ui/button"
 import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table"
 
 import { Input } from "@/components/ui/input"
-import ListaGruposcorporativos from "./lista-gruposcorporativos";
+import ListaGruposcorporativos from "./lista-tipodeGC";
 
 export function NuevoGrupoCoorporativo() {
   return (
     (
       <div className=" p-4 mx-auto w-full max-w-2xl mt-4">
       <div className="bg-white p-4 rounded-md shadow-md mt-4">
-        <h2 className="text-lg font-bold text-[#2c5282] mb-4">Nuevo grupo coorporacion</h2>
+        <h2 className="text-lg font-bold text-[#2c5282] mb-4">Nuevo Grupo Corporativo</h2>
         <div className="grid grid-cols-2 gap-4">
           <div>
            <ListaGruposcorporativos />

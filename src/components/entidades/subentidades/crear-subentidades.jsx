@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table"
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
-import ListaGruposcorporativos from "../gruposcorporativos/lista-gruposcorporativos";
+import ListaGruposcorporativos from "../gruposcorporativos/lista-tipodeGC";
 import ListaEntidades from "../entidad/lista-entidades";
 
 

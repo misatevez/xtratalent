@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import supabase from "@/lib/supabaseClient"; // Asegúrate de que esta ruta sea correcta para tu cliente Supabase
 import { useRouter } from "next/navigation";
-import FormRegistro from "@/components/personal/formRegistro";
+import FormTipoGC from "@/components/entidades/tipogrupocorporativo/formTipoGC";
 import { Notificacion } from "@/components/notification";
 
 export default function Page({ params }) {
@@ -22,9 +22,9 @@ export default function Page({ params }) {
       if (slug) {
         setLoading(true);
         const { data, error } = await supabase
-          .from('usuarios')
+          .from('grupotipo')
           .select('*')
-          .eq('usuario_id', slug)
+          .eq('id_grupotipo', slug)
           .single();
 
         if (error) {
@@ -51,9 +51,9 @@ export default function Page({ params }) {
     e.preventDefault();
     setLoading(true);
     const { error } = await supabase
-      .from('usuarios')
+      .from('grupotipo')
       .update(userDetails)
-      .eq('usuario_id', slug);
+      .eq('id_grupotipo', slug);
 
       if (error) {
         setNotification({
@@ -65,7 +65,7 @@ export default function Page({ params }) {
         setNotification({
           visible: true,
           titulo: "Éxito",
-          mensaje: "Los datos del usuario han sido actualizados" // Ajusta según necesites
+          mensaje: "Los datos del tipo de grupo han sido actualizados" // Ajusta según necesites
         });
       }
       setLoading(false);
@@ -84,8 +84,8 @@ export default function Page({ params }) {
   
   return (
     <>
-    <FormRegistro
-      titulo={"Editar usuario"}
+    <FormTipoGC
+      titulo={"Editar tipo de grupo corporativo"}
       formState={userDetails}
       handleInputChange={handleInputChange}
       handleSubmit={handleSubmit}
