@@ -5,12 +5,12 @@ import { useEffect, useState } from "react";
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select";
 import supabase from "@/lib/supabaseClient";
 
-export default function ListaDirecciones( { onGrupoTipoChange, selectedTipoId } ) {
+export default function ListaSubEntidad( { onGrupoTipoChange, selectedTipoId } ) {
   const [tipos, setTipos] = useState([]);
 
 useEffect(() => {
   const fetchTipos = async () => {
-    const { data, error } = await supabase.from('direcciones').select('id_direcciones, nombre');
+    const { data, error } = await supabase.from('sub_entidad').select('id_sub_entidad, nombre');
     if (error) {
       console.error("Error al obtener los tipos de subentidad ", error);
     } else {
@@ -24,7 +24,7 @@ useEffect(() => {
   return (
     <>
       <label className="block text-sm font-medium mb-1" htmlFor="group-type">
-        Direcciones:
+        Subentidad:
       </label>
       <Select onValueChange={onGrupoTipoChange} value={selectedTipoId?.toString()}>
         <SelectTrigger id="group-type">
@@ -33,7 +33,7 @@ useEffect(() => {
         
         <SelectContent position="popper">
           {tipos.map((tipo, index) => (
-            <SelectItem key={index} value={tipo.id_direcciones.toString()}>{tipo.nombre}</SelectItem>
+            <SelectItem key={index} value={tipo.id_sub_entidad.toString()}>{tipo.nombre}</SelectItem>
           ))}
         </SelectContent>
 

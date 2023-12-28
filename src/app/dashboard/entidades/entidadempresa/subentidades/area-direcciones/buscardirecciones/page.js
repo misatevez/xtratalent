@@ -2,7 +2,7 @@ import BuscarDireccion from "@/components/entidades/entidadempresa/subentidades/
 
 export default function page() {
     return (
-        <BuscarDireccion />
+        <BuscarDireccion/>
     );
 }
 

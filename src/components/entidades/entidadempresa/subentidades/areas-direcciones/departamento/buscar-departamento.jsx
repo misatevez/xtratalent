@@ -1,86 +1,164 @@
-
-import { Button } from "@/components/ui/button"
+'use client'
+import { useEffect, useState } from "react";
+import supabase from "@/lib/supabaseClient";
+import { Input } from "@/components/ui/input";
 import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table"
-import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
-import { Input } from "@/components/ui/input"
-import ListaEntidadesEmpresa from "../../lista-entidades-empresa";
-import ListaDirecciones from "../lista-direcciones";
+import { Button } from "@/components/ui/button";
+
+import { useRouter } from "next/navigation";
+import { Notificacion } from "@/components/notification";
 
 export default function BuscarDepartamento() {
-    return (
-      <div className="bg-white p-4 rounded-md shadow-md m-auto text-center">
-      <h1 className="text-xl font-bold text-center text-[#2c5282] mb-4">
-       TABLA - DEPARTAMENTOS
-      </h1>
-      <div className="grid grid-cols-2 gap-4 mb-4">
-          <div>
-          <ListaEntidadesEmpresa />
-          </div>
-          <div>
-          <ListaDirecciones />
-          </div>
-        </div>
-      <div className="flex justify-center">
-        <Input className="mr-2" placeholder="Search" type="text" />
-        <Button variant="outline">
-          Buscar
-          <div className="ml-1" />
-        </Button>
-      </div>
-      <div className="overflow-x-auto mt-4">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[200px]">Nombre Área-Dirección</TableHead>
-              <TableHead className="w-[200px]">Departamento</TableHead>
-              <TableHead className="w-[50px]">Fecha Registro</TableHead>
-              <TableHead className="w-[50px]">Vacantes Activas</TableHead>
-              <TableHead className="w-[50px]">Vacantes Procesadas</TableHead>
-              <TableHead className="w-[50px]">Última Modificación</TableHead>
-              <TableHead className="w-[100px]">Acción</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            <TableRow>
-              <TableCell>Dirección Ejecutiva</TableCell>
-              <TableCell>Asesoria</TableCell>
-              <TableCell>01/11/2023</TableCell>
-              <TableCell>02</TableCell>
-              <TableCell>12</TableCell>
-              <TableCell>01/11/2023</TableCell>
-              <TableCell>
-                <Button variant="ghost">Editar</Button>
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </div>
-      <div className="flex justify-between items-center mt-4">
-      <Button variant="outline">Generar PDF</Button>
-        <Button variant="outline">Nuevo departamento</Button>
-      </div>
-    </div>
-    );
-}
+  const router = useRouter();
+  const [grupos, setGrupos] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedGrupoId, setSelectedGrupoId] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [notification, setNotification] = useState({
+    visible: false,
+    titulo: "",
+    mensaje: ""
+  });
 
-function SignalIcon(props) {
+  useEffect(() => {
+    async function fetchData() {
+      const { data, error } = await supabase.from('departamentos').select(`
+      id_departamentos,
+      nombre,
+      descripcion,
+      fecha_creado,
+      fecha_actualizado,
+      direcciones:direcciones (id_direcciones, nombre)
+    `);
+      if (error) {
+        console.error(error);
+        setNotification({
+          visible: true,
+          titulo: "Error",
+          mensaje: "Error al cargar grupos: " + error.message
+        });
+      } else {
+        setGrupos(data);
+        setLoading(false);
+      }
+    }
+    fetchData();
+  }, []);
+
+
+
+  const handleCloseNotification = () => {
+    setNotification((prev) => ({ ...prev, visible: false }));
+  };
+
+  const handleCheckboxChange = (userId) => {
+    setSelectedGrupoId(selectedGrupoId === userId ? null : userId); // Toggle selection
+  }
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value.toLowerCase());
+  };
+
+  const handleDeleteGrupo = async () => {
+    if (!selectedGrupoId) return;
+    setLoading(true);
+    const { error } = await supabase.from('departamentos').delete().eq('id_departamentos', selectedGrupoId);
+    if (error) {
+      console.error("Error deleting group: ", error);
+      setNotification({
+        visible: true,
+        titulo: "Error",
+        mensaje: "Error al eliminar grupo: " + error.message
+      });
+    } else {
+      setGrupos(prevGrupos => prevGrupos.filter(grupo => grupo.id_departamentos !== selectedGrupoId));
+      setSelectedGrupoId(null);
+      setNotification({
+        visible: true,
+        titulo: "Éxito",
+        mensaje: "Grupo eliminado correctamente"
+      });
+    }
+    setLoading(false);
+  };
+
+  const filteredGrupos = grupos.filter(grupo =>
+    grupo.nombre.toLowerCase().includes(searchTerm) ||
+    grupo.descripcion.toLowerCase().includes(searchTerm) ||
+    grupo.direcciones.nombre.toLowerCase().includes(searchTerm) 
+  );
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    (<svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round">
-      <path d="M2 20h.01" />
-      <path d="M7 20v-4" />
-      <path d="M12 20v-8" />
-      <path d="M17 20V8" />
-      <path d="M22 4v16" />
-    </svg>)
+    <>
+      <div className="bg-white p-4 rounded-md shadow-md m-auto text-center">
+        <h1 className="text-xl font-bold text-[#2c5282] mb-4">Buscar Direcciones</h1>
+        <div className="flex justify-center">
+          <Input className="mr-2" placeholder="Search" type="text" onChange={handleSearchChange} />
+          <Button variant="outline">Buscar</Button>
+        </div>
+        <div className="overflow-x-auto mt-4">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[100px]">Direccion</TableHead>
+                <TableHead className="w-[200px]">Nombre de Departamento</TableHead>
+                <TableHead className="w-[200px]">Descripcion de Departamento</TableHead>
+                <TableHead className="w-[150px]">Fecha Registro</TableHead>
+                <TableHead className="w-[150px]">Última Modificación</TableHead>
+                <TableHead className="w-[100px]">Seleccionar</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {filteredGrupos.map((grupo, index) => (
+                <TableRow key={index}>
+                  <TableCell>{grupo.direcciones.nombre}</TableCell>
+                  <TableCell>{grupo.nombre}</TableCell>
+                  <TableCell>{grupo.descripcion}</TableCell>
+                  <TableCell>{grupo.fecha_creado}</TableCell>
+                  <TableCell>{grupo.fecha_actualizado}</TableCell>
+                  <TableCell><input
+                  type="checkbox"
+                  checked={selectedGrupoId === grupo.id_departamentos}
+                  onChange={() => handleCheckboxChange(grupo.id_departamentos)}
+                  className="accent-blue-500 h-5 w-5"
+                /></TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+        <div className="flex justify-between mt-4">
+      <Button
+          className={`bg-blue-500 text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
+          disabled={!selectedGrupoId}
+          onClick={() => router.push(`/dashboard/entidades/entidadempresa/subentidades/area-direcciones/departamentos/${selectedGrupoId}`)}
+        >
+          Modificar tipo
+        </Button>
+        
+        <Button
+  className={`bg-red-500 text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
+  disabled={!selectedGrupoId}
+  onClick={handleDeleteGrupo}
+>
+  Eliminar tipo
+</Button>
+
+
+      </div>
+      </div>
+      {notification.visible && (
+        <Notificacion
+          titulo={notification.titulo}
+          mensaje={notification.mensaje}
+          visible={notification.visible}
+          onClose={handleCloseNotification}
+        />
+      )}
+    </>
   );
 }
