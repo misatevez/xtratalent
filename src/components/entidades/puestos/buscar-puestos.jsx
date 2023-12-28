@@ -3,9 +3,9 @@ import { Button } from "@/components/ui/button"
 import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table"
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
-import ListaEntidadesEmpresa from "../subentidades/entidades-empresas/lista-entidades-empresa";
-import ListaDirecciones from "../subentidades/entidades-empresas/areas-direcciones/lista-direcciones";
-import ListaDepartamentos from "../subentidades/entidades-empresas/areas-direcciones/departamento/lista-departamentos";
+import ListaEntidadesEmpresa from "../entidadempresa/entidades-empresas/lista-entidades-empresa";
+import ListaDirecciones from "../entidadempresa/entidades-empresas/areas-direcciones/lista-direcciones";
+import ListaDepartamentos from "../entidadempresa/entidades-empresas/areas-direcciones/departamento/lista-departamentos";
 
 export default function BuscarPuesto() {
     return (
