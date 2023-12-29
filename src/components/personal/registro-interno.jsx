@@ -14,7 +14,7 @@ export function RegistroInterno() {
   // Estado inicial para el formulario
   const [formState, setFormState] = useState({
     password: '',
-    entidad: '',
+    id_entidad_empresa: '',
     tipo_usuario: '',
     correo_electronico: '',
     codigo_plaza_vacante: '',

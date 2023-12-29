@@ -1,8 +1,15 @@
 import React from 'react';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
+import ListaEntidadesEmpresas from '../entidades/entidadempresa/lista-entidad-empresa';
 
 function FormRegistro({ formState, handleInputChange, handleSubmit, titulo }) {
+
+  const handleGrupoTipoChange = (id_entidad_empresa) => {
+    // Actualiza el estado del formulario para incluir el nuevo id de tipo de grupo seleccionado
+    handleInputChange({ target: { name: 'id_entidad_empresa', value: id_entidad_empresa } });
+  };
+
   return (
     <form onSubmit={handleSubmit}  className="p-8 space-y-8 mt-8 mb-8 mx-auto max-w-7xl">
     <h1 className="text-4xl font-bold mb-2 text-center text-blue-400">{titulo}</h1>
@@ -21,12 +28,7 @@ function FormRegistro({ formState, handleInputChange, handleSubmit, titulo }) {
             width="320" />
         </div> */}
       <div className="flex flex-col gap-4 w-full">
-        <label className="flex flex-col gap-2">
-          <span className="text-lg font-semibold">ENTIDAD EMPRESA</span>
-          <select name="entidad" value={formState.entidad} onChange={handleInputChange} className="border rounded p-2">
-          <option selected value="Ejemplo, S.A.">Ejemplo, S.A.</option>
-          </select>
-        </label>
+  <ListaEntidadesEmpresas onGrupoTipoChange={handleGrupoTipoChange} selectedTipoId={formState.id_entidad_empresa} />
         <label className="flex flex-col gap-2">
           <span className="text-lg font-semibold">CANDIDATO USUARIO</span>
           <select name="tipo_usuario" value={formState.tipo_usuario} onChange={handleInputChange} className="border rounded p-2">
