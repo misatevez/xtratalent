@@ -15,7 +15,7 @@ export function SelectoraRespuestas() {
           <div className="flex items-center justify-center space-x-4">
             
             <Button onClick={() => router.push('/dashboard/evaluaciones/respuestas/crear-respuesta')} className="bg-white text-purple-500 hover:bg-gray-200">Crear respuesta</Button>
-            <Button onClick={() => router.push('/dashboard/evaluaciones/respuestas/buscar-respuesta')} className="bg-white text-purple-500 hover:bg-gray-200">Buscar respuesta</Button>
+            {/* <Button onClick={() => router.push('/dashboard/evaluaciones/respuestas/buscar-respuesta')} className="bg-white text-purple-500 hover:bg-gray-200">Buscar respuesta</Button> */}
 
           </div>
         </main>
