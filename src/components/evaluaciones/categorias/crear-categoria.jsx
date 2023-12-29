@@ -1,32 +1,80 @@
 'use client'
-import { Input } from "@/components/ui/input";
-import ListaCategorias from "./lista-categorias";
-import { Button } from "@/components/ui/button";
 import { useRouter } from 'next/navigation'
+import supabase from "@/lib/supabaseClient";
+import { useState } from "react";
+import FormCategoria from "./formCategoria";
+import { Notificacion } from "@/components/notification";
+
 export default function CrearCategoria() {
   const router = useRouter()
+
+  // Estado inicial para el formulario
+  const [formState, setFormState] = useState({
+    nombre: '',
+  });
+
+  const [notification, setNotification] = useState({
+    visible: false,
+    titulo: "",
+    mensaje: ""
+  });
+
+   // Manejar cambios en los inputs
+const handleInputChange = (e) => {
+  const { name, value } = e.target;
+  setFormState(prevState => ({
+    ...prevState,
+    [name]: value
+  }));
+};
+
+const handleCloseNotification = () => {
+  setNotification((prev) => ({ ...prev, visible: false }));
+};
+
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  console.log(formState)
+
+  // Insertar en Supabase
+  const { data, error } = await supabase.from('categorias').insert([formState]);
+
+  if (error) {
+    setNotification({
+      visible: true,
+      titulo: "Error",
+      mensaje: "Vuelva a intentar mas tarde: " + error.message // Ajusta según necesites
+    });
+  } else {
+    setNotification({
+      visible: true,
+      titulo: "Éxito",
+      mensaje: "Se ha creado su categoria" // Ajusta según necesites
+    });
+  }
+};
+
     return (
+      <>
       <div className="p-4 mx-auto w-full max-w-2xl mt-4">
-        <div className="rounded-lg shadow-lg">
-            <div className="bg-white p-6 rounded-lg shadow-inner m-auto text-center">
-              <h1 className="text-3xl font-bold text-center mt-4  text-gray-800">Crear familia de evaluación</h1>
-              <div className="grid grid-cols-1 gap-4">
-          <div>
-<ListaCategorias  />
-</div></div>
-<div className="mt-4 p-6">
-          <label className="block text-sm font-medium mb-2 text-start" htmlFor="group-name">
-            Nombre Familia de Evaluacion:
-          </label>
-          <Input id="group-name" placeholder="Secretarial" />
-        </div>
-        <div className="flex justify-around mt-4">
-          <Button onClick={() => router.push('/dashboard/evaluaciones/categorias/crearcategoria/reportes')}>Reportes</Button>
-          <Button>Guardar</Button>
-        </div>
-            </div>
+<FormCategoria 
+formState={formState}
+handleInputChange={handleInputChange} 
+    handleSubmit={handleSubmit}
+
+/>
           </div>
-          </div>
+           {notification.visible && (
+            <Notificacion
+              titulo={notification.titulo}
+              mensaje={notification.mensaje}
+              visible={notification.visible}
+              onClose={handleCloseNotification}
+            />
+          )}
+          </>
     );
 }
 
