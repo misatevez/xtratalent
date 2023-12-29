@@ -18,7 +18,7 @@ export default function Login() {
     // Realiza la consulta a Supabase para obtener el usuario
     const { data: user, error } = await supabase
       .from('usuarios') // Asegúrate de que el nombre de la tabla sea correcto
-      .select('correo_electronico, usuario_id, password')
+      .select('correo_electronico, usuario_id, password, tipo_usuario')
       .eq('correo_electronico', email)
       .single();
 
@@ -31,7 +31,7 @@ export default function Login() {
     if (user && user.password === password) {
       // Guarda el usuario_id en el almacenamiento local para mantener la sesión
       localStorage.setItem('usuario_id', user.usuario_id);
-
+      localStorage.setItem('tipo_usuario', user.tipo_usuario);
       setMessage({ type: 'success', content: 'Inicio de sesión exitoso' });
       router.push('/dashboard'); // Asegúrate de tener esta ruta
     } else {
