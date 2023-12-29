@@ -3,12 +3,6 @@ import { Button } from "@/components/ui/button"
 import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table"
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
-import ListaEntidadesEmpresa from "../../entidadempresa/subentidades/lista-entidades-empresa";
-import ListaDirecciones from "../../entidadempresa/subentidades/areas-direcciones/lista-direcciones";
-import ListaDepartamentos from "../../entidadempresa/subentidades/areas-direcciones/departamento/lista-departamentos";
-import ListaPuestos from "../lista-puestos";
-import ListaRenglones from "../renglones-presupuestarios/lista-renglones";
-import ListaVacantes from "./lista-vacantes";
 
 
 export default function BuscarDireccionVacante() {
@@ -18,7 +12,7 @@ export default function BuscarDireccionVacante() {
      Vacantes - Crear Dirección web de Registros Masivos
       </h1>
       <div className="grid grid-cols-4 gap-4 mb-4">
-          <div>
+          {/* <div>
           <ListaEntidadesEmpresa />
           </div>
           <div>
@@ -26,9 +20,9 @@ export default function BuscarDireccionVacante() {
           </div>
           <div>
           <ListaDepartamentos />
-          </div>
+          </div> */}
           <div>
-          <ListaPuestos />
+        
           </div>
         </div>
 
