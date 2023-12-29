@@ -12,7 +12,6 @@ export default function CrearPregunta() {
     // Estado inicial para el formulario
     const [formState, setFormState] = useState({
         pregunta: '',
-        descripcion: '',
         id_tema:'',
         tipo_pregunta:'',
         revisable: '',

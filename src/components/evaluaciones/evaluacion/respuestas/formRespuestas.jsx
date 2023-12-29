@@ -40,7 +40,6 @@ export default function FormRespuestas({formState,
         </div>
 
         {formState.id_pregunta &&  <div className="grid grid-cols-1 col-span-full">
-  <h3>Lista de respuestas asignadas</h3>
    <Tabla_respuestas onChange={handleInputChange} idPregunta={formState.id_pregunta} />
 </div>
           }
@@ -58,7 +57,7 @@ export default function FormRespuestas({formState,
 
             >
               <SelectTrigger id="type">
-                <SelectValue placeholder="Texto" />
+                <SelectValue placeholder="Seleccione un tipo" />
               </SelectTrigger>
               <SelectContent position="popper">
                 <SelectItem value="Text">Texto</SelectItem>
