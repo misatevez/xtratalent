@@ -82,9 +82,9 @@ export default function BuscarPersonal() {
   }
 
   const filteredUsuarios = usuarios.filter(usuario =>
-    usuario.primer_nombre.toLowerCase().includes(searchTerm) ||
-    usuario.apellido_paterno.toLowerCase().includes(searchTerm) ||
-    usuario.correo_electronico.toLowerCase().includes(searchTerm)
+    usuario.primer_nombre?.toLowerCase().includes(searchTerm) ||
+    usuario.apellido_paterno?.toLowerCase().includes(searchTerm) ||
+    usuario.correo_electronico?.toLowerCase().includes(searchTerm)
     // Añadir mas campos si quieremos que se pueda buscar por mas campos
   );
 
