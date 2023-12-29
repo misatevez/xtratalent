@@ -1,16 +1,46 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/k8dyNyHXaze
- */
 
 'use client'
 
 import { Button } from "@/components/ui/button"
+import supabase from "@/lib/supabaseClient";
 import { useRouter } from 'next/navigation'
+import { useState } from "react";
 
 
 export default function Login() {
-  const router = useRouter()
+ 
+  const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState({ type: '', content: '' });
+
+  async function handleLogin() {
+    // Realiza la consulta a Supabase para obtener el usuario
+    const { data: user, error } = await supabase
+      .from('usuarios') // Asegúrate de que el nombre de la tabla sea correcto
+      .select('correo_electronico, usuario_id, password')
+      .eq('correo_electronico', email)
+      .single();
+
+    if (error) {
+      setMessage({ type: 'error', content: 'No se encuentra el usuario' });
+      console.error('Error fetching user:', error);
+      return;
+    }
+
+    if (user && user.password === password) {
+      // Guarda el usuario_id en el almacenamiento local para mantener la sesión
+      localStorage.setItem('usuario_id', user.usuario_id);
+
+      setMessage({ type: 'success', content: 'Inicio de sesión exitoso' });
+      router.push('/dashboard'); // Asegúrate de tener esta ruta
+    } else {
+      setMessage({ type: 'error', content: 'Correo electrónico o contraseña incorrectos' });
+    }
+  }
+
+
+
   return (
     <>
       <div className="min-h-screen bg-white flex">
@@ -44,6 +74,8 @@ export default function Login() {
                         Email
                       </label>
                       <input
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                         autoComplete="email"
                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                         id="email-address"
@@ -58,6 +90,8 @@ export default function Login() {
                         Contraseña
                       </label>
                       <input
+                       value={password}
+                       onChange={(e) => setPassword(e.target.value)}
                         autoComplete="current-password"
                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                         id="password"
@@ -87,13 +121,19 @@ export default function Login() {
                     </div>
                   </div>
                   <div className="mt-6 grid grid-cols-2 gap-3">
-                    <Button onClick={() => router.push('/dashboard')} className="w-full" variant="outline">
+                    <Button onClick={handleLogin} className="w-full" variant="outline">
                       Iniciar sesión
                     </Button>
                     <Button onClick={() => router.push('/registro')} className="w-full" variant="outline">
                       Registrarse
                     </Button>
                   </div>
+                    {/* Mensaje de error o éxito */}
+      {message.content && (
+        <div className={message.type === 'error' ? 'text-red-500' : 'text-green-500'}>
+          {message.content}
+        </div>
+      )}
                 </div>
               </div>
             </div>
