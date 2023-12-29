@@ -46,7 +46,7 @@ export function Dashboard( {children} ) {
             <FileQuestionIcon className="w-6 h-6" />
             Evaluaciones
           </Link>
-          <Link
+          {/* <Link
             className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
             href="/dashboard/contenido">
             <FileIcon className="w-6 h-6" />
@@ -57,13 +57,13 @@ export function Dashboard( {children} ) {
             href="/dashboard/licencia">
             <CopyrightIcon className="w-6 h-6" />
             Licencia y soporte
-          </Link>
-          <Link
+          </Link> */}
+          {/* <Link
             className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
             href="/dashboard/configuracion">
             <SettingsIcon className="w-6 h-6" />
             Configuracion
-          </Link>
+          </Link> */}
         </nav>
       </aside>
       <div className="flex flex-col w-full min-h-screen pl-64">

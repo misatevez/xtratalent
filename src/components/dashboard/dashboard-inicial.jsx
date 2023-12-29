@@ -11,7 +11,7 @@ export function DashboardInicial() {
   return (
     (
         <main>
-          <h1
+          {/* <h1
             className="text-4xl font-bold mb-6 text-center mt-10 mx-5 my-5 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-white p-3 rounded-lg shadow-lg">
             Dashboard
           </h1>
@@ -52,7 +52,7 @@ export function DashboardInicial() {
                 <p className="text-2xl font-bold mt-2">350</p>
               </CardContent>
             </Card>
-          </div>
+          </div> */}
         </main>
      )
   );
