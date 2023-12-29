@@ -2,21 +2,21 @@
 import { SelectValue, SelectTrigger, SelectItem, SelectGroup, SelectContent, Select } from "@/components/ui/select"
 import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
-import FormPregunta from "./formPregunta";
+import { Input } from "@/components/ui/input";
 import { Notificacion } from "@/components/notification";
 import supabase from "@/lib/supabaseClient";
 import { useState } from "react";
+import FormRespuestas from "./formRespuestas";
 
-export default function CrearPregunta() {
+export default function CrearRespuesta() {
+
 
     // Estado inicial para el formulario
     const [formState, setFormState] = useState({
-        pregunta: '',
-        descripcion: '',
-        id_tema:'',
-        tipo_pregunta:'',
-        revisable: '',
-        pregunta_concepto: '',
+      tipo_respuesta: "",
+      descripcion: "",
+      correcta: "",
+      id_pregunta: "",
       });
       
       const [notification, setNotification] = useState({
@@ -25,17 +25,17 @@ export default function CrearPregunta() {
         mensaje: ""
       });
   
-        // Manejar cambios en los inputs
-     const handleInputChange = (event) => {
-      const target = event.target;
-      const value = target.type === 'checkbox' ? target.checked : target.value;
-      const name = target.name;
-    
-      setFormState(prevState => ({
-        ...prevState,
-        [name]: value
-      }));
-    };
+       // Manejar cambios en los inputs
+       const handleInputChange = (event) => {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+      
+        setFormState(prevState => ({
+          ...prevState,
+          [name]: value
+        }));
+      };
   
     const handleSelectChange = (value, fieldName) => {
       setFormState(prevState => ({
@@ -57,7 +57,7 @@ export default function CrearPregunta() {
       console.log(formState)
   
       // Insertar en Supabase
-      const { data, error } = await supabase.from('preguntas').insert([formState]);
+      const { data, error } = await supabase.from('respuestas').insert([formState]);
   
       if (error) {
         setNotification({
@@ -69,32 +69,31 @@ export default function CrearPregunta() {
         setNotification({
           visible: true,
           titulo: "Éxito",
-          mensaje: "Se ha creado su pregunta" // Ajusta según necesites
+          mensaje: "Se ha creado su respuesta" // Ajusta según necesites
         });
       }
     };
+  
 
     
     return (
-        <>
-       <FormPregunta
-       
-       formState={formState} 
+      <>
+        <FormRespuestas
+        
+        formState={formState} 
        handleInputChange={handleInputChange} 
        handleSubmit={handleSubmit}
        handleSelectChange={handleSelectChange}
-
-       />
-
-       {notification.visible && (
-        <Notificacion
-          titulo={notification.titulo}
-          mensaje={notification.mensaje}
-          visible={notification.visible}
-          onClose={handleCloseNotification}
         />
-      )}
-      </>
+        {notification.visible && (
+          <Notificacion
+            titulo={notification.titulo}
+            mensaje={notification.mensaje}
+            visible={notification.visible}
+            onClose={handleCloseNotification}
+          />
+        )}
+        </>
     );
 }
 

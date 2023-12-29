@@ -20,6 +20,8 @@ export function SelectoraEvaluaciones() {
             <Button onClick={() => router.push('/dashboard/evaluaciones/categorias')} className="bg-white text-purple-500 hover:bg-gray-200">Categorias</Button>
             <Button onClick={() => router.push('/dashboard/evaluaciones/temas')} className="bg-white text-purple-500 hover:bg-gray-200">Temas</Button>
             <Button onClick={() => router.push('/dashboard/evaluaciones/preguntas')} className="bg-white text-purple-500 hover:bg-gray-200">Preguntas</Button>
+            <Button onClick={() => router.push('/dashboard/evaluaciones/respuestas')} className="bg-white text-purple-500 hover:bg-gray-200">Respuestas</Button>
+
           </div>
         </main>
     )
