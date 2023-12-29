@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button"
 export function RegistroPublico() {
   return (
     (
+      <form className="p-8 space-y-8 mt-8 mb-8 mx-auto max-w-7xl">
     <div className="h-fit overflow-hidden">
     <Card className="mx-auto max-w-lg space-y-6">
       <CardHeader>
@@ -65,6 +66,7 @@ export function RegistroPublico() {
       </CardContent>
     </Card>
     </div>
+    </form>
     )
   );
 }

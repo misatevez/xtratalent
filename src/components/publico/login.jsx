@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import supabase from "@/lib/supabaseClient";
 import { useRouter } from 'next/navigation'
 import { useState } from "react";
-
+import Image from "next/image";
 
 export default function Login() {
  
@@ -47,17 +47,16 @@ export default function Login() {
         <div className="flex-1 flex items-center justify-center p-12">
           <div className="max-w-lg w-full">
             <div>
-              {/* <img
-                alt="Logo"
-                className="mx-auto h-12 w-auto"
-                height="48"
-                src="/placeholder.svg"
-                style={{
-                  aspectRatio: "48/48",
-                  objectFit: "cover",
-                }}
-                width="48"
-              /> */}
+            
+
+<Image
+         className="mx-auto h-32 w-auto"
+          width={300}
+          height={300}
+          alt="Picture of the author"
+         src={"https://i.ibb.co/FHFCs6b/2-LOGO-XTRAT-2023-V13.png"}
+         />
+
               <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">¡Bienvenidos!</h2>
             </div>
             <div className="mt-3">

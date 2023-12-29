@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
 import { useRouter } from 'next/navigation'
-
+import Image from "next/image"
 
 export function Dashboard( {children} ) {
   const router = useRouter()
@@ -17,9 +17,15 @@ export function Dashboard( {children} ) {
   return (
     (<div key="1" className="flex flex-col w-full min-h-screen">
       <aside
-        className="w-64 h-full bg-gray-200 dark:bg-gray-700 border-r fixed top-0 left-0 overflow-auto">
-        <div className="flex items-center justify-center h-16 border-b">
-          <h1 className="text-3xl font-bold text-gray-700 dark:text-gray-200 ml-4">XtraTalent</h1>
+        className="w-64 h-full bg-white dark:bg-gray-700 border-r fixed top-0 left-0 overflow-auto">
+        <div className="flex items-center justify-center h-16 mt-3">
+         <Image
+         className="w-40"
+          width={300}
+          height={300}
+          alt="Picture of the author"
+         src={"https://i.ibb.co/FHFCs6b/2-LOGO-XTRAT-2023-V13.png"}
+         />
         </div>
         <nav className="flex flex-col p-4">
           <Link

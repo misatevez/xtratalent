@@ -32,8 +32,9 @@ function FormRegistro({ formState, handleInputChange, handleSubmit, titulo }) {
         <label className="flex flex-col gap-2">
           <span className="text-lg font-semibold">CANDIDATO USUARIO</span>
           <select name="tipo_usuario" value={formState.tipo_usuario} onChange={handleInputChange} className="border rounded p-2">
-            <option value="externo">Externo  Evaluado</option>
-            <option selected value="interno">Interno  Usuario</option>
+          <option selected value="">Seleccione uno</option>
+            <option value="Externo">Externo  Evaluado</option>
+            <option  value="Interno">Interno  Usuario</option>
           </select>
         </label>
         <label className="flex flex-col gap-2">
