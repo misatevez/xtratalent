@@ -1,8 +1,9 @@
-import { CrearPuestos } from "@/components/entidades/puestos/crear-puestos";
+import { CrearPuesto } from "@/components/entidades/puestos/crear-puestos";
+
 
 export default function page() {
     return (
-        <CrearPuestos />
+        <CrearPuesto />
     );
 }
 

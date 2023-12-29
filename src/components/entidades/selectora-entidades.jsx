@@ -14,14 +14,14 @@ export function SelectoraEntidades() {
     (
         <main
           className="p-8 space-y-8 mt-8 mb-8 mx-auto max-w-7xl bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-lg shadow-lg text-white">
-          <h1 className="text-4xl font-bold mb-6 text-center">Administrar Entidades</h1>
-          <div className="flex items-center justify-center space-x-4">
-          <Button onClick={() => router.push('/dashboard/entidades/tipogrupocorporativo')} className="bg-white text-purple-500 hover:bg-gray-200">Tipo de grupo corporativo</Button>
-            <Button onClick={() => router.push('/dashboard/entidades/gruposcorporativos')} className="bg-white text-purple-500 hover:bg-gray-200">Grupos corporativos</Button>
-            <Button onClick={() => router.push('/dashboard/entidades/subtipoentidad')} className="bg-white text-purple-500 hover:bg-gray-200">Subtipo Entidad</Button>
-            <Button  onClick={() => router.push('/dashboard/entidades/entidadempresa')}className="bg-white text-purple-500 hover:bg-gray-200">Entidades empresa</Button>
-            <Button  onClick={() => router.push('/dashboard/entidades/entidadempresa/subentidades')}className="bg-white text-purple-500 hover:bg-gray-200">Subentidades</Button>
-            <Button  onClick={() => router.push('/dashboard/entidades/puestos')}className="bg-white text-purple-500 hover:bg-gray-200">Puestos</Button>
+          <h1 className="text-4xl font-bold mb-6 text-center">Administrar Organización</h1>
+          <div className="grid grid-cols-3 justify-center ">
+          <Button onClick={() => router.push('/dashboard/entidades/tipogrupocorporativo')} className="bg-white text-purple-500 hover:bg-gray-200 m-3">Tipo Grupo Corporativo</Button>
+            <Button onClick={() => router.push('/dashboard/entidades/gruposcorporativos')} className="bg-white text-purple-500 hover:bg-gray-200 m-3">Grupos Corporativos</Button>
+            <Button onClick={() => router.push('/dashboard/entidades/subtipoentidad')} className="bg-white text-purple-500 hover:bg-gray-200 m-3">Subtipo Entidad</Button>
+            <Button  onClick={() => router.push('/dashboard/entidades/entidadempresa')}className="bg-white text-purple-500 hover:bg-gray-200 m-3">Entidades Empresa</Button>
+            <Button  onClick={() => router.push('/dashboard/entidades/entidadempresa/subentidades')}className="bg-white text-purple-500 hover:bg-gray-200 m-3">Subentidades</Button>
+            <Button  onClick={() => router.push('/dashboard/entidades/puestos')}className="bg-white text-purple-500 hover:bg-gray-200 m-3">Puestos</Button>
           </div>
         </main>
     )
