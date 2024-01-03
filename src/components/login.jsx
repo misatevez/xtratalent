@@ -20,13 +20,12 @@ export function Login() {
     if (error) {
       console.log(error);
       setMessage({ type: "error", content: error.message });
-    } else if (data) {
-      console.log(data);
+    } else if (data.user) {
       setMessage({ type: "success", content: "Login successful!" });
-      localStorage.setItem("token", data.session.access_token); // Store token in localStorage
       router.push("/dashboard"); // Redirect to dashboard page
     }
-  };
+  }
+
   return (
     (<div key="1" className="flex h-screen">
       <div className="w-full bg-[#f0f0f0] flex justify-center items-center">
@@ -65,14 +64,14 @@ export function Login() {
                 width="200" />
             </p>
           </div>
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <p className="text-sm font-semibold mb-2">Regístrate o ingresa a tu cuenta con tu opción preferida:</p>
             <div className="flex justify-between mb-4">
               <Button className="bg-[#0e76a8] text-white w-full mr-2">LinkedIn</Button>
               <Button className="bg-[#db4437] text-white w-full mx-2">Google</Button>
               <Button className="bg-[#2b579a] text-white w-full ml-2">Microsoft</Button>
             </div>
-          </div>
+          </div> */}
           <div className="mb-4">
             <label className="block text-sm font-semibold mb-2" htmlFor="email">
               Email *
