@@ -20,10 +20,13 @@ import FormEvaluacion from "./formEvaluacion";
 import { Notificacion } from "@/components/notification";
 import supabase from "@/lib/supabaseClient";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+
 
 
 export default function CrearEvaluacion() {
 
+  const router = useRouter();
 
     // Estado inicial para el formulario
     const [formState, setFormState] = useState({
@@ -96,6 +99,29 @@ export default function CrearEvaluacion() {
     }
   };
 
+  const handleSubmit2 = async (e) => {
+    e.preventDefault();
+
+    console.log(formState)
+
+    // Insertar en Supabase
+    const { data, error } = await supabase.from('evaluaciones').insert([formState]);
+
+    if (error) {
+      setNotification({
+        visible: true,
+        titulo: "Error",
+        mensaje: "Vuelva a intentar mas tarde: " + error.message // Ajusta según necesites
+      });
+    } else {
+      setNotification({
+        visible: true,
+        titulo: "Éxito",
+        mensaje: "Se ha creado su evaluacion" // Ajusta según necesites
+      });
+      router.push("/dashboard/evaluaciones/temas/creartema");
+    }
+  };
 
 
   return (
@@ -105,6 +131,7 @@ export default function CrearEvaluacion() {
     formState={formState} 
     handleInputChange={handleInputChange} 
     handleSubmit={handleSubmit}
+    handleSubmit2={handleSubmit2}
     handleSelectChange={handleSelectChange}
      />
     </div>

@@ -28,7 +28,7 @@ export default function BuscarTipoGC() {
         setNotification({
           visible: true,
           titulo: "Error",
-          mensaje: "Error al cargar grupos: " + error.message
+          mensaje: "Error al eliminar: Tiene informacion pendiente por eliminar"
         });
       } else {
         setGrupos(data);

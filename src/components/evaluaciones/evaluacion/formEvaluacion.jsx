@@ -16,6 +16,7 @@ export default function FormEvaluacion({
   formState,
   handleInputChange,
   handleSubmit,
+  handleSubmit2,
   titulo,
   handleSelectChange,
 }) {
@@ -248,7 +249,7 @@ export default function FormEvaluacion({
         </div>
         <div className="flex justify-around ">
         <Button
-            type="submit"
+            onClick={handleSubmit2}
             className="bg-blue-500 text-white"
             variant="default"
             disabled={!formState.activa}

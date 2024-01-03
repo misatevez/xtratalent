@@ -68,7 +68,7 @@ export default function   BuscarDireccion() {
       setNotification({
         visible: true,
         titulo: "Error",
-        mensaje: "Error al eliminar grupo: " + error.message
+        mensaje: "Error al eliminar: Tiene informacion pendiente por eliminar"
       });
     } else {
       setGrupos(prevGrupos => prevGrupos.filter(grupo => grupo.id_direcciones !== selectedGrupoId));
