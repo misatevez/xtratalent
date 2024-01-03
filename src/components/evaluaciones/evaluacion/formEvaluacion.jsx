@@ -246,7 +246,15 @@ export default function FormEvaluacion({
             rows="3"
           />
         </div>
-        <div className="flex justify-end">
+        <div className="flex justify-around ">
+        <Button
+            type="submit"
+            className="bg-blue-500 text-white"
+            variant="default"
+            disabled={!formState.activa}
+          >
+            Asignar temas
+          </Button>
           <Button
             type="submit"
             className="bg-blue-500 text-white"
