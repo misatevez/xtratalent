@@ -1,26 +1,10 @@
 import Image from "next/image";
-
+import { Metricas } from "../metricas";
 
 
 export function DashboardInicial() {
   return (
-    <main>
-      
-          <div className="grid grid-cols-1 items-center justify-center h-16">
-          <h1
-            className="text-4xl font-bold mb-6 text-center mt-10 mx-5 my-5 text-black p-3 rounded-lg">
-            Bienvenido a Xtra Talent
-          </h1>
-                 <Image
-         className="w-2/5 m-auto"
-          width={300}
-          height={300}
-          alt="Picture of the author"
-         src={"https://i.ibb.co/FHFCs6b/2-LOGO-XTRAT-2023-V13.png"}
-         />
-          </div> 
-          
-    </main>
+  <Metricas />
   );
 }
 
