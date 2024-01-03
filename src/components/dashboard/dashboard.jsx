@@ -98,7 +98,7 @@ export function Dashboard( {children} ) {
                   </div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuItem>Logout</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => router.push('/login')}  >Logout</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </Button>
