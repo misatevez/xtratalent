@@ -82,8 +82,7 @@ export default function BuscarEntidadEmpresa() {
 
   const filteredGrupos = grupos.filter(grupo =>
     grupo.nombre.toLowerCase().includes(searchTerm) ||
-    grupo.descripcion.toLowerCase().includes(searchTerm) ||
-    grupo.id_subtipo_entidad.nombre.toLowerCase().includes(searchTerm) 
+    grupo.descripcion.toLowerCase().includes(searchTerm) 
   );
 
   if (loading) {
@@ -93,7 +92,7 @@ export default function BuscarEntidadEmpresa() {
   return (
     <>
       <div className="bg-white p-4 rounded-md shadow-md m-auto text-center">
-        <h1 className="text-xl font-bold text-[#2c5282] mb-4">Buscar Sub Entidades</h1>
+        <h1 className="text-xl font-bold text-[#2c5282] mb-4">Buscar Entidades</h1>
         <div className="flex justify-center">
           <Input className="mr-2" placeholder="Search" type="text" onChange={handleSearchChange} />
           <Button variant="outline">Buscar</Button>

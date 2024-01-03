@@ -34,42 +34,53 @@ export function Dashboard( {children} ) {
             <LockIcon className="w-6 h-6" />
             Seguridad y acceso
           </Link>
-          <Link
-            className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
-            href="/dashboard/personal">
-            <ServerIcon className="w-6 h-6" />
-            Personal
-          </Link>
+
           <Link
             className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
             href="/dashboard/entidades">
             <ServerIcon className="w-6 h-6" />
-            Entidades
+            Estructura Organizacional (Entidades)
           </Link>
+
+          <Link
+            className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
+            href="/dashboard/personal">
+            <ServerIcon className="w-6 h-6" />
+            Administración de Personal
+          </Link>
+         
           <Link
             className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
             href="/dashboard/evaluaciones">
             <FileQuestionIcon className="w-6 h-6" />
-            Evaluaciones
+            Administración Evaluaciones
           </Link>
-          {/* <Link
+          <Link
             className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
             href="/dashboard/contenido">
             <FileIcon className="w-6 h-6" />
-            Tipos de contenido
+            Tipos de Contenido
           </Link>
           <Link
             className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
             href="/dashboard/licencia">
             <CopyrightIcon className="w-6 h-6" />
-            Licencia y soporte
-          </Link> */}
-          {/* <Link
+            Licencia y Soporte
+          </Link> 
+           <Link
             className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
             href="/dashboard/configuracion">
             <SettingsIcon className="w-6 h-6" />
             Configuracion
-          </Link> */}
+          </Link> 
+
+          <Link
+            className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
+            href="/dashboard/configuracion">
+            <SettingsIcon className="w-6 h-6" />
+            Métricas (Dashboard) 
+          </Link> 
+
         </nav>
       </aside>
       <div className="flex flex-col w-full min-h-screen pl-64">

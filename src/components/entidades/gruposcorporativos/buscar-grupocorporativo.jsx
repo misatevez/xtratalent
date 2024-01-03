@@ -85,8 +85,7 @@ export default function BuscarGrupoCorporativo() {
 
   const filteredGrupos = grupos.filter(grupo =>
     grupo.nombre.toLowerCase().includes(searchTerm) ||
-    grupo.descripcion.toLowerCase().includes(searchTerm) ||
-    grupo.grupotipo.nombre.toLowerCase().includes(searchTerm) 
+    grupo.descripcion.toLowerCase().includes(searchTerm) 
   );
 
   if (loading) {

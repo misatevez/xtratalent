@@ -84,8 +84,7 @@ export default function   BuscarDireccion() {
 
   const filteredGrupos = grupos.filter(grupo =>
     grupo.nombre.toLowerCase().includes(searchTerm) ||
-    grupo.descripcion.toLowerCase().includes(searchTerm) ||
-    grupo.sub_entidad.nombre.toLowerCase().includes(searchTerm) 
+    grupo.descripcion.toLowerCase().includes(searchTerm) 
   );
 
   if (loading) {

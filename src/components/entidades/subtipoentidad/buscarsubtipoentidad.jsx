@@ -84,8 +84,7 @@ export default function BuscarSubTipoEntidad() {
 
   const filteredGrupos = grupos.filter(grupo =>
     grupo.nombre.toLowerCase().includes(searchTerm) ||
-    grupo.descripcion.toLowerCase().includes(searchTerm) ||
-    grupo.grupo_corporativo.nombre.toLowerCase().includes(searchTerm) 
+    grupo.descripcion.toLowerCase().includes(searchTerm) 
   );
 
   if (loading) {

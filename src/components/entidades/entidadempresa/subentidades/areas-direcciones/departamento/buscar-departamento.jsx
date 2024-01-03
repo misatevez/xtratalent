@@ -84,8 +84,8 @@ export default function BuscarDepartamento() {
 
   const filteredGrupos = grupos.filter(grupo =>
     grupo.nombre.toLowerCase().includes(searchTerm) ||
-    grupo.descripcion.toLowerCase().includes(searchTerm) ||
-    grupo.direcciones.nombre.toLowerCase().includes(searchTerm) 
+    grupo.descripcion.toLowerCase().includes(searchTerm) 
+    
   );
 
   if (loading) {
