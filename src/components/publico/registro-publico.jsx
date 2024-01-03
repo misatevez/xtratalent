@@ -18,24 +18,37 @@ export function RegistroPublico() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleSignUp = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aquí deberías agregar la lógica para confirmar que las contraseñas coinciden, entre otras validaciones
-    if (password !== confirmPassword) {
-      // Manejo de error: las contraseñas no coinciden
-      return;
-    }
-    // Intenta registrar al usuario con Supabase
-    const { user, session, error } = await supabase.auth.signUp({
-      email,
-      password,
-      // Puedes agregar más datos aquí como metadata si necesitas
+
+    console.log(formState)
+
+    // Insertar en Supabase
+    const { data, error } = await supabase.from('usuarios').insert([formState]);
+
+
+    supabase.auth.signUp({
+      email: formState.correo_electronico,
+      password: formState.password,
     });
-    // Maneja la respuesta de Supabase (user creado, mostrar error, etc.)
+
+    if (error) {
+      setNotification({
+        visible: true,
+        titulo: "Error",
+        mensaje: "Vuelva a intentar mas tarde: " + error.message // Ajusta según necesites
+      });
+    } else {
+      setNotification({
+        visible: true,
+        titulo: "Éxito",
+        mensaje: "Se ha creado su usuario" // Ajusta según necesites
+      });
+    }
   };
 
   return (
-    <form className="p-8 space-y-8 mt-8 mb-8 mx-auto max-w-7xl" onSubmit={handleSignUp}>
+    <form className="p-8 space-y-8 mt-8 mb-8 mx-auto max-w-7xl" onSubmit={handleSubmit}>
       <div className="h-fit overflow-hidden">
         <Card className="mx-auto max-w-lg space-y-6">
           <CardHeader>

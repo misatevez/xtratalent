@@ -72,6 +72,12 @@ export function RegistroInterno() {
     // Insertar en Supabase
     const { data, error } = await supabase.from('usuarios').insert([formState]);
 
+
+    supabase.auth.signUp({
+      email: formState.correo_electronico,
+      password: formState.password,
+    });
+
     if (error) {
       setNotification({
         visible: true,
