@@ -21,7 +21,7 @@ export function SelectoraEntidades() {
             <Button onClick={() => router.push('/dashboard/entidades/subtipoentidad')} className="bg-white text-purple-500 hover:bg-gray-200 m-3">Subtipo Entidad</Button>
             <Button  onClick={() => router.push('/dashboard/entidades/entidadempresa')}className="bg-white text-purple-500 hover:bg-gray-200 m-3">Entidades Empresa</Button>
             <Button  onClick={() => router.push('/dashboard/entidades/entidadempresa/subentidades')}className="bg-white text-purple-500 hover:bg-gray-200 m-3">Subentidades</Button>
-            <Button  onClick={() => router.push('/dashboard/entidades/puestos')}className="bg-white text-purple-500 hover:bg-gray-200 m-3">Áreas - Direcciones</Button>
+            <Button  onClick={() => router.push('/dashboard/entidades/entidadempresa/subentidades/area-direcciones')}className="bg-white text-purple-500 hover:bg-gray-200 m-3">Áreas - Direcciones</Button>
           </div>
         </main>
     )

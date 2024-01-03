@@ -13,7 +13,9 @@ export function CrearPuesto() {
     nombre: '',
     descripcion: '',
     id_direcciones: '',
-    id_departamentos: ''
+    id_departamentos: '',
+    id_entidad_empresa:'',
+    id_sub_entidad:'',
   });
   
   const [notification, setNotification] = useState({
@@ -67,6 +69,8 @@ const handleSubmit = async (e) => {
      formState={formState} 
      handleInputChange={handleInputChange} 
      handleInputChange2={handleInputChange} 
+     handleInputChange3={handleInputChange}
+     handleInputChange4={handleInputChange}
      handleSubmit={handleSubmit}
      />
     </div>
