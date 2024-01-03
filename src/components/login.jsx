@@ -12,16 +12,18 @@ export function Login() {
   const [message, setMessage] = useState({ type: "", content: "" });
   const router = useRouter();
 
-  const handleLogin = async () => {
-    const { user, session, error } = await supabase.auth.signIn({
-      email,
-      password,
-    });
-
+  async function signInWithEmail() {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password
+    })
     if (error) {
+      console.log(error);
       setMessage({ type: "error", content: error.message });
-    } else if (user) {
+    } else if (data) {
+      console.log(data);
       setMessage({ type: "success", content: "Login successful!" });
+      localStorage.setItem("token", data.session.access_token); // Store token in localStorage
       router.push("/dashboard"); // Redirect to dashboard page
     }
   };
@@ -99,7 +101,7 @@ export function Login() {
             </div>
           )}
 
-          <Button className="w-full" onClick={handleLogin}>Iniciar sesión</Button>
+          <Button className="w-full" onClick={signInWithEmail}>Iniciar sesión</Button>
           <div className="flex items-center justify-center mt-4">
             <div
               className="text-sm text-blue-600 hover:underline flex flex-col items-center"
