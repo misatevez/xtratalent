@@ -5,20 +5,30 @@ import { useEffect, useState } from "react";
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select";
 import supabase from "@/lib/supabaseClient";
 
-export default function ListaDirecciones( { onGrupoTipoChange, selectedTipoId } ) {
-  const [tipos, setTipos] = useState([]);
+export default function ListaDirecciones( { onGrupoTipoChange, selectedTipoId, filter } ) {
+  const [direcciones, setDirecciones] = useState([]);
 
-useEffect(() => {
-  const fetchTipos = async () => {
-    const { data, error } = await supabase.from('direcciones').select('id_direcciones, nombre');
-    if (error) {
-      console.error("Error al obtener los tipos de subentidad ", error);
-    } else {
-      setTipos(data);
-    }
-  };
-  fetchTipos();
-}, []);
+
+  useEffect(() => {
+    const fetchDirecciones = async () => {
+      if (filter) {
+        const { data, error } = await supabase
+          .from('direcciones')
+          .select('id_direcciones, nombre')
+          .eq('id_sub_entidad', filter);
+
+        if (error) {
+          console.error("Error al obtener las direcciones: ", error);
+        } else {
+          setDirecciones(data);
+        }
+      } else {
+        setDirecciones([]);  // Resetea las direcciones si no hay filtro
+      }
+    };
+
+    fetchDirecciones();
+  }, [filter]);
 
 
   return (
@@ -32,7 +42,7 @@ useEffect(() => {
         </SelectTrigger>
         
         <SelectContent position="popper">
-          {tipos.map((tipo, index) => (
+          {direcciones.map((tipo, index) => (
             <SelectItem key={index} value={tipo.id_direcciones.toString()}>{tipo.nombre}</SelectItem>
           ))}
         </SelectContent>

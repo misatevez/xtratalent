@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import ListaDirecciones from '../entidadempresa/subentidades/areas-direcciones/lista-direcciones';
@@ -9,14 +9,16 @@ import ListaEntidadesEmpresas from '../entidadempresa/lista-entidad-empresa';
 
 
 
-
-
-
 export default function FormPuesto({ formState, handleInputChange, handleSubmit, titulo, handleInputChange2, handleInputChange3, handleInputChange4 }) {
+
+  const [selectedEntidad, setSelectedEntidad] = useState(null);
+  const [selectedSubEntidad, setSelectedSubEntidad] = useState(null);
+  const [selectedDireccion, setSelectedDireccion] = useState(null);
 
   const handleGrupoTipoChange = (id_direcciones) => {
     // Actualiza el estado del formulario para incluir el nuevo id de tipo de grupo seleccionado
     handleInputChange({ target: { name: 'id_direcciones', value: id_direcciones } });
+    handleDireccionChange(id_direcciones); // Actualiza el filtro para los departamentos
   };
 
   const handleGrupoTipoChange2 = (id_departamentos) => {
@@ -25,13 +27,20 @@ export default function FormPuesto({ formState, handleInputChange, handleSubmit,
   };
 
   const handleGrupoTipoChange3 =  (id_entidad_empresa) => {
-    // Actualiza el estado del formulario para incluir el nuevo id de tipo de grupo seleccionado
-    handleInputChange3({ target: { name: 'id_entidad_empresa', value: id_entidad_empresa } });
+    handleInputChange({ target: { name: 'id_entidad_empresa', value: id_entidad_empresa } });
+    setSelectedEntidad(id_entidad_empresa); // Actualiza el filtro de subentidades
+    setSelectedSubEntidad(null); // Resetea subentidad seleccionada
+    setSelectedDireccion(null); // Resetea dirección seleccionada
   };
 
   const handleGrupoTipoChange4 = (id_sub_entidad) => {
-    // Actualiza el estado del formulario para incluir el nuevo id de tipo de grupo seleccionado
-    handleInputChange4({ target: { name: 'id_sub_entidad', value: id_sub_entidad } });
+    handleInputChange({ target: { name: 'id_sub_entidad', value: id_sub_entidad } });
+    setSelectedSubEntidad(id_sub_entidad); // Actualiza el filtro de direcciones
+    setSelectedDireccion(null); // Resetea dirección seleccionada
+  };
+
+  const handleDireccionChange = (id_direccion) => {
+    setSelectedDireccion(id_direccion); // Actualiza el filtro de departamentos
   };
 
 
@@ -49,6 +58,7 @@ export default function FormPuesto({ formState, handleInputChange, handleSubmit,
         
           <div>
           <ListaSubEntidad
+           filter={selectedEntidad}
            selectedTipoId={formState.id_sub_entidad} 
           onGrupoTipoChange={handleGrupoTipoChange4} />
           </div>
@@ -56,12 +66,14 @@ export default function FormPuesto({ formState, handleInputChange, handleSubmit,
 
           <div>
           <ListaDirecciones
+          filter={selectedSubEntidad}
            selectedTipoId={formState.id_direcciones} 
           onGrupoTipoChange={handleGrupoTipoChange} />
           </div>
         
           <div>
           <ListaDepartamentos
+           filter={selectedDireccion}
            selectedTipoId={formState.id_departamentos} 
           onGrupoTipoChange={handleGrupoTipoChange2} />
           </div>

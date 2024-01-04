@@ -53,7 +53,7 @@ const handleSubmit = async (e) => {
     setNotification({
       visible: true,
       titulo: "Éxito",
-      mensaje: "Se ha creado su subtipo de entidad" // Ajusta según necesites
+      mensaje: "Se ha creado su direccion de la entidad" // Ajusta según necesites
     });
   }
 };

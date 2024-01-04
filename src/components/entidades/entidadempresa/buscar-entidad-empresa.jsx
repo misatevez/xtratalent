@@ -101,9 +101,9 @@ export default function BuscarEntidadEmpresa() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[100px]">Grupo Tipo</TableHead>
-                <TableHead className="w-[200px]">Nombre del Subtipo Entidad</TableHead>
-                <TableHead className="w-[200px]">Descripcion del Subtipo Entidad</TableHead>
+                <TableHead className="w-[100px]">Sub Tipo Entidad</TableHead>
+                <TableHead className="w-[200px]">Nombre Entidad</TableHead>
+                <TableHead className="w-[200px]">Descripcion Entidad</TableHead>
                 <TableHead className="w-[150px]">Fecha Registro</TableHead>
                 <TableHead className="w-[150px]">Última Modificación</TableHead>
                 <TableHead className="w-[100px]">Seleccionar</TableHead>

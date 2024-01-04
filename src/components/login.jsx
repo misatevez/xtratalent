@@ -1,5 +1,5 @@
 'use client'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,8 +10,9 @@ export function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState({ type: "", content: "" });
-  const router = useRouter();
+  const [rememberMe, setRememberMe] = useState(false); // Nuevo estado para el checkbox
 
+  const router = useRouter();
   async function signInWithEmail() {
     const { data, error } = await supabase.auth.signInWithPassword({
       email: email,
@@ -21,10 +22,44 @@ export function Login() {
       console.log(error);
       setMessage({ type: "error", content: error.message });
     } else if (data.user) {
+      // Verifica si el usuario marcó "Recordarme" y guarda las credenciales
+      if (rememberMe) {
+        saveCredentials(email, password);
+      } else {
+        // Opcional: Limpia las credenciales anteriores si el usuario no quiere ser recordado.
+        localStorage.removeItem("userEmail");
+        localStorage.removeItem("userPassword");
+      }
+  
       setMessage({ type: "success", content: "Login successful!" });
-      router.push("/dashboard"); // Redirect to dashboard page
+      router.push("/dashboard"); // Redirige a la página del dashboard
     }
   }
+
+  const saveCredentials = (email, password) => {
+    localStorage.setItem("userEmail", email);
+    localStorage.setItem("userPassword", password);
+  };
+
+  // Función para cargar las credenciales desde el almacenamiento local
+  const loadCredentials = () => {
+    const savedEmail = localStorage.getItem("userEmail");
+    const savedPassword = localStorage.getItem("userPassword");
+    if(savedEmail && savedPassword) {
+      setEmail(savedEmail);
+      setPassword(savedPassword);
+      setRememberMe(true); // Asume que si hay credenciales, el usuario quería recordarlas
+    }
+  };
+
+    // Carga las credenciales cuando el componente se monta
+    useEffect(() => {
+      loadCredentials();
+    }, []);
+
+    const handleRememberMeChange = (e) => {
+      setRememberMe(e.target.checked);
+    }
 
   return (
     (<div key="1" className="flex h-screen">
@@ -32,7 +67,7 @@ export function Login() {
         <img
           alt="Woman working"
           className="rounded-lg object-cover w-full h-full"
-          src="https://img.freepik.com/foto-gratis/elegante-mujer-sonriente-gafas-camisa-rayas-usando-computadora-portatil-mientras-sienta-mesa-cocina_171337-13030.jpg?w=1800&t=st=1704280888~exp=1704281488~hmac=f7ea6f77279b3f5efa468047f5f5ec07ae550b09257f6e4d53f56cba44b7bb7e"
+          src="https://xzfcosekgkctmoepyywr.supabase.co/storage/v1/object/public/assets/elegante-mujer-sonriente-gafas-camisa-rayas-usando-computadora-portatil-mientras-sienta-mesa-cocina.jpg?t=2024-01-04T22%3A30%3A38.522Z"
           style={{
             height: "100%",
           }} />
@@ -56,7 +91,7 @@ export function Login() {
                 alt="Better people, better stories"
                 className="mx-auto"
                 height="50"
-                src="http://localhost:3000/_next/image?url=https%3A%2F%2Fi.ibb.co%2FFHFCs6b%2F2-LOGO-XTRAT-2023-V13.png&w=640&q=75"
+                src="https://xzfcosekgkctmoepyywr.supabase.co/storage/v1/object/public/assets/2-LOGO-XTRAT-2023-V13.webp"
                 style={{
                   aspectRatio: "200/50",
                   objectFit: "contain",
@@ -86,7 +121,7 @@ export function Login() {
           </div>
           <div className="flex items-center justify-between mb-6">
             <label className="flex items-center" htmlFor="remember">
-              <Input className="mr-2" id="remember" type="checkbox" />
+              <Input className="mr-2" id="remember" type="checkbox" checked={rememberMe} onChange={handleRememberMeChange} />
               Recordarme
             </label>
             <Link className="text-sm text-blue-600 hover:underline" href="#">
@@ -100,7 +135,7 @@ export function Login() {
             </div>
           )}
 
-          <Button className="w-full" onClick={signInWithEmail}>Iniciar sesión</Button>
+          <Button variant="outline" className="w-full" onClick={signInWithEmail}>Iniciar sesión</Button>
           <div className="flex items-center justify-center mt-4">
             <div
               className="text-sm text-blue-600 hover:underline flex flex-col items-center"

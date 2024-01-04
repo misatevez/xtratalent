@@ -76,7 +76,7 @@ export default function BuscarSubTipoEntidad() {
       setNotification({
         visible: true,
         titulo: "Éxito",
-        mensaje: "Grupo eliminado correctamente"
+        mensaje: "Sub-Entidad eliminada correctamente"
       });
     }
     setLoading(false);
@@ -94,7 +94,7 @@ export default function BuscarSubTipoEntidad() {
   return (
     <>
       <div className="bg-white p-4 rounded-md shadow-md m-auto text-center">
-        <h1 className="text-xl font-bold text-[#2c5282] mb-4">Buscar Sub Entidades</h1>
+        <h1 className="text-xl font-bold text-[#2c5282] mb-4">BUSCAR  SUB TIPO ENTIDADES</h1>
         <div className="flex justify-center">
           <Input className="mr-2" placeholder="Search" type="text" onChange={handleSearchChange} />
           <Button variant="outline">Buscar</Button>

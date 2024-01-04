@@ -5,20 +5,30 @@ import { useEffect, useState } from "react";
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select";
 import supabase from "@/lib/supabaseClient";
 
-export default function ListaSubEntidad( { onGrupoTipoChange, selectedTipoId } ) {
-  const [tipos, setTipos] = useState([]);
+export default function ListaSubEntidad( { onGrupoTipoChange, selectedTipoId, filter } ) {
+  const [subEntidades, setSubEntidades] = useState([]);
 
-useEffect(() => {
-  const fetchTipos = async () => {
-    const { data, error } = await supabase.from('sub_entidad').select('id_sub_entidad, nombre');
-    if (error) {
-      console.error("Error al obtener los tipos de subentidad ", error);
+  useEffect(() => {
+    const fetchSubEntidades = async () => {
+      // Aquí asumo que 'filter' es el id de la entidad seleccionada, ajusta según tu esquema de DB
+      const { data, error } = await supabase
+        .from('sub_entidad')
+        .select('id_sub_entidad, nombre')
+        .eq('id_entidad_empresa', filter); // Filtrando las subentidades por la entidad seleccionada
+
+      if (error) {
+        console.error("Error al obtener las subentidades", error);
+      } else {
+        setSubEntidades(data);
+      }
+    };
+
+    if(filter) { // Solo busca subentidades si hay un filtro seleccionado
+      fetchSubEntidades();
     } else {
-      setTipos(data);
+      setSubEntidades([]); // Resetea las subentidades si no hay filtro
     }
-  };
-  fetchTipos();
-}, []);
+  }, [filter]); // Este efecto se ejecuta cada vez que el filtro cambia
 
 
   return (
@@ -32,7 +42,7 @@ useEffect(() => {
         </SelectTrigger>
         
         <SelectContent position="popper">
-          {tipos.map((tipo, index) => (
+          {subEntidades.map((tipo, index) => (
             <SelectItem key={index} value={tipo.id_sub_entidad.toString()}>{tipo.nombre}</SelectItem>
           ))}
         </SelectContent>

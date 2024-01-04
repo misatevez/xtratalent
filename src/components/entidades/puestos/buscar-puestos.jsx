@@ -69,7 +69,7 @@ export default function BuscarPuesto() {
       setNotification({
         visible: true,
         titulo: "Error",
-        mensaje: "Error al eliminar grupo: " + error.message
+        mensaje: "Error al eliminar: " + error.message
       });
     } else {
       setGrupos(prevGrupos => prevGrupos.filter(grupo => grupo.id_puestos !== selectedGrupoId));
@@ -77,7 +77,7 @@ export default function BuscarPuesto() {
       setNotification({
         visible: true,
         titulo: "Éxito",
-        mensaje: "Grupo eliminado correctamente"
+        mensaje: "Puesto eliminado correctamente"
       });
     }
     setLoading(false);
