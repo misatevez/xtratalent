@@ -17,10 +17,8 @@ export function SelectoraEvaluaciones() {
           <h1 className="text-4xl font-bold mb-6 text-center">Administracion de Evaluaciones</h1>
           <div className="flex items-center justify-center space-x-4">
             <Button onClick={() => router.push('/dashboard/evaluaciones/evaluacion')} className="bg-white text-purple-500 hover:bg-gray-200">Evaluaciones</Button>
-            <Button onClick={() => router.push('/dashboard/evaluaciones/categorias')} className="bg-white text-purple-500 hover:bg-gray-200">Categorias</Button>
-            <Button onClick={() => router.push('/dashboard/evaluaciones/temas')} className="bg-white text-purple-500 hover:bg-gray-200">Temas</Button>
-           
-
+            <Button onClick={() => router.push('/dashboard/evaluaciones/categorias')} className="bg-white text-purple-500 hover:bg-gray-200">Familias</Button>
+            <Button onClick={() => router.push('/dashboard/evaluaciones/categorias/subcategorias')} className="bg-white text-purple-500 hover:bg-gray-200">Subfamilias</Button>
           </div>
         </main>
     )
