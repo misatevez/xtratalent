@@ -82,7 +82,7 @@ export default function CrearEvaluacion() {
     console.log(formState)
 
     // Insertar en Supabase
-    const { data, error } = await supabase.from('evaluaciones').insert([formState]);
+    const { data, error } = await supabase.from('evaluaciones').upsert([formState]);
 
     if (error) {
       setNotification({
@@ -102,10 +102,9 @@ export default function CrearEvaluacion() {
   const handleSubmit2 = async (e) => {
     e.preventDefault();
 
-    console.log(formState)
-
     // Insertar en Supabase
-    const { data, error } = await supabase.from('evaluaciones').insert([formState]);
+    const { data, error } = await supabase.from('evaluaciones').upsert([formState]).select();
+
 
     if (error) {
       setNotification({
@@ -119,8 +118,17 @@ export default function CrearEvaluacion() {
         titulo: "Éxito",
         mensaje: "Se ha creado su evaluacion" // Ajusta según necesites
       });
-      router.push("/dashboard/evaluaciones/temas/creartema");
     }
+
+    // Asegúrate de que data no está vacía y tiene al menos un elemento (la fila insertada)
+    if(data && data.length > 0) {
+      const idEvaluacion = data[0].id_evaluacion; // Ajusta 'id' al nombre real de tu columna de ID en la tabla de 'evaluaciones'
+      router.push(`/dashboard/evaluaciones/temas/asignartema/${idEvaluacion}`);
+    } else {
+      // Manejar el caso en que no hay datos retornados
+      console.error("No se retornaron datos de la inserción");
+    }
+
   };
 
 

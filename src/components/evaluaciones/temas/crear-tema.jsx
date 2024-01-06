@@ -5,9 +5,13 @@ import FormTema from "./formTema";
 
 import { Notificacion } from "@/components/notification";
 import supabase from "@/lib/supabaseClient";
+import { useRouter } from "next/navigation";
 
 
 export default function CrearTema() {
+
+ const router = useRouter();
+
    // Estado inicial para el formulario
    const [formState, setFormState] = useState({
     nombre: '',
@@ -54,7 +58,7 @@ const handleSubmit = async (e) => {
   console.log(formState)
 
   // Insertar en Supabase
-  const { data, error } = await supabase.from('temas').insert([formState]);
+  const { data, error } = await supabase.from('temas').upsert([formState]).select();
 
   if (error) {
     setNotification({
@@ -69,6 +73,16 @@ const handleSubmit = async (e) => {
       mensaje: "Se ha creado su tema" // Ajusta según necesites
     });
   }
+
+    // Asegúrate de que data no está vacía y tiene al menos un elemento (la fila insertada)
+    if(data && data.length > 0) {
+      const idTema = data[0].id_tema; // Ajusta 'id' al nombre real de tu columna de ID en la tabla de 'evaluaciones'
+      router.push(`/dashboard/evaluaciones/preguntas/crearpregunta/${idTema}`);
+    } else {
+      // Manejar el caso en que no hay datos retornados
+      console.error("No se retornaron datos de la inserción");
+    }
+
 };
 
   return (

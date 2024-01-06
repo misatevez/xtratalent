@@ -8,6 +8,7 @@ import {
   SelectContent,
   Select,
 } from "@/components/ui/select";
+import { useRouter } from 'next/navigation'
 
 export default function FormTema({
   formState,
@@ -16,6 +17,7 @@ export default function FormTema({
   titulo,
   handleSelectChange,
 }) {
+  const router = useRouter()
   const niveles = [
     { valor: "Basico", nombre: "1. Básico" },
     { valor: "Medio", nombre: "2. Medio" },
@@ -128,8 +130,16 @@ export default function FormTema({
             className="bg-blue-500 text-white"
             variant="default"
           >
-            Guardar
+            Guardar y asignar preguntas
           </Button>
+          <Button
+            type="button"
+            className="bg-red-500 text-white"
+            variant="default"
+            onClick={() => router.back()}
+          >
+            Volver
+            </Button>
         </div>
       </div>
     </form>
