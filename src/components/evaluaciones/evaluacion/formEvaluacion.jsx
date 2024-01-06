@@ -80,17 +80,49 @@ export default function FormEvaluacion({
         </div>
 
         <div className="grid grid-cols-2 gap-4 mb-4">
-          <ListaCategorias
-            selectedTipoId={formState.id_categoria}
-            onGrupoTipoChange={handleGrupoTipoChange}
-          />
-
-          <ListaSubCategorias
-            selectedCategoryId={formState.id_categoria} // Usa el nombre correcto de la propiedad según tu estado
-            selectedTipoId={formState.id_subcategoria} // Asume que es para seleccionar un tipo de subcategoría
-            onGrupoTipoChange={handleGrupoTipoChange2}
-          />
-
+          <div className="grid grid-cols-1 text-center ">
+            <ListaCategorias
+              selectedTipoId={formState.id_categoria}
+              onGrupoTipoChange={handleGrupoTipoChange}
+            />
+            <div className="grid place-items-center m-2">
+              <label>
+                <span className="font-semibold  text-gray-700">
+                  ¿La familia no esta creada?
+                </span>
+              </label>
+              <button
+                className="bg-blue-500 text-white p-2 w-1/2 rounded-md "
+                variant="default"
+                onClick={ () => router.push("/dashboard/evaluaciones/categorias/crearcategoria")} 
+              >
+                Crear familia
+              </button>
+            </div>
+          </div>
+          <div>
+            <div className="grid grid-cols-1 text-center ">
+              <ListaSubCategorias
+                selectedCategoryId={formState.id_categoria} // Usa el nombre correcto de la propiedad según tu estado
+                selectedTipoId={formState.id_subcategoria} // Asume que es para seleccionar un tipo de subcategoría
+                onGrupoTipoChange={handleGrupoTipoChange2}
+              />
+              <div className="grid place-items-center m-2">
+                <label>
+                  <span className="font-semibold  text-gray-700">
+                    ¿La sub-familia no esta creada?
+                  </span>
+                </label>
+                <button
+                  className="bg-blue-500 text-white p-2 w-1/2 rounded-md "
+                  variant="default"
+                  onClick={ () => router.push("/dashboard/evaluaciones/categorias/subcategorias/crearsubcategorias")} 
+                >
+                  Crear sub-familia
+                </button>
+              </div>
+            </div>
+          </div>
           <div className="flex flex-col">
             <label className="font-semibold" htmlFor="nivel">
               Nivel de Profundidad
@@ -248,7 +280,7 @@ export default function FormEvaluacion({
           />
         </div>
         <div className="flex justify-around ">
-        <Button
+          <Button
             onClick={handleSubmit2}
             className="bg-blue-500 text-white"
             variant="default"

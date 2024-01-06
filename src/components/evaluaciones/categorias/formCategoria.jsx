@@ -2,6 +2,8 @@ import React from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import ListaCategorias from "./lista-categorias";
+import { useRouter } from 'next/navigation'
+
 
 export default function FormCategoria({
   formState,
@@ -9,6 +11,9 @@ export default function FormCategoria({
   handleSubmit,
   titulo,
 }) {
+
+  const router = useRouter()
+
 
   
   return (
@@ -39,9 +44,18 @@ export default function FormCategoria({
             type="submit"
             className="bg-blue-500 text-white"
             variant="default"
+
           >
             Guardar
           </Button>
+          <Button
+            type="button"
+            className="bg-red-500 text-white"
+            variant="default"
+            onClick={() => router.back()}
+          >
+            Volver
+            </Button>
         </div>
       </div>
     </form>

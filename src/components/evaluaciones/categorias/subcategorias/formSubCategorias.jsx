@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import ListaCategorias from "../lista-categorias";
 import ListaSubCategorias from "./lista-subcategorias";
+import { useRouter } from 'next/navigation'
 
 export default function FormSubCategoria({
   formState,
@@ -15,6 +16,9 @@ export default function FormSubCategoria({
     // Actualiza el estado del formulario para incluir el nuevo id de tipo de grupo seleccionado
     handleInputChange({ target: { name: 'id_categoria', value: id_categoria } });
   };
+  const router = useRouter()
+
+
   return (
 
 
@@ -31,7 +35,7 @@ export default function FormSubCategoria({
               />
             </div>
           </div>
-          <div className="mt-4 p-6">
+          <div className="mt-4">
             <label
               className="block text-sm font-medium mb-2 text-start"
               htmlFor="group-name"
@@ -52,6 +56,14 @@ export default function FormSubCategoria({
           >
             Guardar
           </Button>
+          <Button
+            type="button"
+            className="bg-red-500 text-white"
+            variant="default"
+            onClick={() => router.back()}
+          >
+            Volver
+            </Button>
           </div>
         </div>
     </form>
