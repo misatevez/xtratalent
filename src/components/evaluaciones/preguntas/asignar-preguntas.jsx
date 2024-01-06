@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Notificacion } from "@/components/notification";
-import supabase from "@/lib/supabaseClient";
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table";
@@ -15,6 +15,7 @@ import {
     Select,
   } from "@/components/ui/select";
 import { useRouter } from "next/navigation";
+import supabase from "@/lib/supabaseClient";
 
 export default function AsignarPregunta({ id_tema }) {
     const [nombreTema, setNombreTema] = useState([]);
@@ -375,7 +376,7 @@ export default function AsignarPregunta({ id_tema }) {
               </TableCell>
 
               <TableCell>
-                <Button className="w-1/2" type="submit">
+                <Button onClick={() => router.push(`/dashboard/evaluaciones/respuestas/crear-respuesta/${pregunta.id_pregunta}`)} className="w-1/2" type="submit">
                   Asignar Respuesta
                 </Button>
               </TableCell>

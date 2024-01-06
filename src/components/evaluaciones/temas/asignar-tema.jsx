@@ -97,7 +97,7 @@ const handleInputChange = (e) => {
         <form onSubmit={handleSubmit} className="rounded-lg shadow-lg">
           <div className="bg-white p-6 rounded-lg shadow-inner m-auto text-start">
             <h1 className="text-3xl font-bold text-center mt-4  text-gray-800">
-              Asignar Tema a Evaluacion
+              Asignar tema a evaluacion
             </h1>
             <div className="grid grid-cols-2 mt-6">
               <div className="flex flex-col m-2">
