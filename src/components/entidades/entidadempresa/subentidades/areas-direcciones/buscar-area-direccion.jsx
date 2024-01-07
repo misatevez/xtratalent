@@ -94,7 +94,7 @@ export default function   BuscarDireccion() {
   return (
     <>
       <div className="bg-white p-4 rounded-md shadow-md m-auto text-center">
-        <h1 className="text-xl font-bold text-[#2c5282] mb-4">Buscar Direcciones</h1>
+        <h1 className="text-xl font-bold text-[#2c5282] mb-4">BUSCAR ÁREAS – DIRECCIONES</h1>
         <div className="flex justify-center">
           <Input className="mr-2" placeholder="Search" type="text" onChange={handleSearchChange} />
           <Button variant="outline">Buscar</Button>
@@ -103,7 +103,7 @@ export default function   BuscarDireccion() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[100px]">Subentidad</TableHead>
+                <TableHead className="w-[100px]">ÁREAS – DIRECCIONES</TableHead>
                 <TableHead className="w-[200px]">Nombre de Dirección</TableHead>
                 <TableHead className="w-[200px]">Descripcion de Dirección</TableHead>
                 <TableHead className="w-[150px]">Fecha Registro</TableHead>

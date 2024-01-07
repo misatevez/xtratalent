@@ -1,5 +1,3 @@
-'use client'
-
 import { useEffect, useState } from "react";
 
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select";
@@ -10,26 +8,26 @@ export default function ListaSubEntidad( { onGrupoTipoChange, selectedTipoId, fi
 
   useEffect(() => {
     const fetchSubEntidades = async () => {
-      // Aquí asumo que 'filter' es el id de la entidad seleccionada, ajusta según tu esquema de DB
-      const { data, error } = await supabase
+      let query = supabase
         .from('sub_entidad')
-        .select('id_sub_entidad, nombre')
-        .eq('id_entidad_empresa', filter); // Filtrando las subentidades por la entidad seleccionada
+        .select('id_sub_entidad, nombre');
+
+      // Applying the filter conditionally
+      if(filter) {
+        query = query.eq('id_entidad_empresa', filter);
+      }
+
+      const { data, error } = await query;
 
       if (error) {
         console.error("Error al obtener las subentidades", error);
       } else {
-        setSubEntidades(data);
+        setSubEntidades(data || []);
       }
     };
 
-    if(filter) { // Solo busca subentidades si hay un filtro seleccionado
-      fetchSubEntidades();
-    } else {
-      setSubEntidades([]); // Resetea las subentidades si no hay filtro
-    }
+    fetchSubEntidades();
   }, [filter]); // Este efecto se ejecuta cada vez que el filtro cambia
-
 
   return (
     <>

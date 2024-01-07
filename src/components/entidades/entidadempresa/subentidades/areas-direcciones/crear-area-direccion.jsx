@@ -62,7 +62,7 @@ const handleSubmit = async (e) => {
     (
       <>
       <div className=" p-4 mx-auto w-full max-w-2xl mt-4">
-      <FormDirecciones titulo="Crear Direcciones" 
+      <FormDirecciones titulo="CREAR ÁREAS – DIRECCIONES" 
      formState={formState} 
      handleInputChange={handleInputChange} 
      handleSubmit={handleSubmit}

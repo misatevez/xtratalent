@@ -12,6 +12,8 @@ export default function BuscarEvaluacion() {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 5; // Puedes ajustar esto según tus necesidades
   const [totalEvaluaciones, setTotalEvaluaciones] = useState(0);
+  const [triggerEffect, setTriggerEffect] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("")
 
   useEffect(() => {
     const buscarEvaluaciones = async () => {
@@ -35,12 +37,13 @@ export default function BuscarEvaluacion() {
       if (error) {
         alert(error.message);
       } else {
+        console.log(data);
         setEvaluaciones(data);
         setTotalEvaluaciones(count);
       }
     };
     buscarEvaluaciones();
-  }, [currentPage])
+  }, [currentPage, triggerEffect])
 
   const handleDelete = async (id_evaluacion) => {
     const { error } = await supabase
@@ -51,7 +54,7 @@ export default function BuscarEvaluacion() {
     if (error) {
       alert(error.message);
     } else {
-      // Reload the current page
+      setTriggerEffect(prev => !prev);
       setCurrentPage(currentPage);
     }
   }
@@ -70,11 +73,25 @@ export default function BuscarEvaluacion() {
     }
   };
 
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value.toLowerCase());
+  }
+
+  const filteredEvaluaciones = evaluaciones.filter(evaluaciones =>
+    evaluaciones.nombre?.toLowerCase().includes(searchTerm) ||
+    evaluaciones.descripcion?.toLowerCase().includes(searchTerm)
+    // Añadir mas campos si quieremos que se pueda buscar por mas campos
+  );
+
   return (
     <div className="bg-white p-4 rounded-md shadow-md m-auto text-center">
       <h1 className="text-xl font-bold text-center text-[#2c5282] mb-4">
-        Buscar Evaluaciones
+      Catálogo de Evaluaciones
       </h1>
+      <div className="flex w-full max-w-full items-center space-x-2 mb-10">
+        <Input placeholder="Search" type="text" onChange={handleSearchChange} />
+        <Button type="submit">Buscar</Button>
+      </div>
       <div className="overflow-x-auto mt-4">
         <Table>
           <TableHeader>
@@ -82,17 +99,26 @@ export default function BuscarEvaluacion() {
               <TableHead className="w-[100px]">Nombre</TableHead>
               <TableHead className="w-[150px]">Familia</TableHead>
               <TableHead className="w-[150px]">Sub-familia</TableHead>
+              <TableHead className="w-[150px]">Estado</TableHead>
+              <TableHead className="w-[150px]">Clase</TableHead>
+              <TableHead className="w-[150px]">Nivel</TableHead>
+              <TableHead className="w-[150px]">Duracion</TableHead>
               <TableHead className="w-[300px]">Acciones</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {evaluaciones.map((evaluacion, index) => (
+            {filteredEvaluaciones.map((evaluacion, index) => (
               <TableRow key={index}>
                 <TableCell>{evaluacion.nombre}</TableCell>
                 <TableCell>{evaluacion.categorias?.nombre}</TableCell>
                 <TableCell>{evaluacion.sub_categorias?.nombre}</TableCell>
+                <TableCell>{evaluacion.activa ? "ACTIVA" : "DESACTIVADA"}</TableCell>
+
+                <TableCell>{evaluacion.clase}</TableCell>
+                <TableCell>{evaluacion.nivel}</TableCell>
+                <TableCell>{evaluacion.duracion} Mins</TableCell>
                 <TableCell>
-                <Button variant="ghost">Asignar</Button>
+                <Button onClick={() => router.push(`/dashboard/evaluaciones/evaluacion/asignar/${evaluacion.id_evaluacion}`)} variant="ghost">Asignar</Button>
                   <Button onClick={() => router.push(`/dashboard/evaluaciones/evaluacion/${evaluacion.id_evaluacion}`)} variant="ghost">Editar</Button>
                   <Button onClick={() => handleDelete(evaluacion.id_evaluacion)} variant="ghost">Borrar</Button>
                 </TableCell>

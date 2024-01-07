@@ -1,5 +1,3 @@
-'use client'
-
 import { useEffect, useState } from "react";
 
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select";
@@ -8,28 +6,28 @@ import supabase from "@/lib/supabaseClient";
 export default function ListaDirecciones( { onGrupoTipoChange, selectedTipoId, filter } ) {
   const [direcciones, setDirecciones] = useState([]);
 
-
   useEffect(() => {
     const fetchDirecciones = async () => {
-      if (filter) {
-        const { data, error } = await supabase
-          .from('direcciones')
-          .select('id_direcciones, nombre')
-          .eq('id_sub_entidad', filter);
+      let query = supabase
+        .from('direcciones')
+        .select('id_direcciones, nombre');
 
-        if (error) {
-          console.error("Error al obtener las direcciones: ", error);
-        } else {
-          setDirecciones(data);
-        }
+      // Applying the filter conditionally
+      if(filter) {
+        query = query.eq('id_sub_entidad', filter);
+      }
+
+      const { data, error } = await query;
+
+      if (error) {
+        console.error("Error al obtener las direcciones: ", error);
       } else {
-        setDirecciones([]);  // Resetea las direcciones si no hay filtro
+        setDirecciones(data || []);
       }
     };
 
     fetchDirecciones();
-  }, [filter]);
-
+  }, [filter]); // Este efecto se ejecuta cada vez que el filtro cambia
 
   return (
     <>
@@ -42,8 +40,8 @@ export default function ListaDirecciones( { onGrupoTipoChange, selectedTipoId, f
         </SelectTrigger>
         
         <SelectContent position="popper">
-          {direcciones.map((tipo, index) => (
-            <SelectItem key={index} value={tipo.id_direcciones.toString()}>{tipo.nombre}</SelectItem>
+          {direcciones.map((direccion, index) => (
+            <SelectItem key={index} value={direccion.id_direcciones.toString()}>{direccion.nombre}</SelectItem>
           ))}
         </SelectContent>
 

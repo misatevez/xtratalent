@@ -95,7 +95,7 @@ export default function BuscarDepartamento() {
   return (
     <>
       <div className="bg-white p-4 rounded-md shadow-md m-auto text-center">
-        <h1 className="text-xl font-bold text-[#2c5282] mb-4">Buscar Direcciones</h1>
+        <h1 className="text-xl font-bold text-[#2c5282] mb-4">BUSCAR DEPARTAMENTOS</h1>
         <div className="flex justify-center">
           <Input className="mr-2" placeholder="Search" type="text" onChange={handleSearchChange} />
           <Button variant="outline">Buscar</Button>
@@ -104,7 +104,7 @@ export default function BuscarDepartamento() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[100px]">Direccion</TableHead>
+                <TableHead className="w-[100px]">DEPARTAMENTOS</TableHead>
                 <TableHead className="w-[200px]">Nombre de Departamento</TableHead>
                 <TableHead className="w-[200px]">Descripcion de Departamento</TableHead>
                 <TableHead className="w-[150px]">Fecha Registro</TableHead>

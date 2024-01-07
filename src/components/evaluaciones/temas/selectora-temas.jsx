@@ -17,8 +17,7 @@ export function SelectoraTemas() {
           <h1 className="text-4xl font-bold mb-6 text-center">Temas</h1>
           <div className="flex items-center justify-center space-x-4">
             <Button onClick={() => router.push('/dashboard/evaluaciones/temas/creartema')} className="bg-white text-purple-500 hover:bg-gray-200">Crear tema</Button>
-            <Button onClick={() => router.push('/dashboard/evaluaciones/temas/creartema')} className="bg-white text-purple-500 hover:bg-gray-200">Buscar tema</Button>
-            <Button onClick={() => router.push('/dashboard/evaluaciones/temas/creartema')} className="bg-white text-purple-500 hover:bg-gray-200">Catalogo temas</Button>
+            <Button onClick={() => router.push('/dashboard/evaluaciones/temas/catalogo')} className="bg-white text-purple-500 hover:bg-gray-200">Catalogo temas</Button>
             <Button onClick={() => router.push('/dashboard/evaluaciones/preguntas')} className="bg-white text-purple-500 hover:bg-gray-200">Preguntas</Button>
             
             {/* <Button onClick={() => router.push('/dashboard/evaluaciones/temas/reportestema')} className="bg-white text-purple-500 hover:bg-gray-200">Reporte de temas</Button>
