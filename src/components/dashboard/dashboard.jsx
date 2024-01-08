@@ -54,7 +54,7 @@ export function Dashboard( {children} ) {
           <Link
             className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
             href="/dashboard/personal">
-            <ServerIcon className="w-6 h-6" />
+            <UserIcon className="w-6 h-6" />
             Administración de Personal
           </Link>
          
