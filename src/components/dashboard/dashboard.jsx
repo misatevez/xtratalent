@@ -10,9 +10,18 @@ import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
 import { useRouter } from 'next/navigation'
 import Image from "next/image"
+import supabase from "@/lib/supabaseClient"
 
 export function Dashboard( {children} ) {
   const router = useRouter()
+
+  // supabase logout
+
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut()
+    if (error) console.log('Error logging out:', error.message)
+    else router.push('/')
+  }
 
   return (
     (<div key="1" className="flex flex-col w-full min-h-screen">
@@ -98,7 +107,8 @@ export function Dashboard( {children} ) {
                   </div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuItem onClick={() => router.push('/login')}  >Logout</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => router.push('/dashboard/perfil')}  >Perfil</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => handleLogout() }  >Logout</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </Button>

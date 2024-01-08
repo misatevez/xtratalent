@@ -61,6 +61,23 @@ export function Login() {
       setRememberMe(e.target.checked);
     }
 
+    // recuperar contraseña
+    const forgotPassword = async (email) => {
+      const { data, error } = await supabase.auth.resetPasswordForEmail(
+        email
+      );
+      if (error) {
+        console.log(error);
+        setMessage({ type: "error", content: error.message });
+      } else if (data) {
+        setMessage({
+          type: "success",
+          content: "Te enviamos un correo para restablecer tu contraseña.",
+        });
+      }
+    }
+
+
   return (
     (<div key="1" className="flex h-screen">
       <div className="w-full bg-[#f0f0f0] flex justify-center items-center">
@@ -124,7 +141,7 @@ export function Login() {
               <Input className="mr-2" id="remember" type="checkbox" checked={rememberMe} onChange={handleRememberMeChange} />
               Recordarme
             </label>
-            <Link className="text-sm text-blue-600 hover:underline" href="#">
+            <Link onClick={() => forgotPassword(email) } className="text-sm text-blue-600 hover:underline" href="#">
               ¿Recuperar contraseña?
             </Link>
           </div>
