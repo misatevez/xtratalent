@@ -51,6 +51,7 @@ useEffect(() => {
       if (error) {
         console.error("Error fetching evaluation details: ", error);
       } else {
+
         setFormState({ ...data });
       }
     }
@@ -100,7 +101,6 @@ const handleCloseNotification = () => {
 
 
 const handleSubmit = async (e) => {
-  e.preventDefault();
 
   console.log(formState)
 
@@ -117,7 +117,7 @@ const handleSubmit = async (e) => {
     setNotification({
       visible: true,
       titulo: "Éxito",
-      mensaje: "Se ha creado su tema" // Ajusta según necesites
+      mensaje: "Se ha actualizado su tema" // Ajusta según necesites
     });
   }
 
@@ -134,10 +134,36 @@ const handleSubmit = async (e) => {
 
 };
 
+const handleSubmit2 = async (e) => {
+  
+
+  console.log(formState)
+
+  // Insertar en Supabase
+  const { data, error } = await supabase.from('temas').upsert([formState]).select();
+
+  if (error) {
+    setNotification({
+      visible: true,
+      titulo: "Error",
+      mensaje: "Vuelva a intentar mas tarde: " + error.message // Ajusta según necesites
+    });
+  } else {
+    setNotification({
+      visible: true,
+      titulo: "Éxito",
+      mensaje: "Se ha actualizado su tema" // Ajusta según necesites
+    });
+  }
+    
+
+};
+
   return (
     <>
+    
     <div className="p-4 mx-auto w-full max-w-3xl">
-    <form onSubmit={handleSubmit} className="rounded-lg shadow-lg">
+    <form  className="rounded-lg shadow-lg">
       <div className="bg-white p-6 rounded-lg shadow-inner m-auto text-start">
         <h1 className="text-3xl font-bold text-center mt-4  text-gray-800">
           Editar tema
@@ -227,8 +253,17 @@ const handleSubmit = async (e) => {
             type="submit"
             className="bg-blue-500 text-white"
             variant="default"
+            onClick={() => handleSubmit()}
           >
-            Guardar y asignar preguntas
+            Asignar o editar preguntas
+          </Button>
+          <Button
+            type="submit"
+            className="bg-blue-500 text-white"
+            variant="default"
+            onClick={() => handleSubmit2()}
+          >
+            Guardar
           </Button>
           <Button
             type="button"
