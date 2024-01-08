@@ -75,21 +75,20 @@ export function Login() {
       <div className="w-1/2 flex flex-col justify-center items-center px-12">
         <div className="w-full max-w-md">
           <div className="mb-6 text-center">
-            {/* <img
-              alt="Client logo"
-              className="mb-2 mx-auto"
+            <img
+              alt="Gobierno de guatemala"
+              className="mb-2 mx-auto w-full"
               height="50"
-              src="/placeholder.svg"
+              src="https://xzfcosekgkctmoepyywr.supabase.co/storage/v1/object/public/assets/LOGOTIPO%20-%20ONSEC%20-%20XTRA-TALENT-2024_V1.png"
               style={{
-                aspectRatio: "200/50",
                 objectFit: "cover",
               }}
-              width="200" /> */}
+              width="200" />
             <h1 className="text-3xl font-bold">¡Bienvenidos!</h1>
-            <p className="text-sm text-gray-500 mt-1">
+            <p className="text-sm text-gray-500 mt-6">
               <img
                 alt="Better people, better stories"
-                className="mx-auto"
+                className="mx-auto w-full"
                 height="50"
                 src="https://xzfcosekgkctmoepyywr.supabase.co/storage/v1/object/public/assets/2-LOGO-XTRAT-2023-V13.webp"
                 style={{

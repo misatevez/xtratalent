@@ -13,8 +13,7 @@ export function SelectoraCategorias() {
           <h1 className="text-4xl font-bold mb-6 text-center">Categorias</h1>
           <div className="flex items-center justify-center space-x-4">
             <Button  onClick={() => router.push('/dashboard/evaluaciones/categorias/crearcategoria')} className="bg-white text-purple-500 hover:bg-gray-200">Crear familia</Button>
-            <Button  onClick={() => router.push('/dashboard/evaluaciones/categorias/crearcategoria/reportes')} className="bg-white text-purple-500 hover:bg-gray-200">Buscar familias</Button> 
-            <Button  className="bg-white text-purple-500 hover:bg-gray-200">Catalogo de familias</Button>
+            <Button  onClick={() => router.push('/dashboard/evaluaciones/categorias/crearcategoria/reportes')} className="bg-white text-purple-500 hover:bg-gray-200">Catálogo familias</Button> 
           </div>
         </main>
     )
