@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import supabase from "@/lib/supabaseClient";
+import Image from "next/image";
 
 export function Login() {
   const [email, setEmail] = useState("");
@@ -92,7 +93,7 @@ export function Login() {
       <div className="w-1/2 flex flex-col justify-center items-center px-12">
         <div className="w-full max-w-md">
           <div className="mb-6 text-center">
-            <img
+            <Image
               alt="Gobierno de guatemala"
               className="mb-2 mx-auto w-full"
               height="50"
@@ -103,7 +104,7 @@ export function Login() {
               width="200" />
             <h1 className="text-3xl font-bold">¡Bienvenidos!</h1>
             <p className="text-sm text-gray-500 mt-3">
-              <img
+              <Image
                 alt="Better people, better stories"
                 className="mx-auto w-full"
                 height="50"
