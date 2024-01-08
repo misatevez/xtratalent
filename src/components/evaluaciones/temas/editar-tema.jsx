@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Notificacion } from "@/components/notification";
-import supabase from "@/lib/supabaseClient";
 import { useRouter } from "next/navigation";
+import supabase from "@/lib/supabaseClient";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Notificacion } from "@/components/notification";
 import {
   SelectValue,
   SelectTrigger,
@@ -14,156 +14,122 @@ import {
   Select,
 } from "@/components/ui/select";
 
+export default function EditarTema({ id_tema }) {
+  const router = useRouter();
 
-export default function EditarTema({id_tema}) {
+  const niveles = [
+    { valor: "Basico", nombre: "1. Básico" },
+    { valor: "Medio", nombre: "2. Medio" },
+    { valor: "Intermedio", nombre: "3. Intermedio" },
+    { valor: "Avanzado", nombre: "4. Avanzado" },
+    { valor: "Experto", nombre: "5. Experto" },
+    { valor: "Instructor", nombre: "6. Instructor" },
+  ];
 
- const router = useRouter();
+  const objetivo = [
+    { valor: "Actitud", nombre: "Actitud" },
+    { valor: "Aptitud", nombre: "Aptitud" },
+    { valor: "Conocimiento", nombre: "Conocimiento" },
+    { valor: "Competencia", nombre: "Competencia" },
+    { valor: "Especifica-Desempeño", nombre: "Especifica-Desempeño" },
+    { valor: "Habilidad", nombre: "Habilidad" },
+    { valor: "Tecnico", nombre: "Tecnico" },
+    { valor: "Psicometrico", nombre: "Psicometrico" },
+  ];
 
- const niveles = [
-  { valor: "Basico", nombre: "1. Básico" },
-  { valor: "Medio", nombre: "2. Medio" },
-  { valor: "Intermedio", nombre: "3. Intermedio" },
-  { valor: "Avanzado", nombre: "4. Avanzado" },
-  { valor: "Experto", nombre: "5. Experto" },
-  { valor: "Instructor", nombre: "6. Instructor" },
-];
-
-const objetivo = [
-  { valor: "Actitud", nombre: "Actitud" },
-  { valor: "Aptitud", nombre: "Aptitud" },
-  { valor: "Conocimiento", nombre: "Conocimiento" },
-  { valor: "Competencia", nombre: "Competencia" },
-  { valor: "Especifica-Desempeño", nombre: "Especifica-Desempeño" },
-  { valor: "Habilidad", nombre: "Habilidad" },
-  { valor: "Tecnico", nombre: "Tecnico" },
-  { valor: "Psicometrico", nombre: "Psicometrico" },
-];
-
-useEffect(() => {
-  const obtenerTema = async () => {
-    if (id_tema) {
-      const { data, error } = await supabase
-        .from('temas')
-        .select('*')
-        .eq('id_tema', id_tema)
-        .single();
-
-      if (error) {
-        console.error("Error fetching evaluation details: ", error);
-      } else {
-
-        setFormState({ ...data });
-      }
-    }
-  };
-
-  obtenerTema();
-}, [id_tema]);
-
-   // Estado inicial para el formulario
-   const [formState, setFormState] = useState({
+  const [formState, setFormState] = useState({
     nombre: '',
     descripcion: '',
-    nivel:'',
-    clase:''
+    nivel: '',
+    clase: ''
   });
-  
   const [notification, setNotification] = useState({
     visible: false,
     titulo: "",
     mensaje: ""
   });
 
-   // Manejar cambios en los inputs
-   const handleInputChange = (event) => {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-  
+  useEffect(() => {
+    const obtenerTema = async () => {
+      if (id_tema) {
+        const { data, error } = await supabase
+          .from('temas')
+          .select('*')
+          .eq('id_tema', id_tema)
+          .single();
+
+        if (error) {
+          console.error("Error fetching evaluation details: ", error);
+        } else {
+          setFormState({ ...data });
+        }
+      }
+    };
+
+    obtenerTema();
+  }, [id_tema]);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
     setFormState(prevState => ({
       ...prevState,
       [name]: value
     }));
   };
 
-const handleSelectChange = (value, fieldName) => {
-  setFormState(prevState => ({
-    ...prevState,
-    [fieldName]: value,
-  }));
-};
+  const handleCloseNotification = () => {
+    setNotification((prev) => ({ ...prev, visible: false }));
+  };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { error } = await supabase
+      .from('temas')
+      .update(formState)
+      .eq('id_tema', id_tema);
 
-
-const handleCloseNotification = () => {
-  setNotification((prev) => ({ ...prev, visible: false }));
-};
-
-
-const handleSubmit = async (e) => {
-
-  console.log(formState)
-
-  // Insertar en Supabase
-  const { data, error } = await supabase.from('temas').upsert([formState]).select();
-
-  if (error) {
-    setNotification({
-      visible: true,
-      titulo: "Error",
-      mensaje: "Vuelva a intentar mas tarde: " + error.message // Ajusta según necesites
-    });
-  } else {
-    setNotification({
-      visible: true,
-      titulo: "Éxito",
-      mensaje: "Se ha actualizado su tema" // Ajusta según necesites
-    });
-  }
-
-    // Asegúrate de que data no está vacía y tiene al menos un elemento (la fila insertada)
-    if(data && data.length > 0) {
-      const idTema = data[0].id_tema; // Ajusta 'id' al nombre real de tu columna de ID en la tabla de 'evaluaciones'
-      router.push(`/dashboard/evaluaciones/preguntas/crearpregunta/${idTema}`);
+    if (error) {
+      setNotification({
+        visible: true,
+        titulo: "Error",
+        mensaje: "Vuelva a intentar más tarde: " + error.message
+      });
     } else {
-      // Manejar el caso en que no hay datos retornados
-      console.error("No se retornaron datos de la inserción");
+      setNotification({
+        visible: true,
+        titulo: "Éxito",
+        mensaje: "Tema actualizado correctamente"
+      });
     }
+  };
 
-    
-
-};
-
-const handleSubmit2 = async (e) => {
+  const handleSaveAndAssignQuestions = async (e) => {
+    e.preventDefault(); // Prevenir la recarga de la página
+    const { error } = await supabase
+      .from('temas')
+      .update(formState)
+      .eq('id_tema', id_tema);
   
-
-  console.log(formState)
-
-  // Insertar en Supabase
-  const { data, error } = await supabase.from('temas').upsert([formState]).select();
-
-  if (error) {
-    setNotification({
-      visible: true,
-      titulo: "Error",
-      mensaje: "Vuelva a intentar mas tarde: " + error.message // Ajusta según necesites
-    });
-  } else {
-    setNotification({
-      visible: true,
-      titulo: "Éxito",
-      mensaje: "Se ha actualizado su tema" // Ajusta según necesites
-    });
-  }
-    
-
-};
+    if (error) {
+      setNotification({
+        visible: true,
+        titulo: "Error",
+        mensaje: "Vuelva a intentar más tarde: " + error.message
+      });
+    } else {
+      setNotification({
+        visible: false, // Ocultar notificación para evitar que bloquee la navegación
+      });
+      // Redirige para asignar preguntas
+      router.push(`/dashboard/evaluaciones/preguntas/crearpregunta/${id_tema}`);
+    }
+  };
 
   return (
     <>
     
     <div className="p-4 mx-auto w-full max-w-3xl">
-    <form  className="rounded-lg shadow-lg">
+    <form   onSubmit={handleSubmit} className="rounded-lg shadow-lg">
       <div className="bg-white p-6 rounded-lg shadow-inner m-auto text-start">
         <h1 className="text-3xl font-bold text-center mt-4  text-gray-800">
           Editar tema
@@ -249,22 +215,19 @@ const handleSubmit2 = async (e) => {
         </div>
 
         <div className="flex justify-around mt-4">
-          <Button
-            type="submit"
-            className="bg-blue-500 text-white"
+        <Button
+            type="button" // Cambiar a 'button' para evitar el comportamiento de 'submit'
+            className="bg-green-500 text-white"
             variant="default"
-            onClick={() => handleSubmit()}
+            onClick={handleSaveAndAssignQuestions} // Llamar a la función que maneja la lógica para guardar y asignar preguntas
           >
-            Asignar o editar preguntas
+           Asignar Preguntas
           </Button>
-          <Button
-            type="submit"
-            className="bg-blue-500 text-white"
-            variant="default"
-            onClick={() => handleSubmit2()}
-          >
-            Guardar
+
+          <Button type="submit" className="bg-blue-500 text-white" variant="default">
+            Guardar cambios
           </Button>
+
           <Button
             type="button"
             className="bg-red-500 text-white"
