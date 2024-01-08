@@ -1,21 +1,48 @@
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import ListaEntidadesEmpresas from "../entidades/entidadempresa/lista-entidad-empresa";
+import {
+  SelectValue,
+  SelectTrigger,
+  SelectItem,
+  SelectContent,
+  Select,
+} from "@/components/ui/select";
 
-export default function FormPerfilUsuario() {
+
+export default function FormPerfilUsuario( {formState, handleSelectChange}) {
+
+
+  const tipos = [
+    { valor: "Internal", nombre: "Internal" },
+    { valor: "External", nombre: "External" },
+  ];
+
     return (
         <main className="p-8 space-y-8 mt-8 mb-8 mx-auto max-w-7xl">
-        <h1 className="text-4xl font-bold mb-6 text-center text-blue-400">Perfiles de usuario</h1>
+        <h1 className="text-4xl font-bold mb-6 text-center">Perfiles de usuario</h1>
         <div className="grid grid-cols-2 gap-4">
           <div className="flex flex-col gap-2">
             <ListaEntidadesEmpresas />
           </div>
           <label className="flex flex-col gap-2">
-            <span className="text-lg font-semibold">Tipo de usuario:</span>
-            <select className="border rounded p-2">
-              <option>Internal</option>
-              <option>External</option>
-            </select>
+            <span  className="block text-sm font-medium mb-1">Tipo de usuario:</span>
+            <Select
+              onValueChange={(value) => handleSelectChange(value, "tipo_usuario")}
+              value={formState.tipo_usuario}
+            >
+              <SelectTrigger id="group-type">
+                <SelectValue placeholder="Seleccione uno" />
+              </SelectTrigger>
+
+              <SelectContent position="popper">
+                {tipos.map((nivel, index) => (
+                  <SelectItem key={index} value={nivel.valor}>
+                    {nivel.nombre}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </label>
         </div>
         <div className="grid grid-cols gap-4">

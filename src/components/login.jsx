@@ -85,7 +85,7 @@ export function Login() {
               }}
               width="200" />
             <h1 className="text-3xl font-bold">¡Bienvenidos!</h1>
-            <p className="text-sm text-gray-500 mt-6">
+            <p className="text-sm text-gray-500 mt-3">
               <img
                 alt="Better people, better stories"
                 className="mx-auto w-full"
@@ -97,6 +97,7 @@ export function Login() {
                 }}
                 width="200" />
             </p>
+            <h1 className="text-3xl font-bold mt-3 text-blue-400">Plataforma de evaluaciones</h1>
           </div>
           {/* <div className="mb-4">
             <p className="text-sm font-semibold mb-2">Regístrate o ingresa a tu cuenta con tu opción preferida:</p>
