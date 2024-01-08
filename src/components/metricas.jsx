@@ -7,7 +7,12 @@ import supabase from "@/lib/supabaseClient";
 export function Metricas() {
 
   const [userCount, setUserCount] = useState(0);
-  const [entidadesCount, setEntidadesrCount] = useState(0);
+  const [gruposCount, setGruposCount] = useState(0);
+  const [tipogruposCount, setTipoGruposCount] = useState(0);
+  const [tipoEntidadCount, SettipoEntidadCount] = useState(0);
+  const [entidadEmpresaCount, SetentidadEmpresaCount] = useState(0);
+  const [subEntidadesCount, SetsubEntidadesCount] = useState(0);
+  const [direccionesCount, setDireccionesCount] = useState(0);
   const [departamentosCount, setDepartamentosCount] = useState(0);
 
   useEffect(() => {
@@ -20,12 +25,60 @@ export function Metricas() {
   }, []);
 
   useEffect(() => {
-    async function fetchEntidadesCount() {
-      const { count } = await supabase.from('direcciones').select('*', { count: 'exact' });
-      setEntidadesrCount(count);
+    async function setTipoGrupsCount() {
+      const { count } = await supabase.from('grupotipo').select('*', { count: 'exact' });
+      setTipoGruposCount(count);
     }
 
-    fetchEntidadesCount();
+    setTipoGrupsCount();
+  }, []);
+
+
+  useEffect(() => {
+    async function fetchGrupos() {
+      const { count } = await supabase.from('grupo_corporativo').select('*', { count: 'exact' });
+      setGruposCount(count);
+    }
+
+    fetchGrupos();
+  }, []);
+
+  useEffect(() => {
+    async function setTipoEntidad() {
+      const { count } = await supabase.from('subtipo_entidad').select('*', { count: 'exact' });
+      SettipoEntidadCount(count);
+    }
+
+    setTipoEntidad();
+  }, []);
+
+  useEffect(() => {
+    async function getEntidadEmpresa() {
+      const { count } = await supabase.from('entidad_empresa').select('*', { count: 'exact' });
+      SetentidadEmpresaCount(count);
+    }
+
+    getEntidadEmpresa();
+  }, []);
+
+  useEffect(() => {
+    async function getSubEntidades() {
+      const { count } = await supabase.from('sub_entidad').select('*', { count: 'exact' });
+      SetsubEntidadesCount(count);
+    }
+
+    getSubEntidades();
+  }, []);
+
+
+
+  useEffect(() => {
+    async function fetchDireccionesCount() {
+      const { count } = await supabase.from('direcciones').select('*', { count: 'exact' });
+      setDireccionesCount(count);
+    }
+
+    fetchDireccionesCount();
   }, []);
 
   useEffect(() => {
@@ -40,9 +93,10 @@ export function Metricas() {
   return (
     (<div
       key="1"
-      className="flex flex-col md:flex-row gap-4 p-6 m-auto justify-center">
+      className="flex flex-wrap gap-4 p-6 m-auto justify-center">
+
       <Card
-        className="flex-1 bg-white dark:bg-gray-800 shadow-lg rounded-lg border border-gray-200 dark:border-gray-700">
+        className="w-1/4 p-4 min-w-[250px] max-w-[300px] bg-white shadow rounded">
         <CardHeader className="p-4 border-b border-gray-200 dark:border-gray-700">
           <CardTitle className="text-lg font-semibold text-gray-900 dark:text-gray-100">Usuarios registrados</CardTitle>
         </CardHeader>
@@ -52,19 +106,81 @@ export function Metricas() {
           </CardContent>
         </CardContent>
       </Card>
+
       <Card
-        className="flex-1 bg-white dark:bg-gray-800 shadow-lg rounded-lg border border-gray-200 dark:border-gray-700">
+        className="w-1/4 p-4 min-w-[250px] max-w-[300px] bg-white shadow rounded">
+        <CardHeader className="p-4 border-b border-gray-200 dark:border-gray-700">
+          <CardTitle className="text-lg font-semibold text-gray-900 dark:text-gray-100">Tipos grupos corporativos</CardTitle>
+        </CardHeader>
+        <CardContent className="p-4">
+          <CardContent className="p-4 flex items-center justify-center">
+            <p className="text-gray-600 dark:text-gray-400 text-3xl font-bold">{tipogruposCount}</p>
+          </CardContent>
+        </CardContent>
+      </Card>
+
+      <Card
+        className="w-1/4 p-4 min-w-[250px] max-w-[300px] bg-white shadow rounded">
+        <CardHeader className="p-4 border-b border-gray-200 dark:border-gray-700">
+          <CardTitle className="text-lg font-semibold text-gray-900 dark:text-gray-100">Grupos corporativos</CardTitle>
+        </CardHeader>
+        <CardContent className="p-4">
+          <CardContent className="p-4 flex items-center justify-center">
+            <p className="text-gray-600 dark:text-gray-400 text-3xl font-bold">{gruposCount}</p>
+          </CardContent>
+        </CardContent>
+      </Card>
+
+      <Card
+        className="w-1/4 p-4 min-w-[250px] max-w-[300px] bg-white shadow rounded">
+        <CardHeader className="p-4 border-b border-gray-200 dark:border-gray-700">
+          <CardTitle className="text-lg font-semibold text-gray-900 dark:text-gray-100">Subtipo Entidades</CardTitle>
+        </CardHeader>
+        <CardContent className="p-4">
+          <CardContent className="p-4 flex items-center justify-center">
+            <p className="text-gray-600 dark:text-gray-400 text-3xl font-bold">{tipoEntidadCount}</p>
+          </CardContent>
+        </CardContent>
+      </Card>
+
+      <Card
+        className="w-1/4 p-4 min-w-[250px] max-w-[300px] bg-white shadow rounded">
+        <CardHeader className="p-4 border-b border-gray-200 dark:border-gray-700">
+          <CardTitle className="text-lg font-semibold text-gray-900 dark:text-gray-100">Entidades empresa</CardTitle>
+        </CardHeader>
+        <CardContent className="p-4">
+          <CardContent className="p-4 flex items-center justify-center">
+            <p className="text-gray-600 dark:text-gray-400 text-3xl font-bold">{entidadEmpresaCount}</p>
+          </CardContent>
+        </CardContent>
+      </Card>
+
+      <Card
+        className="w-1/4 p-4 min-w-[250px] max-w-[300px] bg-white shadow rounded">
+        <CardHeader className="p-4 border-b border-gray-200 dark:border-gray-700">
+          <CardTitle className="text-lg font-semibold text-gray-900 dark:text-gray-100">Subentidades</CardTitle>
+        </CardHeader>
+        <CardContent className="p-4">
+          <CardContent className="p-4 flex items-center justify-center">
+            <p className="text-gray-600 dark:text-gray-400 text-3xl font-bold">{subEntidadesCount}</p>
+          </CardContent>
+        </CardContent>
+      </Card>
+
+
+      <Card
+        className="w-1/4 p-4 min-w-[250px] max-w-[300px] bg-white shadow rounded">
         <CardHeader className="p-4 border-b border-gray-200 dark:border-gray-700">
           <CardTitle className="text-lg font-semibold text-gray-900 dark:text-gray-100">Direcciones</CardTitle>
         </CardHeader>
         <CardContent className="p-4">
           <CardContent className="p-4 flex items-center justify-center">
-            <p className="text-gray-600 dark:text-gray-400 text-3xl font-bold">{entidadesCount}</p>
+            <p className="text-gray-600 dark:text-gray-400 text-3xl font-bold">{direccionesCount}</p>
           </CardContent>
         </CardContent>
       </Card>
       <Card
-        className="flex-1 bg-white dark:bg-gray-800 shadow-lg rounded-lg border border-gray-200 dark:border-gray-700">
+        className="w-1/4 p-4 min-w-[250px] max-w-[300px] bg-white shadow rounded">
         <CardHeader className="p-4 border-b border-gray-200 dark:border-gray-700">
           <CardTitle className="text-lg font-semibold text-gray-900 dark:text-gray-100">Departamentos</CardTitle>
         </CardHeader>
