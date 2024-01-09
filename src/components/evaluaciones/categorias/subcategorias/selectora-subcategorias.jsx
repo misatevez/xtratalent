@@ -13,7 +13,7 @@ export function SelectoraSubCategorias() {
           <h1 className="text-4xl font-bold mb-6 text-center">Sub-familias</h1>
           <div className="flex items-center justify-center space-x-4">
             <Button  onClick={() => router.push('/dashboard/evaluaciones/categorias/subcategorias/crearsubcategorias')} className="bg-white text-purple-500 hover:bg-gray-200">Crear sub-familia</Button>
-            <Button   className="bg-white text-purple-500 hover:bg-gray-200">Catálogo sub-familias</Button> 
+            <Button  onClick={() => router.push('/dashboard/evaluaciones/categorias/subcategorias/reportesubcategorias')}  className="bg-white text-purple-500 hover:bg-gray-200">Catálogo sub-familias</Button> 
           </div>
         </main>
     )
