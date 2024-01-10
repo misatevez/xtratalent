@@ -17,7 +17,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '20.11.0' # Asegúrate de que esta versión coincide con la que usas localmente
+        node-version: '20.11.0' # Usa la versión de Node.js que prefieras
 
     - name: Install Dependencies
       run: npm install
@@ -27,6 +27,10 @@ jobs:
 
     - name: Deploy to Server
       run: |
-        scp -r .next/* root@172.16.5.55:/var/www/
+        echo "$DEPLOY_KEY" > deploy_key
+        chmod 600 deploy_key
+        scp -o StrictHostKeyChecking=no -i deploy_key -r .next/* root@172.16.5.55:/var/www/
+        ssh -o StrictHostKeyChecking=no -i deploy_key root@172.16.5.55 'chown -R www-data:www-data /var/www/*'
+        rm -f deploy_key
       env:
         DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
