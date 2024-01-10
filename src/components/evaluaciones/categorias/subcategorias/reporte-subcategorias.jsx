@@ -50,7 +50,7 @@ export default function ReporteCategorias() {
       <div className="rounded-lg shadow-lg">
         <div className="bg-white p-6 rounded-lg shadow-inner m-auto text-center">
           <h1 className="text-2xl font-bold text-center mt-4  text-gray-800">
-            Catalogo sub-familia de Evaluaciones 
+            Catalogo sub-familia de Evaluaciones.
           </h1>
           <div className="grid grid-cols-1 gap-4 mt-6">
             <div>
