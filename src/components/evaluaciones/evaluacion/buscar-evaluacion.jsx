@@ -85,7 +85,7 @@ export default function BuscarEvaluacion() {
 
   return (
     <div className="bg-white p-4 rounded-md shadow-md m-auto text-center">
-      <h1 className="text-xl font-bold text-center text-[#2c5282] mb-4">
+      <h1 className="text-xl font-bold text-center   mb-4">
       Catálogo de Evaluaciones
       </h1>
       <div className="flex w-full max-w-full items-center space-x-2 mb-10">
