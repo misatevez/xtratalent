@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 
 import { useRouter } from "next/navigation";
 import { Notificacion } from "@/components/notification";
+import { formatearFecha } from "@/lib/fechaService";
 
 export default function BuscarEntidadEmpresa() {
   const router = useRouter();
@@ -26,6 +27,8 @@ export default function BuscarEntidadEmpresa() {
       id_entidad_empresa,
       nombre,
       descripcion,
+      fecha_creado,
+      fecha_actualizado,
       subtipo_entidad:subtipo_entidad (id_subtipo_entidad, nombre)
     `);
       if (error) {
@@ -36,6 +39,7 @@ export default function BuscarEntidadEmpresa() {
           mensaje: "Error al cargar grupos: " + error.message
         });
       } else {
+        console.log(data);
         setGrupos(data);
         setLoading(false);
       }
@@ -82,7 +86,8 @@ export default function BuscarEntidadEmpresa() {
 
   const filteredGrupos = grupos.filter(grupo =>
     grupo.nombre.toLowerCase().includes(searchTerm) ||
-    grupo.descripcion.toLowerCase().includes(searchTerm) 
+    grupo.descripcion.toLowerCase().includes(searchTerm) ||
+    grupo.subtipo_entidad.nombre.toLowerCase().includes(searchTerm)
   );
 
   if (loading) {
@@ -91,11 +96,12 @@ export default function BuscarEntidadEmpresa() {
 
   return (
     <>
-      <div className="bg-white p-4 rounded-md shadow-md m-auto text-center">
-        <h1 className="text-xl font-bold text-[#2c5282] mb-4">Buscar Entidades</h1>
+                    <div className="p-4 mx-auto w-full max-w-6xl mt-4">
+                <div className="rounded-lg shadow-lg">
+                  <div className="bg-white p-6 rounded-lg shadow-inner m-auto">
+        <h1 className="text-xl font-bold   mb-4">Buscar Entidades</h1>
         <div className="flex justify-center">
           <Input className="mr-2" placeholder="Search" type="text" onChange={handleSearchChange} />
-          <Button variant="outline">Buscar</Button>
         </div>
         <div className="overflow-x-auto mt-4">
           <Table>
@@ -115,8 +121,8 @@ export default function BuscarEntidadEmpresa() {
                   <TableCell>{grupo.subtipo_entidad.nombre}</TableCell>
                   <TableCell>{grupo.nombre}</TableCell>
                   <TableCell>{grupo.descripcion}</TableCell>
-                  <TableCell>{grupo.fecha_creado}</TableCell>
-                  <TableCell>{grupo.fecha_actualizado}</TableCell>
+                  <TableCell>{ formatearFecha( grupo.fecha_creado)}</TableCell>
+                  <TableCell>{ formatearFecha( grupo.fecha_actualizado)}</TableCell>
                   <TableCell><input
                   type="checkbox"
                   checked={selectedGrupoId === grupo.id_entidad_empresa}
@@ -145,7 +151,8 @@ export default function BuscarEntidadEmpresa() {
   Eliminar tipo
 </Button>
 
-
+</div>
+</div>
       </div>
       </div>
       {notification.visible && (

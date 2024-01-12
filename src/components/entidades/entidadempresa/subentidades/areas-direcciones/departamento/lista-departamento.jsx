@@ -10,9 +10,10 @@ export default function ListaDepartamentos( { onGrupoTipoChange, selectedTipoId 
 
   useEffect(() => {
     const fetchDepartamentos = async () => {
-      console.log(selectedTipoId);
+      console.log('Estas en lista departamento:', selectedTipoId);
+      console.log('Este es un filtro:', filter);
       if (filter) {
-        console.log(filter);
+        console.log('Este es un filtro:', filter);
         const { data, error } = await supabase
           .from('departamentos')
           .select('id_departamentos, nombre')
@@ -21,6 +22,7 @@ export default function ListaDepartamentos( { onGrupoTipoChange, selectedTipoId 
         if (error) {
           console.error("Error al obtener los departamentos: ", error);
         } else {
+          console.log(data);
           setDepartamentos(data);
         }
       } else {

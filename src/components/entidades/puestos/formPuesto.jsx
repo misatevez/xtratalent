@@ -5,6 +5,7 @@ import ListaDirecciones from '../entidadempresa/subentidades/areas-direcciones/l
 import ListaDepartamentos from '../entidadempresa/subentidades/areas-direcciones/departamento/lista-departamento';
 import ListaSubEntidad from '../entidadempresa/subentidades/lista-subentidad';
 import ListaEntidadesEmpresas from '../entidadempresa/lista-entidad-empresa';
+import Volver from '@/components/ui/volver';
 
 
 
@@ -45,9 +46,12 @@ export default function FormPuesto({ formState, handleInputChange, handleSubmit,
 
 
     return (
+      <div className="p-4 mx-auto w-full max-w-2xl mt-4">
+      <div className="rounded-lg shadow-lg">
+        <div className="bg-white p-6 rounded-lg shadow-inner m-auto">
         <form  onSubmit={handleSubmit}>
-        <div className="bg-white p-4 rounded-md shadow-md mt-4">
-        <h2 className="text-lg font-bold text-[#2c5282] mb-4">{titulo}</h2>
+        <div >
+        <h2 className="text-lg font-bold  mb-4">{titulo}</h2>
         <div className="grid grid-cols-2 gap-4">
 
         <div>
@@ -73,9 +77,10 @@ export default function FormPuesto({ formState, handleInputChange, handleSubmit,
         
           <div>
           <ListaDepartamentos
-           filter={selectedDireccion}
+           filter={formState.id_direcciones}
            selectedTipoId={formState.id_departamentos} 
-          onGrupoTipoChange={handleGrupoTipoChange2} />
+          onGrupoTipoChange={handleGrupoTipoChange2}
+           />
           </div>
         </div>
         <div className="mt-4">
@@ -98,9 +103,13 @@ export default function FormPuesto({ formState, handleInputChange, handleSubmit,
         </div>
         <div className="flex justify-end mt-4">
           <Button>Guardar</Button>
+          <Volver />
         </div>
       </div>
       </form>
+      </div>
+      </div>
+      </div>
     );
 }
 

@@ -101,7 +101,6 @@ export default function BuscarGrupoCorporativo() {
         <h1 className="text-xl font-bold mb-4">Buscar Grupos Corporativos</h1>
         <div className="flex justify-center">
           <Input className="mr-2" placeholder="Search" type="text" onChange={handleSearchChange} />
-          <Button variant="outline">Buscar</Button>
         </div>
         <div className="overflow-x-auto mt-4">
           <Table>

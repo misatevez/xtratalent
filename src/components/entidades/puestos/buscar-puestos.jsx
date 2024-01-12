@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 
 import { useRouter } from "next/navigation";
 import { Notificacion } from "@/components/notification";
+import { formatearFecha } from "@/lib/fechaService";
 
 export default function BuscarPuesto() {
   const router = useRouter();
@@ -96,11 +97,12 @@ export default function BuscarPuesto() {
 
   return (
     <>
-      <div className="bg-white p-4 rounded-md shadow-md m-auto text-center">
-        <h1 className="text-xl font-bold text-[#2c5282] mb-4">Buscar Puestos</h1>
+                    <div className="p-4 mx-auto w-full max-w-5xl mt-4">
+                <div className="rounded-lg shadow-lg">
+                  <div className="bg-white p-6 rounded-lg shadow-inner m-auto">
+        <h1 className="text-xl font-bold mb-4">Buscar Puestos</h1>
         <div className="flex justify-center">
           <Input className="mr-2" placeholder="Search" type="text" onChange={handleSearchChange} />
-          <Button variant="outline">Buscar</Button>
         </div>
         <div className="overflow-x-auto mt-4">
           <Table>
@@ -122,8 +124,8 @@ export default function BuscarPuesto() {
                   <TableCell>{grupo.departamentos?.nombre}</TableCell>
                   <TableCell>{grupo.nombre}</TableCell>
                   <TableCell>{grupo.descripcion}</TableCell>
-                  <TableCell>{grupo.fecha_creado}</TableCell>
-                  <TableCell>{grupo.fecha_actualizado}</TableCell>
+                  <TableCell>{ formatearFecha( grupo.fecha_creado )}</TableCell>
+                  <TableCell>{ formatearFecha( grupo.fecha_actualizado )}</TableCell>
                   <TableCell><input
                   type="checkbox"
                   checked={selectedGrupoId === grupo.id_puestos}
@@ -155,6 +157,9 @@ export default function BuscarPuesto() {
 
       </div>
       </div>
+      </div>
+      </div>
+    
       {notification.visible && (
         <Notificacion
           titulo={notification.titulo}

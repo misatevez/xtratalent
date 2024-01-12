@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 
 import { useRouter } from "next/navigation";
 import { Notificacion } from "@/components/notification";
+import { formatearFecha } from "@/lib/fechaService";
 
 export default function BuscarDepartamento() {
   const router = useRouter();
@@ -94,8 +95,10 @@ export default function BuscarDepartamento() {
 
   return (
     <>
-      <div className="bg-white p-4 rounded-md shadow-md m-auto text-center">
-        <h1 className="text-xl font-bold text-[#2c5282] mb-4">BUSCAR DEPARTAMENTOS</h1>
+       <div className="p-4 mx-auto w-full max-w-5xl mt-4">
+                <div className="rounded-lg shadow-lg">
+                  <div className="bg-white p-6 rounded-lg shadow-inner m-auto">
+        <h1 className="text-xl font-bold  mb-4">BUSCAR DEPARTAMENTOS</h1>
         <div className="flex justify-center">
           <Input className="mr-2" placeholder="Search" type="text" onChange={handleSearchChange} />
           <Button variant="outline">Buscar</Button>
@@ -104,7 +107,7 @@ export default function BuscarDepartamento() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[100px]">DEPARTAMENTOS</TableHead>
+                <TableHead className="w-[100px]">Area - Dirección</TableHead>
                 <TableHead className="w-[200px]">Nombre de Departamento</TableHead>
                 <TableHead className="w-[200px]">Descripcion de Departamento</TableHead>
                 <TableHead className="w-[150px]">Fecha Registro</TableHead>
@@ -118,8 +121,8 @@ export default function BuscarDepartamento() {
                   <TableCell>{grupo.direcciones.nombre}</TableCell>
                   <TableCell>{grupo.nombre}</TableCell>
                   <TableCell>{grupo.descripcion}</TableCell>
-                  <TableCell>{grupo.fecha_creado}</TableCell>
-                  <TableCell>{grupo.fecha_actualizado}</TableCell>
+                  <TableCell>{ formatearFecha( grupo.fecha_creado )}</TableCell>
+                  <TableCell>{ formatearFecha( grupo.fecha_actualizado )}</TableCell>
                   <TableCell><input
                   type="checkbox"
                   checked={selectedGrupoId === grupo.id_departamentos}
@@ -148,7 +151,8 @@ export default function BuscarDepartamento() {
   Eliminar tipo
 </Button>
 
-
+</div>
+</div>
       </div>
       </div>
       {notification.visible && (
