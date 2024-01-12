@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import ListaCategorias from '@/components/evaluaciones/categorias/lista-categorias';
 
 
-export default function page({params}) {
+export default function Page({params}) {
     const slug = params.slug;
 
     const router = useRouter()

@@ -6,7 +6,7 @@ import { Notificacion } from "@/components/notification";
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
-export default function page({params}) {
+export default function Page({params}) {
     const slug = params.slug;
 
     const [loading, setLoading] = useState(true)

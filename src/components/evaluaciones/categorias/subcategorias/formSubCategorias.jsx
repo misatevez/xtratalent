@@ -29,6 +29,12 @@ export default function FormSubCategoria({
           </h1>
           <div className="grid grid-cols-1 gap-4">
             <div>
+            <label
+            className="block text-sm font-medium mb-2 text-start"
+            htmlFor="group-name"
+          >
+            Nombre Familia de Categoria:
+          </label>
               <ListaCategorias
               selectedTipoId={formState.id_categoria} 
               onGrupoTipoChange={handleGrupoTipoChange}

@@ -2,6 +2,7 @@ import React from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import ListaTipodeGrupoCorporativo from './lista-tipodeGC';
+import Volver from '@/components/ui/volver';
 
 
 export default function FormGC({ formState, handleInputChange, handleSubmit, titulo }) {
@@ -12,9 +13,12 @@ export default function FormGC({ formState, handleInputChange, handleSubmit, tit
   };
 
     return (
+      <div className="p-4 mx-auto w-full max-w-2xl mt-4">
+      <div className="rounded-lg shadow-lg">
+        <div className="bg-white p-6 rounded-lg shadow-inner m-auto">
         <form  onSubmit={handleSubmit}>
-        <div className="bg-white p-4 rounded-md shadow-md mt-4">
-        <h2 className="text-lg font-bold text-[#2c5282] mb-4">{titulo}</h2>
+        <div>
+        <h2 className="text-lg font-bold mb-4">{titulo}</h2>
         <div className="grid grid-cols-2 gap-4">
           <div>
           <ListaTipodeGrupoCorporativo 
@@ -42,9 +46,13 @@ export default function FormGC({ formState, handleInputChange, handleSubmit, tit
         </div>
         <div className="flex justify-end mt-4">
           <Button>Guardar</Button>
+          <Volver />
         </div>
       </div>
       </form>
+      </div>
+      </div>
+      </div>
     );
 }
 
