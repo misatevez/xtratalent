@@ -81,6 +81,16 @@ export default function BuscarPersonal() {
     return <div>Loading...</div>;
   }
 
+
+  function formatearFecha(fechaStr) {
+    const fecha = new Date(fechaStr);
+    const dia = fecha.getDate().toString().padStart(2, "0");
+    const mes = (fecha.getMonth() + 1).toString().padStart(2, "0");
+    const año = fecha.getFullYear();
+
+    return `${dia}/${mes}/${año}`;
+  }
+
   const filteredUsuarios = usuarios.filter(usuario =>
     usuario.primer_nombre?.toLowerCase().includes(searchTerm) ||
     usuario.apellido_paterno?.toLowerCase().includes(searchTerm) ||
@@ -95,14 +105,13 @@ export default function BuscarPersonal() {
         <h1 className="text-2xl font-bold">Buscar usuario</h1>
       </div>
       <div className="flex w-full max-w-full items-center space-x-2 mb-10">
-        <Input placeholder="Search" type="text" onChange={handleSearchChange} />
+        <Input placeholder="Buscar" type="text" onChange={handleSearchChange} />
         <Button type="submit">Buscar</Button>
       </div>
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[50px]">Código</TableHead>
-            <TableHead className="w-[150px]">Nombre</TableHead>
+            <TableHead className="w-[150px]">Nombre y apellido</TableHead>
             <TableHead className="w-[200px]">Nombre Perfil</TableHead>
             <TableHead className="w-[250px]">Email</TableHead>
             <TableHead className="w-[150px]">Fecha Registro</TableHead>
@@ -112,11 +121,12 @@ export default function BuscarPersonal() {
         <TableBody>
           {filteredUsuarios.map((usuario, index) => (
             <TableRow key={index}>
-              <TableCell>{usuario.usuario_id}</TableCell>
-              <TableCell>{usuario.primer_nombre} {usuario.apellido_paterno}</TableCell>
+              <TableCell>
+  {usuario.primer_nombre || usuario.apellido_paterno ? `${usuario.primer_nombre || ""} ${usuario.apellido_paterno || ""}`.trim() : "Sin asignar"}
+</TableCell>
               <TableCell>{usuario.tipo_usuario}</TableCell>
               <TableCell>{usuario.correo_electronico}</TableCell>
-              <TableCell>{usuario.fecha_creado}</TableCell>
+              <TableCell>{formatearFecha(usuario.fecha_creado)}</TableCell>
               <TableCell><input
                   type="checkbox"
                   checked={selectedUserId === usuario.usuario_id}

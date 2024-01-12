@@ -124,7 +124,7 @@ export default function ReporteSubCategorias() {
             </h1>
             <div className="flex w-full max-w-full items-center space-x-2 mb-10">
               <Input
-                placeholder="Search"
+                placeholder="Buscar"
                 type="text"
                 onChange={handleSearchChange}
               />

@@ -12,6 +12,7 @@ export default function page({params}) {
     const slug = params.slug;
 
     const router = useRouter()
+    const [loading, setLoading] = useState(true)
 
  // Estado inicial para el formulario
  const [formState, setFormState] = useState({
@@ -74,8 +75,10 @@ useEffect(() => {
             throw error;
         }
         setFormState(data);
+        setLoading(false);
         };
         fetchData();
+    
     }
 , [slug]);
 
@@ -84,6 +87,10 @@ const handleGrupoTipoChange = (id_categoria) => {
     // Actualiza el estado del formulario para incluir el nuevo id de tipo de grupo seleccionado
     handleInputChange({ target: { name: 'id_categoria', value: id_categoria } });
   };
+
+
+  if(loading) return <div>Cargando...</div>
+  
 
 
     return (

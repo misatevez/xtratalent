@@ -6,6 +6,7 @@ import supabase from "@/lib/supabaseClient";
 
 export default function ListaCategorias({ onGrupoTipoChange, selectedTipoId }) {
   const [categorias, setCategorias] = useState([]);
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchCategorias = async () => {
@@ -14,10 +15,14 @@ export default function ListaCategorias({ onGrupoTipoChange, selectedTipoId }) {
         console.error("Error al obtener las categorías: ", error);
       } else {
         setCategorias(data);
+        setLoading(false);
       }
     };
     fetchCategorias();
   }, []); // No depende de otros estados o props
+
+  if(loading) return <div>Cargando...</div>
+    
 
   return (
     <div className="flex justify-between items-start">

@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 export default function page({params}) {
     const slug = params.slug;
 
+    const [loading, setLoading] = useState(true)
     const router = useRouter()
 
   // Estado inicial para el formulario
@@ -74,10 +75,15 @@ useEffect(() => {
             throw error;
         }
         setFormState(data);
+        setLoading(false);
         };
         fetchData();
     }
 , [slug]);
+
+if (loading) {
+    return <p>Cargando...</p>;
+    }
 
 
     return (

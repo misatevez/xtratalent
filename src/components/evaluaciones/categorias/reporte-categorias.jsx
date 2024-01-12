@@ -20,6 +20,7 @@ import { useRouter } from "next/navigation";
 export default function ReporteCategorias() {
   const router = useRouter();
   const [categorias, setCategorias] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10; // Ajustar según necesidades
   const [totalCategorias, setTotalCategorias] = useState(0);
@@ -47,6 +48,7 @@ export default function ReporteCategorias() {
       } else {
         setCategorias(data);
         setTotalCategorias(count);
+        setLoading(false);
       }
     };
 
@@ -109,6 +111,8 @@ export default function ReporteCategorias() {
     }
   }
 
+  if (loading) return <div>Cargando...</div>;
+
   return (
     <>
     <div className="p-4 mx-auto w-full max-w-2xl mt-4">
@@ -119,7 +123,7 @@ export default function ReporteCategorias() {
           </h1>
           <div className="flex w-full max-w-full items-center space-x-2 mb-10">
             <Input
-              placeholder="Search"
+              placeholder="Buscar"
               type="text"
               onChange={handleSearchChange}
             />
