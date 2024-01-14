@@ -22,7 +22,7 @@ export default function FormSubEntidad({ formState, handleInputChange, handleSub
         <form  onSubmit={handleSubmit}>
         <div >
         <h2 className="text-lg font-bold mb-4">{titulo}</h2>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4">
 
           <div>
           <ListaEntidadesEmpresas 
@@ -49,7 +49,7 @@ export default function FormSubEntidad({ formState, handleInputChange, handleSub
             rows="4"
           />
         </div>
-        <div className="flex justify-end mt-4">
+        <div className="flex justify-around mt-4">
           <Button>Guardar</Button>
           <Volver />
         </div>

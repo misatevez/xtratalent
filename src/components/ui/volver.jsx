@@ -6,7 +6,7 @@ export default function Volver() {
     return (
         <Button
         type="button"
-        className="bg-red-500 text-white"
+        className="bg-red-500 text-white hover:bg-red-600"
         variant="default"
         onClick={() => router.back()}
       >

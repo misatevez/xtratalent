@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation'
 import Image from "next/image"
 import supabase from "@/lib/supabaseClient"
 
+
 export function Dashboard( {children} ) {
   const router = useRouter()
 

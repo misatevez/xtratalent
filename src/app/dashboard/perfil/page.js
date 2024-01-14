@@ -5,10 +5,14 @@ import supabase from '@/lib/supabaseClient';
 export default function Page() { // Nombre del componente con mayúscula
   const [user, setUser] = useState(null);
   const [informacion, setInformacion] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    
     supabase.auth.getUser()
-      .then((user) => setUser(user.data.user))
+      .then((user) => setUser(user.data.user)
+      
+      )
       .catch((error) => console.log(error));
   }, []);
 
@@ -24,6 +28,7 @@ export default function Page() { // Nombre del componente con mayúscula
         console.error(error);
         return;
       }
+
       setInformacion(data);
     };
     getData();
@@ -38,6 +43,11 @@ export default function Page() { // Nombre del componente con mayúscula
   const excludedFields = [
     "password", "fecha_creado", "fecha_subido", "user_id", "usuario_id", "id_entidad_empresa"
   ];
+
+  if (loading) {
+<h1>Cargando....</h1>
+  }
+
 
   return (
     <div className="p-4 mx-auto w-full max-w-2xl mt-4">

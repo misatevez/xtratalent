@@ -127,20 +127,20 @@ export default function BuscarEntidadEmpresa() {
                   type="checkbox"
                   checked={selectedGrupoId === grupo.id_entidad_empresa}
                   onChange={() => handleCheckboxChange(grupo.id_entidad_empresa)}
-                  className="accent-blue-500 h-5 w-5"
+                  className="accent-black h-5 w-5"
                 /></TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </div>
-        <div className="flex justify-between mt-4">
+        <div className="flex justify-around mt-4">
       <Button
-          className={`bg-blue-500 text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={`bg-black text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
           disabled={!selectedGrupoId}
           onClick={() => router.push(`/dashboard/entidades/entidadempresa/${selectedGrupoId}`)}
         >
-          Modificar tipo
+          Modificar
         </Button>
         
         <Button
@@ -148,7 +148,7 @@ export default function BuscarEntidadEmpresa() {
   disabled={!selectedGrupoId}
   onClick={handleDeleteGrupo}
 >
-  Eliminar tipo
+  Eliminar
 </Button>
 
 </div>

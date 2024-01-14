@@ -2,19 +2,57 @@ import React from 'react';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import ListaEntidadesEmpresas from '../entidades/entidadempresa/lista-entidad-empresa';
+import Volver from '../ui/volver';
+import {
+  SelectValue,
+  SelectTrigger,
+  SelectItem,
+  SelectContent,
+  Select,
+} from "@/components/ui/select";
+
 
 function FormRegistro({ formState, handleInputChange, handleSubmit, titulo }) {
+
+  const tipo_usuario = [
+    { valor: "Interno", nombre: "Interno" },
+    { valor: "Externo", nombre: "Externo" },
+  ];
+
+  const paises = [
+    { valor: "Guatemala", nombre: "Guatemala" },
+  ];
+
+  const estado_civil = [
+    { valor: "Soltero", nombre: "Soltero" },
+    { valor: "Casado", nombre: "Casado" }
+  ];
+
+  const genero = [
+    { valor: "Masculino", nombre: "Masculino" },
+    { valor: "Femenino", nombre: "Femenino" }
+  ];
+
 
   const handleGrupoTipoChange = (id_entidad_empresa) => {
     // Actualiza el estado del formulario para incluir el nuevo id de tipo de grupo seleccionado
     handleInputChange({ target: { name: 'id_entidad_empresa', value: id_entidad_empresa } });
   };
 
+  const handleSelectChange = (value, fieldName) => {
+    setFormState(prevState => ({
+      ...prevState,
+      [fieldName]: value,
+    }));
+  };
+
   return (
-    <form onSubmit={handleSubmit}  className="p-8 space-y-8 mt-8 mb-8 mx-auto max-w-7xl">
-    <h1 className="text-4xl font-bold mb-2 text-center text-blue-400">{titulo}</h1>
-    <h2 className="text-3xl font-semibold mb-2 text-center text-blue-300">DATOS PERSONALES</h2>
-    <div className="flex items-center gap-6 mb-4">
+    <div className="p-4 mx-auto w-full max-w-2xl mt-4">
+    <div className="rounded-lg shadow-lg">
+      <div className="bg-white p-6 rounded-lg shadow-inner m-auto">
+    <form onSubmit={handleSubmit} >
+    <h1 className="text-2xl font-bold mb-4 ">{titulo}</h1>
+    <div className="flex items-center gap-6 mb-2">
         {/* <div className="w-40 h-40 bg-gray-300 rounded">
           <img
             alt="User Photo"
@@ -27,18 +65,34 @@ function FormRegistro({ formState, handleInputChange, handleSubmit, titulo }) {
             }}
             width="320" />
         </div> */}
-      <div className="flex flex-col gap-4 w-full">
+      <div className="flex flex-col gap-3 w-full">
   <ListaEntidadesEmpresas onGrupoTipoChange={handleGrupoTipoChange} selectedTipoId={formState.id_entidad_empresa} />
+
+
+            <label className="font-semibold" htmlFor="tipo_usuario">
+            <span className="block text-sm font-medium mb-1">Tipo de usuario</span>
+            </label>
+            <Select
+              onValueChange={(value) => handleSelectChange(value, "tipo_usuario")}
+              value={formState.tipo_usuario}
+            >
+              <SelectTrigger id="group-type">
+                <SelectValue placeholder="Seleccione uno" />
+              </SelectTrigger>
+
+              <SelectContent position="popper">
+                {tipo_usuario.map((nivel, index) => (
+                  <SelectItem key={index} value={nivel.valor}>
+                    {nivel.nombre}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+
+
         <label className="flex flex-col gap-2">
-          <span className="text-lg font-semibold">CANDIDATO USUARIO</span>
-          <select name="tipo_usuario" value={formState.tipo_usuario} onChange={handleInputChange} className="border rounded p-2">
-          <option selected value="">Seleccione uno</option>
-            <option value="Externo">Externo  Evaluado</option>
-            <option  value="Interno">Interno  Usuario</option>
-          </select>
-        </label>
-        <label className="flex flex-col gap-2">
-          <span className="text-lg font-semibold">Correo Electrónico (e-Mail)</span>
+          <span className="block text-sm font-medium mb-1">Correo Electrónico:</span>
           <Input
            name="correo_electronico" value={formState.correo_electronico} onChange={handleInputChange}
             className="border rounded p-2"
@@ -46,7 +100,7 @@ function FormRegistro({ formState, handleInputChange, handleSubmit, titulo }) {
             type="email" />
         </label>
         <label className="flex flex-col gap-2">
-          <span className="text-lg font-semibold">Password</span>
+          <span className="block text-sm font-medium mb-1">Password</span>
           <Input
           name="password" value={formState.password}
            onChange={handleInputChange}
@@ -58,71 +112,87 @@ function FormRegistro({ formState, handleInputChange, handleSubmit, titulo }) {
     </div>
     <div className="grid grid-cols-2 gap-4">
       <label className="flex flex-col gap-2">
-        <span className="text-lg font-semibold">Dirección Completa</span>
+        <span className="block text-sm font-medium mb-1">Dirección Completa</span>
         <Input 
         name="direccion_calle_avenida" value={formState.direccion_calle_avenida} onChange={handleInputChange}
-        className="border rounded p-2" placeholder="Calle - Avenida" type="text" />
+        className="border rounded p-2" type="text" />
       </label>
       <label className="flex flex-col gap-2">
-        <span className="text-lg font-semibold">Colonia</span>
+        <span className="block text-sm font-medium mb-1">Colonia</span>
         <Input 
         name="direccion_colonia" value={formState.direccion_colonia} onChange={handleInputChange}
         className="border rounded p-2" type="text" />
       </label>
       <label className="flex flex-col gap-2">
-        <span className="text-lg font-semibold">Zona</span>
+        <span className="block text-sm font-medium mb-1">Zona</span>
         <Input
         name="direccion_zona" value={formState.direccion_zona} onChange={handleInputChange} 
         className="border rounded p-2" type="text" />
       </label>
       <label className="flex flex-col gap-2">
-        <span className="text-lg font-semibold">Departamento</span>
+        <span className="block text-sm font-medium mb-1">Departamento</span>
         <Input
         name="direccion_departamento" value={formState.direccion_departamento} onChange={handleInputChange}
         className="border rounded p-2" type="text" />
       </label>
       <label className="flex flex-col gap-2">
-        <span className="text-lg font-semibold">Municipio</span>
+        <span className="block text-sm font-medium mb-1">Municipio</span>
         <Input 
         name="direccion_municipio" value={formState.direccion_municipio} onChange={handleInputChange}
         className="border rounded p-2" type="text" />
       </label>
-      <label className="flex flex-col gap-2">
-        <span className="text-lg font-semibold">País de Origen</span>
-        <select name="pais_origen" value={formState.pais_origen} onChange={handleInputChange} className="border rounded p-2">
-          <option  selected value="Guatemala">Guatemala</option>
-        </select>
-      </label>
+
+      <label className=" flex flex-col gap-2" htmlFor="clase">
+            <span className="block text-sm font-medium mb-1">Pais de origen</span>
+            
+            <Select
+              onValueChange={(value) => handleSelectChange(value, "pais_origen")}
+              value={formState.pais_origen}
+            >
+              <SelectTrigger id="group-type">
+                <SelectValue placeholder="Seleccione uno" />
+              </SelectTrigger>
+
+              <SelectContent position="popper">
+                {paises.map((nivel, index) => (
+                  <SelectItem key={index} value={nivel.valor}>
+                    {nivel.nombre}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            </label>
+
     </div>
-    <div className="grid grid-cols-2 gap-6">
+    <div className="grid grid-cols-2 gap-6 mt-4">
       <label className="flex flex-col gap-2">
-        <span className="text-lg font-semibold">Primer Nombre</span>
+        <span className="block text-sm font-medium mb-1">Primer Nombre</span>
         <Input
         name="primer_nombre" value={formState.primer_nombre} onChange={handleInputChange}
         className="border rounded p-2" type="text" />
       </label>
       <label className="flex flex-col gap-2">
-        <span className="text-lg font-semibold">Segundo Nombre</span>
+        <span className="block text-sm font-medium mb-1">Segundo Nombre</span>
         <Input 
         name="segundo_nombre" value={formState.segundo_nombre} onChange={handleInputChange}
         className="border rounded p-2" type="text" />
       </label>
       <label className="flex flex-col gap-2">
-        <span className="text-lg font-semibold">Apellido Paterno</span>
+        <span className="block text-sm font-medium mb-1">Apellido Paterno</span>
         <Input 
         name="apellido_paterno" value={formState.apellido_paterno} onChange={handleInputChange}
         className="border rounded p-2" type="text" />
       </label>
       <label className="flex flex-col gap-2">
-        <span className="text-lg font-semibold">Apellido Materno</span>
+        <span className="block text-sm font-medium mb-1">Apellido Materno</span>
         <Input
         name="apellido_materno" value={formState.apellido_materno} onChange={handleInputChange}
         className="border rounded p-2" type="text" />
       </label>
     </div>
-    <div className="flex gap-6">
+    <div className="flex gap-6 mt-4">
       <label className="flex flex-col gap-2 w-full">
-        <span className="text-lg font-semibold">Fecha Nacimiento</span>
+        <span className="block text-sm font-medium mb-1">Fecha Nacimiento</span>
         <div className="flex gap-4 w-full">
           <Input
           
@@ -132,68 +202,114 @@ function FormRegistro({ formState, handleInputChange, handleSubmit, titulo }) {
         </div>
       </label>
     </div>
-    <div className="grid grid-cols-2 gap-6">
+    <div className="grid grid-cols-2 gap-6 mt-4">
       <label className="flex flex-col gap-2">
-        <span className="text-lg font-semibold">DPI CUI</span>
+        <span className="block text-sm font-medium mb-1">DPI CUI</span>
         <Input 
         name="numero_dpi" value={formState.numero_dpi} onChange={handleInputChange}
         className="border rounded p-2" type="text" />
       </label>
+      
+
+      <label className=" flex flex-col gap-2" htmlFor="lugar_nacimiento">
+            <span className="block text-sm font-medium mb-1">Lugar de nacimiento</span>
+            
+            <Select
+              onValueChange={(value) => handleSelectChange(value, "lugar_nacimiento")}
+              value={formState.lugar_nacimiento}
+            >
+              <SelectTrigger id="group-type">
+                <SelectValue placeholder="Seleccione uno" />
+              </SelectTrigger>
+
+              <SelectContent position="popper">
+                {paises.map((nivel, index) => (
+                  <SelectItem key={index} value={nivel.valor}>
+                    {nivel.nombre}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            </label>
+
       <label className="flex flex-col gap-2">
-        <span className="text-lg font-semibold">Lugar de Nacimiento</span>
-        <select
-        name="lugar_nacimiento" value={formState.lugar_nacimiento} onChange={handleInputChange}
-        className="border rounded p-2">
-          <option selected value="Guatemala">Guatemala</option>
-        </select>
-      </label>
-      <label className="flex flex-col gap-2">
-        <span className="text-lg font-semibold">Profesión Ocupación</span>
+        <span className="block text-sm font-medium mb-1">Profesión Ocupación</span>
         <Input
         name="profesion_ocupacion" value={formState.profesion_ocupacion} onChange={handleInputChange}
           className="border rounded p-2"
-          placeholder="Plaza Solicitante:"
           type="text" />
       </label>
       <label className="flex flex-col gap-2">
-        <span className="text-lg font-semibold">Pasaporte Número</span>
+        <span className="block text-sm font-medium mb-1">Pasaporte Número</span>
         <Input 
         name="numero_pasaporte" value={formState.numero_pasaporte} onChange={handleInputChange}
         className="border rounded p-2" type="text" />
       </label>
       <label className="flex flex-col gap-2">
-        <span className="text-lg font-semibold">Teléfono Casa</span>
+        <span className="block text-sm font-medium mb-1">Teléfono Casa</span>
         <Input 
         name="telefono_casa" value={formState.telefono_casa} onChange={handleInputChange}
         className="border rounded p-2" type="text" />
       </label>
+     
+      <label className=" flex flex-col gap-2" htmlFor="estado_civil">
+            <span className="block text-sm font-medium mb-1">Estado civil</span>
+            
+            <Select
+              onValueChange={(value) => handleSelectChange(value, "estado_civil")}
+              value={formState.estado_civil}
+            >
+              <SelectTrigger id="group-type">
+                <SelectValue placeholder="Seleccione uno" />
+              </SelectTrigger>
+
+              <SelectContent position="popper">
+                {estado_civil.map((nivel, index) => (
+                  <SelectItem key={index} value={nivel.valor}>
+                    {nivel.nombre}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            </label>
+
+      
+            <label className=" flex flex-col gap-2" htmlFor="genero">
+            <span className="block text-sm font-medium mb-1">Genero</span>
+            
+            <Select
+              onValueChange={(value) => handleSelectChange(value, "genero")}
+              value={formState.genero_sexo}
+            >
+              <SelectTrigger id="group-type">
+                <SelectValue placeholder="Seleccione uno" />
+              </SelectTrigger>
+
+              <SelectContent position="popper">
+                {genero.map((nivel, index) => (
+                  <SelectItem key={index} value={nivel.valor}>
+                    {nivel.nombre}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            </label>
+
       <label className="flex flex-col gap-2">
-        <span className="text-lg font-semibold">Estado Civil</span>
-        <select 
-        name="estado_civil" value={formState.estado_civil} onChange={handleInputChange}
-        className="border rounded p-2">
-          <option selected value="Soltero">Soltero</option>
-          <option value="Casado">Casado</option>
-        </select>
-      </label>
-      <label className="flex flex-col gap-2">
-        <span className="text-lg font-semibold">Género</span>
-        <select
-        name="genero_sexo" value={formState.genero_sexo} onChange={handleInputChange}
-        className="border rounded p-2">
-          <option selected value="Masculino">Masculino</option>
-          <option value="Femenino">Femenino</option>
-        </select>
-      </label>
-      <label className="flex flex-col gap-2">
-        <span className="text-lg font-semibold">Teléfono Móvil-Celular</span>
+        <span className="block text-sm font-medium mb-1">Teléfono Móvil-Celular</span>
         <Input 
         name="telefono_movil_cel" value={formState.telefono_movil_cel} onChange={handleInputChange}
         className="border rounded p-2" type="text" />
       </label>
     </div>
-    <Button type="submit" className="mt-4">Guardar</Button>
+    <div className='flex justify-around mt-4'>
+    <Button type="submit">Guardar</Button>
+    <Volver />
+    </div>
   </form>
+  </div>
+  </div>
+  </div>
   );
 }
 

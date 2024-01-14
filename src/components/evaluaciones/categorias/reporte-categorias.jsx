@@ -111,7 +111,7 @@ export default function ReporteCategorias() {
     }
   }
 
-  if (loading) return <div>Cargando...</div>;
+
 
   return (
     <>

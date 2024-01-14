@@ -1,6 +1,6 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
-import withAuth from '@/components/ProtectedRoute'
+import { PermissionsProvider } from '@/components/PermissionsContext'
 
 
 
@@ -17,6 +17,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
      
       <body className={inter.className}>
+
         {children}
         </body>
     </html>

@@ -38,8 +38,6 @@ const handleCloseNotification = () => {
 const handleSubmit = async (e) => {
   e.preventDefault();
 
-  console.log(formState)
-
   // Insertar en Supabase
   const { data, error } = await supabase.from('subtipo_entidad').insert([formState]);
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
+import Volver from '@/components/ui/volver';
 
 export default function FormTipoGC({ formState, handleInputChange, handleSubmit, titulo }) {
   const router = useRouter()
@@ -10,7 +11,7 @@ export default function FormTipoGC({ formState, handleInputChange, handleSubmit,
       <div className="rounded-lg shadow-lg">
         <div className="bg-white p-6 rounded-lg shadow-inner m-auto">
         <form  onSubmit={handleSubmit}>
-        <h2 className="text-lg font-bold mb-4">{titulo}</h2>
+        <h2 className="text-lg font-bold">{titulo}</h2>
         <div className="grid grid-cols-2 gap-4">
         </div>
         <div className="mt-4">
@@ -31,16 +32,9 @@ export default function FormTipoGC({ formState, handleInputChange, handleSubmit,
             rows="4"
           />
         </div>
-        <div className="flex justify-end mt-4">
+        <div className="flex justify-around mt-4">
           <Button ype="submit">Guardar</Button>
-          <Button
-            type="button"
-            className="bg-red-500 text-white"
-            variant="default"
-            onClick={() => router.back()}
-          >
-            Volver
-            </Button>
+          <Volver/>
         </div>
       </form>
       </div>

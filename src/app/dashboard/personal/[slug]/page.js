@@ -30,6 +30,7 @@ export default function Page({ params }) {
         if (error) {
           console.error("Error fetching user details: ", error);
         } else {
+          console.log("User details fetched successfully: ", data);
           setUserDetails(data);
         }
         setLoading(false);

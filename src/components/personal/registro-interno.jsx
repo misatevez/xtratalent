@@ -8,8 +8,19 @@ import { useState } from 'react';
 import supabase from "@/lib/supabaseClient"
 import FormRegistro from "./formRegistro"
 import { Notificacion } from "../notification"
+import usePermisosPersonal from "@/lib/usePermisosPersonal"
+import  { verificarPermiso } from "../verificarPermisos"
 
 export function RegistroInterno() {
+
+  const permisos = usePermisosPersonal();
+
+  const permisoDenegado = verificarPermiso(permisos.altaPersonal);
+
+  if (permisoDenegado) {
+      return permisoDenegado;
+  }
+
 
   // Estado inicial para el formulario
   const [formState, setFormState] = useState({

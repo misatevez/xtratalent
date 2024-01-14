@@ -154,7 +154,7 @@ export default function BuscarTipoGC() {
                           onChange={() =>
                             handleCheckboxChange(grupo.id_grupotipo)
                           }
-                          className="accent-blue-500 h-5 w-5"
+                          className="accent-black h-5 w-5"
                         />
                       </TableCell>
                     </TableRow>
@@ -162,9 +162,9 @@ export default function BuscarTipoGC() {
                 </TableBody>
               </Table>
             </div>
-            <div className="flex justify-between mt-4">
+            <div className="flex justify-around mt-4">
               <Button
-                className={`bg-blue-500 text-white ${
+                className={`bg-black text-white ${
                   !selectedGrupoId ? "opacity-50 cursor-not-allowed" : ""
                 }`}
                 disabled={!selectedGrupoId}

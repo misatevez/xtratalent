@@ -1,12 +1,14 @@
 'use client'
+// ProtectedRoute.js
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { PermissionsProvider } from './PermissionsContext';
 import supabase from '@/lib/supabaseClient';
-import { useRouter } from 'next/navigation'; // Asegúrate de que la importación es correcta.
 
 const ProtectedRoute = ({ children }) => {
   const router = useRouter();
   const [user, setUser] = useState(null);
-  const [checking, setChecking] = useState(true); // Nuevo estado para indicar si está comprobando el usuario
+  const [checking, setChecking] = useState(true);
 
   useEffect(() => {
     const checkUser = async () => {
@@ -16,25 +18,43 @@ const ProtectedRoute = ({ children }) => {
         console.error('Error checking user:', error);
         setChecking(false);
       } else if (session && session.user) {
-        console.log('User found: ', session.user);
-        setUser(session.user); // Si hay una sesión y un usuario, establece el usuario
+        // Obtener el email del usuario autenticado
+        const userEmail = session.user.email;
+
+        // Buscar en la tabla de usuarios usando el email
+        const { data: userData, error: userError } = await supabase
+          .from('usuarios')
+          .select('*')
+          .eq('correo_electronico', userEmail)
+          .single(); // Esperamos obtener un solo resultado, ya que el email debería ser único
+
+        if (userError) {
+          console.error('Error fetching user data:', userError);
+          setChecking(false);
+          return;
+        }
+
+        // Asignar los datos del usuario al estado
+        setUser(userData);
       } else {
-        router.push('/login'); // Si no hay usuario, redirige a login
+        router.push('/login');
       }
 
-      setChecking(false); // Finaliza la comprobación
+      setChecking(false);
     };
 
     checkUser();
   }, []);
 
   if (checking) {
-    // Mientras está comprobando, puedes retornar null o un componente de carga
-    return null; // o <LoadingComponent />
+    return null;
   }
 
-  // Una vez completada la comprobación, renderiza los hijos si el usuario está presente
-  return user ? <>{children}</> : null; // En caso de que el usuario no esté presente, no se renderiza nada o podrías redirigir o mostrar un mensaje.
+  return user ? (
+    <PermissionsProvider user={user}>
+      {children}
+    </PermissionsProvider>
+  ) : null;
 };
 
 export default ProtectedRoute;
