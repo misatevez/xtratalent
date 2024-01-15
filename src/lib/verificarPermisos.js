@@ -1,4 +1,4 @@
-import Volver from "./ui/volver";
+import Volver from "../components/ui/volver";
 
 // en un archivo de utilidades, por ejemplo, permisosUtil.js
 export const verificarPermiso = (tienePermiso) => {

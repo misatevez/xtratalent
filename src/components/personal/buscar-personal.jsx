@@ -6,10 +6,12 @@ import { Button } from "@/components/ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useRouter } from 'next/navigation'
 import { Notificacion } from "../notification"
+import usePermisosPersonal from "@/lib/usePermisosPersonal"
 
 
 export default function BuscarPersonal() {
   const router = useRouter()
+  const permisos = usePermisosPersonal();
   const [usuarios, setUsuarios] = useState([])
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedUserId, setSelectedUserId] = useState(null)
@@ -100,13 +102,13 @@ export default function BuscarPersonal() {
 
   return (
     <>
-    <div className="bg-white p-4 m-4 rounded-lg shadow-lg">
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold">Buscar usuario</h1>
-      </div>
+    <div className="p-4 mx-auto w-full max-w-6xl mt-4">
+    <div className="rounded-lg shadow-lg">
+      <div className="bg-white p-6 rounded-lg shadow-inner m-auto">
+        <h1 className="text-2xl font-bold mb-2">Buscar usuario</h1>
+
       <div className="flex w-full max-w-full items-center space-x-2 mb-10">
         <Input placeholder="Buscar" type="text" onChange={handleSearchChange} />
-        <Button type="submit">Buscar</Button>
       </div>
       <Table>
         <TableHeader>
@@ -131,7 +133,7 @@ export default function BuscarPersonal() {
                   type="checkbox"
                   checked={selectedUserId === usuario.usuario_id}
                   onChange={() => handleCheckboxChange(usuario.usuario_id)}
-                  className="accent-blue-500 h-5 w-5"
+                  className="accent-black h-5 w-5"
                 /></TableCell>
             </TableRow>
           ))}
@@ -139,8 +141,8 @@ export default function BuscarPersonal() {
       </Table>
       <div className="flex justify-between mt-4">
       <Button
-          className={`bg-blue-500 text-white ${!selectedUserId ? 'opacity-50 cursor-not-allowed' : ''}`}
-          disabled={!selectedUserId}
+          className={`bg-black text-white ${!selectedUserId ? 'opacity-50 cursor-not-allowed' : ''}`}
+          disabled={!selectedUserId || !permisos.modificarUsuario}
           onClick={() => router.push(`/dashboard/personal/${selectedUserId}`)}
         >
           Modificar usuario
@@ -148,13 +150,14 @@ export default function BuscarPersonal() {
         
         <Button
   className={`bg-red-500 text-white ${!selectedUserId ? 'opacity-50 cursor-not-allowed' : ''}`}
-  disabled={!selectedUserId}
+  disabled={!selectedUserId || !permisos.eliminarUsuario}
   onClick={handleDeleteUser}
 >
   Eliminar usuario
 </Button>
+</div>
 
-
+      </div>
       </div>
     </div>
 

@@ -1,4 +1,4 @@
-import { usePermissions } from "@/components/PermissionsContext";
+import { usePermissions } from "@/lib/PermissionsContext";
 
 const usePermisosPersonal = () => {
     const { permissions } = usePermissions();

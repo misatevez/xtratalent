@@ -8,9 +8,11 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { Notificacion } from "@/components/notification";
 import { formatearFecha } from "@/lib/fechaService";
+import usePermisosOrganizacion from "@/lib/usePermisosOrganizacion";
 
 export default function BuscarGrupoCorporativo() {
   const router = useRouter();
+  const permisos = usePermisosOrganizacion();
   const [grupos, setGrupos] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedGrupoId, setSelectedGrupoId] = useState(null);
@@ -136,7 +138,7 @@ export default function BuscarGrupoCorporativo() {
         <div className="flex justify-around mt-4">
       <Button
           className={`bg-black text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
-          disabled={!selectedGrupoId}
+          disabled={!selectedGrupoId || !permisos.editarGrupoCorporativo}
           onClick={() => router.push(`/dashboard/entidades/gruposcorporativos/${selectedGrupoId}`)}
         >
           Modificar tipo
@@ -144,7 +146,7 @@ export default function BuscarGrupoCorporativo() {
         
         <Button
   className={`bg-red-500 text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
-  disabled={!selectedGrupoId}
+  disabled={!selectedGrupoId || !permisos.editarGrupoCorporativo}
   onClick={handleDeleteGrupo}
 >
   Eliminar tipo

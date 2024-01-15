@@ -4,12 +4,22 @@ import supabase from "@/lib/supabaseClient"; // Asegúrate de que esta ruta sea 
 import { useRouter } from "next/navigation";
 import FormRegistro from "@/components/personal/formRegistro";
 import { Notificacion } from "@/components/notification";
+import usePermisosPersonal from "@/lib/usePermisosPersonal";
+import { verificarPermiso } from "@/lib/verificarPermisos";
 
 export default function Page({ params }) {
   const [userDetails, setUserDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const { slug } = params; // Asume que tu ruta tiene un parámetro llamado 'slug'
+  const permisos = usePermisosPersonal();
+
+  const permisoDenegado = verificarPermiso(permisos.modificarUsuario);
+
+  if (permisoDenegado) {
+      return permisoDenegado;
+  }
+
 
   const [notification, setNotification] = useState({
     visible: false,

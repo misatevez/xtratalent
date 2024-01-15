@@ -1,6 +1,6 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { PermissionsProvider } from '@/components/PermissionsContext'
+import { PermissionsProvider } from '@/lib/PermissionsContext'
 
 
 

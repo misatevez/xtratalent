@@ -9,7 +9,7 @@ import supabase from "@/lib/supabaseClient"
 import FormRegistro from "./formRegistro"
 import { Notificacion } from "../notification"
 import usePermisosPersonal from "@/lib/usePermisosPersonal"
-import  { verificarPermiso } from "../verificarPermisos"
+import  { verificarPermiso } from "../../lib/verificarPermisos"
 
 export function RegistroInterno() {
 

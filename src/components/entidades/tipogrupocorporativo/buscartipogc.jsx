@@ -14,9 +14,11 @@ import { Button } from "@/components/ui/button";
 
 import { useRouter } from "next/navigation";
 import { Notificacion } from "@/components/notification";
+import usePermisosOrganizacion from "@/lib/usePermisosOrganizacion";
 
 export default function BuscarTipoGC() {
   const router = useRouter();
+  const permisos = usePermisosOrganizacion();
   const [grupos, setGrupos] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedGrupoId, setSelectedGrupoId] = useState(null);
@@ -167,7 +169,7 @@ export default function BuscarTipoGC() {
                 className={`bg-black text-white ${
                   !selectedGrupoId ? "opacity-50 cursor-not-allowed" : ""
                 }`}
-                disabled={!selectedGrupoId}
+                disabled={!selectedGrupoId || !permisos.editarTipoGrupoCorporativo}
                 onClick={() =>
                   router.push(
                     `/dashboard/entidades/tipogrupocorporativo/${selectedGrupoId}`
@@ -181,7 +183,7 @@ export default function BuscarTipoGC() {
                 className={`bg-red-500 text-white ${
                   !selectedGrupoId ? "opacity-50 cursor-not-allowed" : ""
                 }`}
-                disabled={!selectedGrupoId}
+                disabled={!selectedGrupoId || !permisos.editarTipoGrupoCorporativo}
                 onClick={handleDeleteGrupo}
               >
                 Eliminar tipo

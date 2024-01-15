@@ -1,5 +1,5 @@
-import { usePermissions } from "@/components/PermissionsContext";
-import ProtectedRoute from "@/components/ProtectedRoute";
+import { usePermissions } from "@/lib/PermissionsContext";
+import ProtectedRoute from "@/lib/ProtectedRoute";
 import { Dashboard } from "@/components/dashboard/dashboard";
 
 export default function Layout({ children }) {
