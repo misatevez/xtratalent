@@ -14,7 +14,7 @@ import {
 import Volver from "@/components/ui/volver";
   
 
-export default function page({params}) {
+export default function Page({params}) {
 
     const router = useRouter();
 
