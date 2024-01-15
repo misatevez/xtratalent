@@ -65,12 +65,13 @@ export function Dashboard( {children} ) {
             <FileQuestionIcon className="w-6 h-6" />
             Administración Evaluaciones
           </Link>
-          {/* <Link
+         < Link
             className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
-            href="/dashboard/contenido">
+            href="/dashboard/resolver">
             <FileIcon className="w-6 h-6" />
-            Tipos de Contenido
+            Mis evaluaciones
           </Link>
+          {/* 
           <Link
             className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
             href="/dashboard/licencia">
