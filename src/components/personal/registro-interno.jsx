@@ -17,9 +17,7 @@ export function RegistroInterno() {
 
   const permisoDenegado = verificarPermiso(permisos.altaPersonal);
 
-  if (permisoDenegado) {
-      return permisoDenegado;
-  }
+ 
 
 
   // Estado inicial para el formulario
@@ -103,6 +101,10 @@ export function RegistroInterno() {
       });
     }
   };
+
+  if (permisoDenegado) {
+    return permisoDenegado;
+}
 
   return (
     (<>

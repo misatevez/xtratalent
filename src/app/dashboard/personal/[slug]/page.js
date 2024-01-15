@@ -16,10 +16,7 @@ export default function Page({ params }) {
 
   const permisoDenegado = verificarPermiso(permisos.modificarUsuario);
 
-  if (permisoDenegado) {
-      return permisoDenegado;
-  }
-
+  
 
   const [notification, setNotification] = useState({
     visible: false,
@@ -93,6 +90,11 @@ export default function Page({ params }) {
     setNotification((prev) => ({ ...prev, visible: false }));
   };
   
+  if (permisoDenegado) {
+    return permisoDenegado;
+}
+
+
   return (
     <>
     <FormRegistro
