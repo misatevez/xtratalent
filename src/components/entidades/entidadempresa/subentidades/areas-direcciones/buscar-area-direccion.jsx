@@ -8,9 +8,11 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { Notificacion } from "@/components/notification";
 import { formatearFecha } from "@/lib/fechaService";
+import usePermisosOrganizacion from "@/lib/usePermisosOrganizacion";
 
 export default function   BuscarDireccion() {
   const router = useRouter();
+  const permisos = usePermisosOrganizacion  ();
   const [grupos, setGrupos] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedGrupoId, setSelectedGrupoId] = useState(null);
@@ -135,7 +137,7 @@ export default function   BuscarDireccion() {
         <div className="flex justify-between mt-4">
       <Button
           className={`bg-blue-500 text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
-          disabled={!selectedGrupoId}
+          disabled={!selectedGrupoId || !permisos.editarAreasDirecciones }
           onClick={() => router.push(`/dashboard/entidades/entidadempresa/subentidades/area-direcciones/${selectedGrupoId}`)}
         >
           Modificar tipo
@@ -143,7 +145,7 @@ export default function   BuscarDireccion() {
         
         <Button
   className={`bg-red-500 text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
-  disabled={!selectedGrupoId}
+  disabled={!selectedGrupoId || !permisos.editarAreasDirecciones}
   onClick={handleDeleteGrupo}
 >
   Eliminar tipo
