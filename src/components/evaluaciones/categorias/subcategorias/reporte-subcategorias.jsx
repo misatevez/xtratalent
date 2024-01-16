@@ -7,9 +7,11 @@ import { useRouter } from "next/navigation";
 import { Notificacion } from "@/components/notification";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import usePermisosEvaluaciones from "@/lib/usePermisosEvaluaciones";
 
 export default function ReporteSubCategorias() {
   const router = useRouter();
+  const permisos = usePermisosEvaluaciones();
   const [subCategorias, setSubCategorias] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10; // Ajustar según necesidades
@@ -148,6 +150,7 @@ export default function ReporteSubCategorias() {
                       <TableCell>
                       {" "}
                       <Button
+                        disabled={!permisos.editarSubfamilia}
                         onClick={() =>
                           router.push(
                             `/dashboard/evaluaciones/categorias/subcategorias/${subCategoria.id_subcategorias}`
@@ -158,6 +161,7 @@ export default function ReporteSubCategorias() {
                         Editar
                       </Button>
                       <Button
+                        disabled={!permisos.borrarSubfamilia}
                         onClick={() => handleDelete(subCategoria.id_subcategorias)}
                         variant="ghost"
                       >

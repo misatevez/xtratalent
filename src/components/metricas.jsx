@@ -2,10 +2,11 @@
 import { CardTitle, CardHeader, CardContent, Card } from "@/components/ui/card"
 import { useEffect, useState } from 'react';
 import supabase from "@/lib/supabaseClient";
+import usePermisosMetricas from "@/lib/usePermisosMetricas";
 
 
 export function Metricas() {
-
+  const permisos = usePermisosMetricas();
   const [userCount, setUserCount] = useState(0);
   const [gruposCount, setGruposCount] = useState(0);
   const [tipogruposCount, setTipoGruposCount] = useState(0);
@@ -91,7 +92,10 @@ export function Metricas() {
   }, []);
 
   return (
-    (<div
+    (
+<>    
+    {permisos.metricas &&
+    <div
       key="1"
       className="flex flex-wrap gap-4 p-6 m-auto justify-center">
 
@@ -190,6 +194,15 @@ export function Metricas() {
           </CardContent>
         </CardContent>
       </Card>
-    </div>)
+    </div>
+    }
+    {
+      !permisos.metricas &&
+      <div>
+        <h1>Bienvenido</h1>
+      </div>
+    }
+    </>
+    )
   );
 }

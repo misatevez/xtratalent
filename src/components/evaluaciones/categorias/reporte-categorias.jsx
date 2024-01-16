@@ -14,11 +14,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Notificacion } from "@/components/notification";
 import { useRouter } from "next/navigation";
+import usePermisosEvaluaciones from "@/lib/usePermisosEvaluaciones";
 
 
 
 export default function ReporteCategorias() {
   const router = useRouter();
+  const permisos = usePermisosEvaluaciones()
   const [categorias, setCategorias] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -121,7 +123,7 @@ export default function ReporteCategorias() {
           <h1 className="text-xl font-bold text-center mb-4">
             Catalogo Familia de Evaluaciones
           </h1>
-          <div className="flex w-full max-w-full items-center space-x-2 mb-10">
+          <div className="flex w-full max-w-full items-left space-x-2 mb-10">
             <Input
               placeholder="Buscar"
               type="text"
@@ -147,6 +149,7 @@ export default function ReporteCategorias() {
                     <TableCell>
                       {" "}
                       <Button
+                        disabled={!permisos.editarFamilias}
                         onClick={() =>
                           router.push(
                             `/dashboard/evaluaciones/categorias/${categoria.id_categoria}`
@@ -157,6 +160,7 @@ export default function ReporteCategorias() {
                         Editar
                       </Button>
                       <Button
+                        disabled={!permisos.borrarFamilias}
                         onClick={() => handleDelete(categoria.id_categoria)}
                         variant="ghost"
                       >

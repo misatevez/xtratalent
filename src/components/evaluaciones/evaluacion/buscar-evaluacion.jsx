@@ -5,9 +5,11 @@ import { Input } from "@/components/ui/input"
 import { useEffect, useState } from "react"
 import supabase from "@/lib/supabaseClient"
 import { useRouter } from "next/navigation"
+import usePermisosEvaluaciones from "@/lib/usePermisosEvaluaciones"
 
 export default function BuscarEvaluacion() {
   const router = useRouter();
+  const permisos = usePermisosEvaluaciones();
   const [evaluaciones, setEvaluaciones] = useState([])
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 5; // Puedes ajustar esto según tus necesidades
@@ -84,8 +86,8 @@ export default function BuscarEvaluacion() {
   );
 
   return (
-    <div className="bg-white p-4 rounded-md shadow-md m-auto text-center">
-      <h1 className="text-xl font-bold text-center   mb-4">
+    <div className="bg-white p-4 rounded-md shadow-md m-auto text-left">
+      <h1 className="text-xl font-bold text-left   mb-4">
       Catálogo de Evaluaciones
       </h1>
       <div className="flex w-full max-w-full items-center space-x-2 mb-10">
@@ -97,8 +99,8 @@ export default function BuscarEvaluacion() {
           <TableHeader>
             <TableRow>
               <TableHead className="w-[100px]">Nombre</TableHead>
-              <TableHead className="w-[150px]">Familia</TableHead>
-              <TableHead className="w-[150px]">Sub-familia</TableHead>
+              <TableHead className="w-[200px]">Familia</TableHead>
+              <TableHead className="w-[200px]">Sub-familia</TableHead>
               <TableHead className="w-[150px]">Estado</TableHead>
               <TableHead className="w-[150px]">Clase</TableHead>
               <TableHead className="w-[150px]">Nivel</TableHead>
@@ -118,9 +120,9 @@ export default function BuscarEvaluacion() {
                 <TableCell>{evaluacion.nivel}</TableCell>
                 <TableCell>{evaluacion.duracion} Mins</TableCell>
                 <TableCell>
-                <Button onClick={() => router.push(`/dashboard/evaluaciones/evaluacion/asignar/${evaluacion.id_evaluacion}`)} variant="ghost">Asignar</Button>
-                  <Button onClick={() => router.push(`/dashboard/evaluaciones/evaluacion/${evaluacion.id_evaluacion}`)} variant="ghost">Editar</Button>
-                  <Button onClick={() => handleDelete(evaluacion.id_evaluacion)} variant="ghost">Borrar</Button>
+                <Button   disabled={!permisos.asignarEvaluaciones} onClick={() => router.push(`/dashboard/evaluaciones/evaluacion/asignar/${evaluacion.id_evaluacion}`)} variant="ghost">Asignar</Button>
+                  <Button disabled={!permisos.editarEvaluaciones} onClick={() => router.push(`/dashboard/evaluaciones/evaluacion/${evaluacion.id_evaluacion}`)} variant="ghost">Editar</Button>
+                  <Button disabled={!permisos.borrarEvaluaciones}  onClick={() => handleDelete(evaluacion.id_evaluacion)} variant="ghost">Borrar</Button>
                 </TableCell>
               </TableRow>
             ))}

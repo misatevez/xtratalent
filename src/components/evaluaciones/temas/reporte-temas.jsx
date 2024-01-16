@@ -6,9 +6,11 @@ import { useEffect, useState } from "react"
 import supabase from "@/lib/supabaseClient"
 import { useRouter } from "next/navigation"
 import { Notificacion } from "@/components/notification"
+import usePermisosEvaluaciones from "@/lib/usePermisosEvaluaciones"
 
 export default function ReporteTemas() {
   const router = useRouter();
+  const permisos = usePermisosEvaluaciones();
   const [evaluaciones, setEvaluaciones] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 5; // Puedes ajustar esto según tus necesidades
@@ -133,7 +135,6 @@ export default function ReporteTemas() {
       </h1>
       <div className="flex w-full max-w-full items-center space-x-2 mb-10">
         <Input placeholder="Search" type="text" onChange={handleSearchChange} />
-        <Button type="submit">Buscar</Button>
       </div>
       <div className="overflow-x-auto mt-4">
         <Table>
@@ -162,8 +163,12 @@ export default function ReporteTemas() {
                 <TableCell>{ formatearFecha( evaluacion.fecha_creado)}</TableCell>
                 <TableCell>{ formatearFecha( evaluacion.fecha_actualizado )}</TableCell>
                 <TableCell>
-                  <Button onClick={() => router.push(`/dashboard/evaluaciones/temas/${evaluacion.id_tema}`)} variant="ghost">Editar</Button>
-                  <Button onClick={() => handleDelete(evaluacion.id_tema)} variant="ghost">Borrar</Button>
+                  <Button 
+                  disabled={!permisos.editarTema}
+                  onClick={() => router.push(`/dashboard/evaluaciones/temas/${evaluacion.id_tema}`)} variant="ghost">Editar</Button>
+                  <Button 
+                  disabled={!permisos.borrarTema}
+                  onClick={() => handleDelete(evaluacion.id_tema)} variant="ghost">Borrar</Button>
                 </TableCell>
               </TableRow>
             ))}
