@@ -48,7 +48,6 @@ export const PermissionsProvider = ({ children, user }) => {
             id_perfil: perm.id_perfil,
             permisos: perm.permisos
           }));
-          console.log(newPermissions);
           setPermissions(newPermissions);
         }
       } catch (error) {

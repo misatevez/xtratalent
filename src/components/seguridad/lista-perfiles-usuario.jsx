@@ -11,34 +11,29 @@ import {
 import { useState, useEffect } from "react";
 import supabase from "@/lib/supabaseClient"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { useRouter } from "next/navigation";
+import Volver from "../ui/volver";
 
 
 
 export default function ListaPerfilesUsuario() {
-
+  const router = useRouter();
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState("");
   const [perfilUsuario, setPerfilUsuario] = useState([]);
+  const [triggerEffect, setTriggerEffect] = useState(false);
+
     // Estado inicial para el formulario
     const [formState, setFormState] = useState({
       nombre: '',
       descripcion: '',
-      id_entidad_empresa: '',
-      tipo_usuario: '',
     });
-
-    const tipos = [
-      { valor: "Internal", nombre: "Internal" },
-      { valor: "External", nombre: "External" },
-    ];
 
     useEffect(() => {
       async function fetchData() {
         const { data, error } = await supabase
-          .from('perfil_usuario')
+          .from('perfil_tipo')
           .select(`
-            *,
-            entidad_empresa: id_entidad_empresa (nombre)
+            *
           `) // Asumiendo que 'nombre' es la columna en 'entidad_empresa' que quieres obtener
         if (error) {
           console.log('Error fetching profile data:', error);
@@ -49,45 +44,78 @@ export default function ListaPerfilesUsuario() {
         }
       }
       fetchData();
-    }, []);
-    
+    }, [triggerEffect]);
 
+   const  handleDelete = async (id) => {
+    console.log(id);
+      try {
+        const { data, error } = await supabase
+          .from('perfil_tipo')
+          .delete()
+          .match({ id_perfil: id })
+        if (error) {
+          throw error
+        }
+      } catch (error) {
+        console.log(error.message)
+      } finally {
+        setTriggerEffect(prev => !prev);
+        setLoading(false)
+      }
+    }
 
-    const filteredPerfiles = perfilUsuario.filter(usuario =>
-      usuario.nombre.toLowerCase().includes(searchTerm) ||
-      usuario.tipo_usuario?.toLowerCase().includes(searchTerm) ||
-      usuario.id_entidad_empresa?.toLowerCase().includes(searchTerm)
-      // Añadir mas campos si quieremos que se pueda buscar por mas campos
-    );
+    if(loading) return (<div>Cargando...</div>);
+
 
     return (
-        <main className="p-8 space-y-8 mt-8 mb-8 mx-auto max-w-7xl">
-          <h1 className="text-4xl font-bold mb-6 text-center">Perfiles de usuario</h1>
-          <div className="grid grid-cols-2 gap-4">
-           
-          </div>
-
-
+      <div className="p-4 mx-auto w-full max-w-6xl mt-4">
+      <div className="rounded-lg shadow-lg">
+        <div className="bg-white p-6 rounded-lg shadow-inner m-auto">
+          <h1 className="text-2xl font-bold mb-6 text-center">Perfiles de usuario</h1>
           <Table>
         <TableHeader>
           <TableRow>
             <TableHead className="w-[150px]">Nombre</TableHead>
-            <TableHead className="w-[200px]">Tipo de usuario</TableHead>
-            <TableHead className="w-[300px]">Entidad Empresa</TableHead>
+            <TableHead className="w-[200px]">Descripcion</TableHead>
+            <TableHead className="w-[200px]">Accion</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {filteredPerfiles.map((usuario, index) => (
+          {perfilUsuario.map((usuario, index) => (
             <TableRow key={index}>
               <TableCell>{usuario.nombre}</TableCell>
-              <TableCell>{usuario.tipo_usuario}</TableCell>
-              <TableCell>{usuario.entidad_empresa.nombre}</TableCell>
+              <TableCell>{usuario.descripcion}</TableCell>
+              <TableCell>
+                <Button
+                  className="mr-2 p-2"
+                  size="small"
+                 onClick={() => router.push(`/dashboard/seguridad/asignarperfil/${usuario.id_perfil}`)}
+                >
+                  Asignar
+                </Button>
+                <Button 
+                 onClick={() => router.push(`/dashboard/seguridad/buscarperfil/${usuario.id_perfil}`)}
+                  className="mr-2 p-2"
+                  size="small">
+                  Editar
+                </Button>
+                <Button
+                onClick={() => handleDelete(usuario.id_perfil)}
+                className="mr-2 p-2"
+                  size="small">
+                  Eliminar
+                </Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-          
-        </main>
+      <div className="flex items-center gap-2 mt-4">
+            <Volver />
+          </div>
+        </div>
+      </div>
+    </div>
     );
 }
 

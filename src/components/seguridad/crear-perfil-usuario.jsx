@@ -12,18 +12,20 @@ import {
   SelectContent,
   Select,
 } from "@/components/ui/select";
+import { useRouter } from "next/navigation";
 
 
 
 export default function CrearPerfilUsuario() {
 
+  const router = useRouter();
+
+  const [perfilId, setPerfilId] = useState(null);
 
   // Estado inicial para el formulario
   const [formState, setFormState] = useState({
     nombre: '',
     descripcion: '',
-    id_entidad_empresa: '',
-    tipo_usuario: '',
   });
   
   const [notification, setNotification] = useState({
@@ -32,10 +34,6 @@ export default function CrearPerfilUsuario() {
     mensaje: ""
   });
 
-  const tipos = [
-    { valor: "Internal", nombre: "Internal" },
-    { valor: "External", nombre: "External" },
-  ];
 
    // Manejar cambios en los inputs
 const handleInputChange = (e) => {
@@ -63,7 +61,7 @@ const handleSubmit = async (e) => {
   console.log(formState)
 
   // Insertar en Supabase
-  const { data, error } = await supabase.from('perfil_usuario').insert([formState]);
+  const { data, error } = await supabase.from('perfil_tipo').upsert([formState]).select('id_perfil').single();
 
   if (error) {
     setNotification({
@@ -75,51 +73,18 @@ const handleSubmit = async (e) => {
     setNotification({
       visible: true,
       titulo: "Éxito",
-      mensaje: "Se ha creado su perfil de entidad empresa" // Ajusta según necesites
+      mensaje: "Se ha creado su perfil" // Ajusta según necesites
     });
+    setPerfilId(data.id_perfil);
   }
 };
-
-const handleGrupoTipoChange = (id_entidad_empresa) => {
-  // Actualiza el estado del formulario para incluir el nuevo id de tipo de grupo seleccionado
-  handleInputChange({
-    target: { name: "id_entidad_empresa", value: id_entidad_empresa },
-  });
-};
-
 
 
     return (
       <>
           <main className="p-8 space-y-8 mt-8 mb-8 mx-auto max-w-7xl">
         <h1 className="text-4xl font-bold mb-6 text-center">Perfiles de usuario</h1>
-        <div className="grid grid-cols-2 gap-4">
-          <div className="flex flex-col gap-2">
-            <ListaEntidadesEmpresas
-             selectedTipoId={formState.id_entidad_empresa}
-             onGrupoTipoChange={handleGrupoTipoChange}
-            />
-          </div>
-          <label className="flex flex-col gap-2">
-            <span  className="block text-sm font-medium mb-1">Tipo de usuario:</span>
-            <Select
-              onValueChange={(value) => handleSelectChange(value, "tipo_usuario")}
-              value={formState.tipo_usuario}
-            >
-              <SelectTrigger id="group-type">
-                <SelectValue placeholder="Seleccione uno" />
-              </SelectTrigger>
 
-              <SelectContent position="popper">
-                {tipos.map((nivel, index) => (
-                  <SelectItem key={index} value={nivel.valor}>
-                    {nivel.nombre}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </label>
-        </div>
         <div className="grid grid-cols gap-4">
           <label className="flex flex-col gap-2 w-full">
             <span className="block text-sm font-medium">Nombre del perfil:</span>
@@ -128,7 +93,6 @@ const handleGrupoTipoChange = (id_entidad_empresa) => {
               value={formState.nombre}
               onChange={handleInputChange}
               className="border rounded p-2 w-full"
-              placeholder="Ejemplo: Regional Regulator - Sedes"
               style={{
                 width: "100%",
               }}
@@ -148,6 +112,7 @@ const handleGrupoTipoChange = (id_entidad_empresa) => {
         </div>
         <div className="flex items-center gap-2 mt-4">
           <Button onClick={handleSubmit} className="mt-4">Guardar</Button>
+          <Button disabled={!perfilId} onClick={ () => router.push(`/dashboard/seguridad/buscarperfil/${perfilId}`) } className="mt-4">Asignar Privilegios</Button>
         </div>
       </main>
        {notification.visible && (
