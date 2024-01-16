@@ -13,6 +13,7 @@ import supabase from "@/lib/supabaseClient"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useRouter } from "next/navigation";
 import Volver from "../ui/volver";
+import usePermisosSeguridad from "@/lib/usePermisosSeguridad";
 
 
 
@@ -21,6 +22,7 @@ export default function ListaPerfilesUsuario() {
   const [loading, setLoading] = useState(true);
   const [perfilUsuario, setPerfilUsuario] = useState([]);
   const [triggerEffect, setTriggerEffect] = useState(false);
+  const permisos = usePermisosSeguridad ();
 
     // Estado inicial para el formulario
     const [formState, setFormState] = useState({
@@ -87,6 +89,7 @@ export default function ListaPerfilesUsuario() {
               <TableCell>{usuario.descripcion}</TableCell>
               <TableCell>
                 <Button
+                disabled={!permisos.asignarPerfilUsuario}
                   className="mr-2 p-2"
                   size="small"
                  onClick={() => router.push(`/dashboard/seguridad/asignarperfil/${usuario.id_perfil}`)}
@@ -94,12 +97,14 @@ export default function ListaPerfilesUsuario() {
                   Asignar
                 </Button>
                 <Button 
+                disabled={!permisos.modificarPerfilUsuario}
                  onClick={() => router.push(`/dashboard/seguridad/buscarperfil/${usuario.id_perfil}`)}
                   className="mr-2 p-2"
                   size="small">
                   Editar
                 </Button>
                 <Button
+                disabled={!permisos.borrarPerfilUsuario}
                 onClick={() => handleDelete(usuario.id_perfil)}
                 className="mr-2 p-2"
                   size="small">

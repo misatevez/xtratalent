@@ -138,7 +138,7 @@ export default function BuscarGrupoCorporativo() {
         <div className="flex justify-around mt-4">
       <Button
           className={`bg-black text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
-          disabled={!selectedGrupoId || !permisos.editarGrupoCorporativo}
+          disabled={!selectedGrupoId || !permisos.editar_tipo_gc_subtipo}
           onClick={() => router.push(`/dashboard/entidades/gruposcorporativos/${selectedGrupoId}`)}
         >
           Modificar tipo
@@ -146,7 +146,7 @@ export default function BuscarGrupoCorporativo() {
         
         <Button
   className={`bg-red-500 text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
-  disabled={!selectedGrupoId || !permisos.editarGrupoCorporativo}
+  disabled={!selectedGrupoId || !permisos.editar_tipo_gc_subtipo}
   onClick={handleDeleteGrupo}
 >
   Eliminar tipo

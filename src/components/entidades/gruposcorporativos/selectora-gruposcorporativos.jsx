@@ -15,8 +15,8 @@ export function SelectoraGruposCorporativos() {
           className="p-8 space-y-8 mt-8 mb-8 mx-auto max-w-7xl bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-lg shadow-lg text-white">
           <h1 className="text-4xl font-bold mb-6 text-center">Administrar Grupos Corporativos</h1>
           <div className="flex items-center space-x-4 justify-center">
-            <Button  disabled={!permisos.grupoCorporativo} onClick={() => router.push('/dashboard/entidades/gruposcorporativos/creargrupos')} className="bg-white text-purple-500 hover:bg-gray-200">Crear Grupos Corporativos</Button>
-            <Button  disabled={!permisos.grupoCorporativo} onClick={() => router.push('/dashboard/entidades/gruposcorporativos/buscargrupos')}className="bg-white text-purple-500 hover:bg-gray-200">Buscar Grupos Corporativos</Button>
+            <Button  disabled={!permisos.editar_tipo_gc_subtipo} onClick={() => router.push('/dashboard/entidades/gruposcorporativos/creargrupos')} className="bg-white text-purple-500 hover:bg-gray-200">Crear Grupos Corporativos</Button>
+            <Button  disabled={!permisos.tipo_gc_subtipo} onClick={() => router.push('/dashboard/entidades/gruposcorporativos/buscargrupos')}className="bg-white text-purple-500 hover:bg-gray-200">Buscar Grupos Corporativos</Button>
           </div>
         </main>
     )

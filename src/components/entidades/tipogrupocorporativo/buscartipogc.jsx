@@ -169,7 +169,7 @@ export default function BuscarTipoGC() {
                 className={`bg-black text-white ${
                   !selectedGrupoId ? "opacity-50 cursor-not-allowed" : ""
                 }`}
-                disabled={!selectedGrupoId || !permisos.editarTipoGrupoCorporativo}
+                disabled={!selectedGrupoId || !permisos.editar_tipo_gc_subtipo}
                 onClick={() =>
                   router.push(
                     `/dashboard/entidades/tipogrupocorporativo/${selectedGrupoId}`
@@ -183,7 +183,7 @@ export default function BuscarTipoGC() {
                 className={`bg-red-500 text-white ${
                   !selectedGrupoId ? "opacity-50 cursor-not-allowed" : ""
                 }`}
-                disabled={!selectedGrupoId || !permisos.editarTipoGrupoCorporativo}
+                disabled={!selectedGrupoId || !permisos.editar_tipo_gc_subtipo}
                 onClick={handleDeleteGrupo}
               >
                 Eliminar tipo

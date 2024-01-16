@@ -49,6 +49,7 @@ export const PermissionsProvider = ({ children, user }) => {
             permisos: perm.permisos
           }));
           setPermissions(newPermissions);
+          console.log('Permisos cargados');
         }
       } catch (error) {
         console.error(error.message);

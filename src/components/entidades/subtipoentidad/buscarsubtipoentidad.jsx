@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { Notificacion } from "@/components/notification";
 import { formatearFecha } from "@/lib/fechaService";
+import usePermisosOrganizacion from "@/lib/usePermisosOrganizacion";
 
 export default function BuscarSubTipoEntidad() {
   const router = useRouter();
@@ -15,6 +16,7 @@ export default function BuscarSubTipoEntidad() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedGrupoId, setSelectedGrupoId] = useState(null);
   const [loading, setLoading] = useState(true);
+  const permisos = usePermisosOrganizacion  ();
   const [notification, setNotification] = useState({
     visible: false,
     titulo: "",
@@ -139,7 +141,7 @@ export default function BuscarSubTipoEntidad() {
         <div className="flex justify-around mt-4">
       <Button
           className={`bg-black text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
-          disabled={!selectedGrupoId}
+          disabled={!selectedGrupoId || !permisos.editar_tipo_gc_subtipo}
           onClick={() => router.push(`/dashboard/entidades/subtipoentidad/${selectedGrupoId}`)}
         >
           Modificar
@@ -147,7 +149,7 @@ export default function BuscarSubTipoEntidad() {
         
         <Button
   className={`bg-red-500 text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
-  disabled={!selectedGrupoId}
+  disabled={!selectedGrupoId || !permisos.editar_tipo_gc_subtipo}
   onClick={handleDeleteGrupo}
 >
   Eliminar
