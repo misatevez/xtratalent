@@ -12,8 +12,16 @@ import { Checkbox } from "../ui/checkbox";
 import Volver from "../ui/volver";
 import { useEffect, useState } from "react";
 import supabase from "@/lib/supabaseClient";
+import { Notificacion } from "../notification";
 
 export function PerfilesUsuario({ perfilId }) {
+
+  const [notification, setNotification] = useState({
+    titulo: "",
+    mensaje: "",
+    visible: false,
+  });
+
   const [permisosSeguridad, setPermisosSeguridad] = useState({
     seguridad: false,
     crear_perfil_usuario: false,
@@ -149,17 +157,29 @@ export function PerfilesUsuario({ perfilId }) {
         .eq('id_perfil', perfilId)
         .eq('id_modulo', 4); // Asegúrate de que el id_modulo sea correcto
   
-      console.log('Permisos actualizados con éxito');
+      setNotification({
+        titulo: "Permisos actualizados",
+        mensaje: "Los permisos se han actualizado correctamente",
+        visible: true,
+      });
     } catch (error) {
       console.error('Error al actualizar permisos:', error);
-      console.log('Error al actualizar permisos');
+      setNotification({
+        titulo: "Error al actualizar permisos",
+        mensaje: "No se han podido actualizar los permisos",
+        visible: true,
+      });
     }
   };
   
+  const handleCloseNotification = () => {
+    setNotification((prev) => ({ ...prev, visible: false }));
+  };
   
   
 
   return (
+    <>
     <div className="border rounded-lg mx-auto w-full max-w-5xl p-5  mt-10">
       <div className="flex items-center">
         <h2 className="text-lg font-semibold m-2 p-2">Perfil de usuario</h2>
@@ -885,5 +905,15 @@ export function PerfilesUsuario({ perfilId }) {
         <Volver />
       </div>
     </div>
+
+{notification.visible && (
+  <Notificacion
+    titulo={notification.titulo}
+    mensaje={notification.mensaje}
+    visible={notification.visible}
+    onClose={handleCloseNotification}
+  />
+)}
+</>
   );
 }
