@@ -12,48 +12,37 @@
     TableRow,
   } from "@/components/ui/table";
   import Volver from "../ui/volver";
+import useUsuario from "@/lib/useUsuario";
 
   export default function EvaluacionesDisponibles() {
     const [evaluaciones, setEvaluaciones] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [usuario, setUsuario] = useState(null);
     const router = useRouter();
-
+    const {id_usuario} = useUsuario()
+    
+    
     useEffect(() => {
       const fetchEvaluaciones = async () => {
+        if (!id_usuario) return;
+    
         try {
-          const { data: session } = await supabase.auth.getSession();
-
-          const userEmail = session.session.user.email;
-
-          console.log("Este es el email", userEmail);
-
-          const { data: userData } = await supabase
-            .from("usuarios")
-            .select("usuario_id") // Solo seleccionamos el campo necesario
-            .eq("correo_electronico", userEmail)
-            .single();
-
-          console.log("Este es el usuario", userData.usuario_id);
-          setUsuario(userData.usuario_id);
-
+          const ahora = new Date();
+    
           const { data: evaluationsData } = await supabase
             .from("usuarios_evaluaciones")
-            .select(
-              `
-                          *,
-                          evaluaciones: id_evaluacion (
-                              nombre,
-                              activa,
-                              duracion
-                          )
-                      `
-            )
-            .eq("usuarios_id", userData.usuario_id);
-
-          console.log("Estas son las evaluaciones", evaluationsData);
-
+            .select(`
+              *,
+              evaluaciones: id_evaluacion (
+                nombre,
+                activa,
+                duracion
+              )
+            `)
+            .eq("usuarios_id", id_usuario)
+            .is('entrega_evaluacion', null) // Filtra las evaluaciones no entregadas
+            .gt('final_evaluacion', ahora.toISOString()) // Filtra las evaluaciones cuya fecha final es posterior a ahora
+    
           setEvaluaciones(evaluationsData);
         } catch (err) {
           console.error("Error:", err);
@@ -62,23 +51,52 @@
           setLoading(false);
         }
       };
-
+    
       fetchEvaluaciones();
-    }, []);
+    }, [id_usuario]);
+    
+    
 
     const iniciarEvaluacion = async (evaluacionId, duracion) => {
-      const inicio = new Date(); // Define la variable inicio
-      const finEvaluacion = new Date(inicio); // Usa la variable inicio para calcular finEvaluacion
-      finEvaluacion.setMinutes(finEvaluacion.getMinutes() + duracion);
+      try {
+        // Verificar si ya existe un registro de inicio_evaluacion
+        const { data: evaluacionExistente, error } = await supabase
+          .from('usuarios_evaluaciones')
+          .select('inicio_evaluacion')
+          .match({ id_evaluacion: evaluacionId, usuarios_id: id_usuario })
+          .single();
     
-      await supabase
-        .from('usuarios_evaluaciones')
-        .update({ inicio_evaluacion: inicio, final_evaluacion: finEvaluacion })
-        .match({ id_evaluacion: evaluacionId, usuarios_id: usuario });
+        if (error) {
+          console.error('Error al verificar la evaluación existente:', error);
+          return;
+        }
+    
+        // Si inicio_evaluacion ya está registrado, no hacer nada
+        if (evaluacionExistente && evaluacionExistente.inicio_evaluacion) {
+            // Redirige al usuario a la página de la evaluación
+      router.push(`/dashboard/resolver/evaluaciones-disponibles/${evaluacionId}`);
+          return;
+        }
+    
+        // Si no, calcular finEvaluacion y actualizar la base de datos
+        const inicio = new Date(); 
+        const finEvaluacion = new Date(inicio); 
+        finEvaluacion.setMinutes(finEvaluacion.getMinutes() + duracion);
+    
+        await supabase
+          .from('usuarios_evaluaciones')
+          .update({ inicio_evaluacion: inicio, final_evaluacion: finEvaluacion })
+          .match({ id_evaluacion: evaluacionId, usuarios_id: id_usuario });
+    
+    
+      } catch (err) {
+        console.error('Error al iniciar la evaluación:', err);
+      }
     
       // Redirige al usuario a la página de la evaluación
       router.push(`/dashboard/resolver/evaluaciones-disponibles/${evaluacionId}`);
     };
+    
     
 
     if (loading) {
@@ -103,7 +121,7 @@
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {evaluaciones.map((evaluacion, index) => (
+                  {evaluaciones?.map((evaluacion, index) => (
                     <TableRow key={index}>
                       <TableCell>{evaluacion.evaluaciones.nombre}</TableCell>
                       <TableCell>

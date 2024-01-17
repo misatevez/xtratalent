@@ -11,11 +11,13 @@ export const PermissionsProvider = ({ children, user }) => {
   const [permissions, setPermissions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [usuario, setUsuario] = useState(null);
 
   useEffect(() => {
     const loadPermissions = async () => {
       try {
         const userId = user?.usuario_id;
+        setUsuario(userId);
 
         if (!userId) {
           console.log('No hay usuario');
@@ -63,7 +65,7 @@ export const PermissionsProvider = ({ children, user }) => {
   }, [user]);
 
   return (
-    <PermissionsContext.Provider value={{ permissions }}>
+    <PermissionsContext.Provider value={{ permissions, usuario }}>
       {children}
     </PermissionsContext.Provider>
   );

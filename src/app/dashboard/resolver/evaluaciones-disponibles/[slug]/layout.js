@@ -1,11 +1,13 @@
 'use client'
 import supabase from "@/lib/supabaseClient";
+import useUsuario from "@/lib/useUsuario";
 import { useEffect, useState } from "react";
 
 
 export default function Layout({children, params}) {
 
     const id_evaluacion = params.slug;
+    const {id_usuario} = useUsuario();
     const [tiempo, setTiempo] = useState({
         inicio_evaluacion: 0,
         evaluaciones: {
@@ -18,15 +20,6 @@ export default function Layout({children, params}) {
     useEffect(() => {
         const fetchTiempo = async () => {
             try {
-                const { data: session } = await supabase.auth.getSession();
-                const userEmail = session.session.user.email;
-                const { data: userData } = await supabase
-                    .from("usuarios")
-                    .select("usuario_id") // Solo seleccionamos el campo necesario
-                    .eq("correo_electronico", userEmail)
-                    .single();
-
-                const usuario = userData.usuario_id;
 
                 const { data: evaluationsData } = await supabase
     .from("usuarios_evaluaciones")
@@ -36,7 +29,7 @@ export default function Layout({children, params}) {
             duracion
         )
     `)
-    .match({ id_evaluacion: id_evaluacion, usuarios_id: usuario })
+    .match({ id_evaluacion: id_evaluacion, usuarios_id: id_usuario })
     .single();
                 setTiempo(evaluationsData);
                 console.log(evaluationsData);

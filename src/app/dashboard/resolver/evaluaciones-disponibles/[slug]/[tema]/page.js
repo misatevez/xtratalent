@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import Volver from "@/components/ui/volver";
 import supabase from "@/lib/supabaseClient";
 import { Label } from "@/components/ui/label";
+import useUsuario from "@/lib/useUsuario";
 
 export default function Page({ params }) {
     const id_tema = params.tema;
@@ -14,6 +15,8 @@ export default function Page({ params }) {
     const [mensajeRespuesta, setMensajeRespuesta] = useState(null);
     const [nohaymaspreguntas, setNohaymaspreguntas] = useState(false);
     const [respuestasUsuario, setRespuestasUsuario] = useState([]);
+    const {id_usuario} = useUsuario();
+    const id_evaluacion = params.slug;
 
     useEffect(() => {
         const obtenerPreguntasYRespuestas = async () => {
@@ -21,7 +24,7 @@ export default function Page({ params }) {
                 const { data: respuestasUsuarioData, error: respuestasUsuarioError } = await supabase
                     .from('usuario_evaluacion_respuesta')
                     .select('id_pregunta')
-                    .eq('usuario_id', 25);
+                    .eq('usuario_id', id_usuario);
 
                 if (respuestasUsuarioError) throw respuestasUsuarioError;
 
@@ -82,14 +85,13 @@ export default function Page({ params }) {
     const guardarOActualizarRespuestaUsuario = async () => {
         try {
             const preguntaActual = preguntas[preguntaActualIndex];
-            const usuarioId = 25; // Reemplaza 25 con el ID real del usuario
     
             // Verificar si el usuario ya ha respondido esta pregunta
             const { data: respuestasExistentes, error: consultaError } = await supabase
                 .from('usuario_evaluacion_respuesta')
                 .select('*')
                 .eq('id_pregunta', preguntaActual.id_pregunta)
-                .eq('usuario_id', usuarioId);
+                .eq('usuario_id', id_usuario);
     
             if (consultaError) throw consultaError;
     
@@ -100,7 +102,7 @@ export default function Page({ params }) {
                         .from('usuario_evaluacion_respuesta')
                         .update({ id_respuesta: respuestaSeleccionada })
                         .eq('id_pregunta', preguntaActual.id_pregunta)
-                        .eq('usuario_id', usuarioId);
+                        .eq('usuario_id', id_usuario);
     
                     if (actualizarError) throw actualizarError;
     
@@ -114,8 +116,8 @@ export default function Page({ params }) {
                     .from('usuario_evaluacion_respuesta')
                     .insert([
                         {
-                            usuario_id: usuarioId,
-                            id_evaluacion: 22, // Asegúrate de reemplazar este valor si es necesario
+                            usuario_id: usuario_id,
+                            id_evaluacion: id_evaluacion,
                             id_pregunta: preguntaActual.id_pregunta,
                             id_respuesta: respuestaSeleccionada
                         }

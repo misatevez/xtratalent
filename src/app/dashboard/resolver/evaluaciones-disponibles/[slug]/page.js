@@ -12,11 +12,13 @@ import {
     TableRow,
   } from "@/components/ui/table";
 import Volver from "@/components/ui/volver";
+import useUsuario from "@/lib/useUsuario";
   
 
 export default function Page({params}) {
 
     const router = useRouter();
+    const {id_usuario} = useUsuario();
 
     const id_evaluacion = params.slug;
     const [temas, setTemas] = useState([]);
@@ -43,6 +45,18 @@ export default function Page({params}) {
         obtenerTemas();
 
     }   , []);
+
+    const handleEntregarEvaluacion = async () => {
+      const entrega = new Date();
+      const {data: evaluacion, error} = await supabase
+      .from('usuarios_evaluaciones')
+      .update({entrega_evaluacion: entrega})
+      .match({ id_evaluacion: id_evaluacion, usuarios_id: id_usuario })
+     if(error) console.log(error)
+      else {
+        router.push('/dashboard/resolver/evaluaciones-resueltas')
+      }
+    }
 
     return (
         <>
@@ -95,7 +109,7 @@ export default function Page({params}) {
                 </TableBody>
               </Table>
               <div className="flex justify-around mt-4">
-                <Button>Entregar evaluacion</Button>
+                <Button onClick={handleEntregarEvaluacion} >Entregar evaluacion</Button>
               <Volver/>
               </div>
             </div>
