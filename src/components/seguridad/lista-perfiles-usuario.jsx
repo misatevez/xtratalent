@@ -101,7 +101,7 @@ export default function ListaPerfilesUsuario() {
                  onClick={() => router.push(`/dashboard/seguridad/buscarperfil/${usuario.id_perfil}`)}
                   className="mr-2 p-2"
                   size="small">
-                  Editar
+                  Editar privilegios
                 </Button>
                 <Button
                 disabled={!permisos.borrarPerfilUsuario}
