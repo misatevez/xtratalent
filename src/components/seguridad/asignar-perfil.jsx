@@ -49,7 +49,7 @@ export default function AsignarPerfil({id_perfil}) {
           .from('perfiles_usuario')
           .upsert([
             { id_perfil: id_perfil, id_usuario: id_usuario }
-          ], { onConflict: 'id_usuario' }) // Especificar la columna de conflicto
+          ])
       
         if (error) {
           setNotification({
