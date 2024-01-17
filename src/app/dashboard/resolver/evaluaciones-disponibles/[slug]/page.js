@@ -79,6 +79,7 @@ export default function Page({params}) {
                       <TableCell>
                         {" "}
                         <Button
+                          variant="link"
                           onClick={() =>
                             router.push(
                               `/dashboard/resolver/evaluaciones-disponibles/${id_evaluacion}/${tema.id_tema}`
@@ -87,13 +88,16 @@ export default function Page({params}) {
                         >
                           Resolver
                         </Button>
+
                       </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
               </Table>
-              <div className="flex justify-between mt-4"></div>
+              <div className="flex justify-around mt-4">
+                <Button>Entregar evaluacion</Button>
               <Volver/>
+              </div>
             </div>
           </div>
         </div>
