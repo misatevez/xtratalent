@@ -16,6 +16,8 @@ import { Notificacion } from "../notification";
 
 export function PerfilesUsuario({ perfilId }) {
 
+  const [loading, setLoading] = useState(true);
+
   const [notification, setNotification] = useState({
     titulo: "",
     mensaje: "",
@@ -108,6 +110,7 @@ export function PerfilesUsuario({ perfilId }) {
         });
       }
     };
+    setLoading(false);
     obtenerPermisosdePerfil();
   }, [perfilId]);
 
@@ -122,40 +125,42 @@ export function PerfilesUsuario({ perfilId }) {
 
   const handleSubmit = async () => {
     try {
-      // Actualizar permisos de seguridad
-      await supabase
-        .from('perfil_permisos')
-        .update({ permisos: permisosSeguridad })
-        .eq('id_perfil', perfilId)
-        .eq('id_modulo', 5); // Asegúrate de que el id_modulo sea correcto
+      const updates = [
+        { id_perfil: perfilId, id_modulo: 5, permisos: permisosSeguridad },
+        { id_perfil: perfilId, id_modulo: 2, permisos: permisosEstructuraOrganizacional },
+        { id_perfil: perfilId, id_modulo: 1, permisos: permisosPersonal },
+        { id_perfil: perfilId, id_modulo: 3, permisos: permisosEvaluaciones },
+        { id_perfil: perfilId, id_modulo: 4, permisos: permisosMetricas }
+      ];
   
-      // Actualizar permisos de estructura organizacional
-      await supabase
-        .from('perfil_permisos')
-        .update({ permisos: permisosEstructuraOrganizacional })
-        .eq('id_perfil', perfilId)
-        .eq('id_modulo', 2); // Asegúrate de que el id_modulo sea correcto
+      for (const update of updates) {
+        // Verifica si existe un registro
+        const { data, error } = await supabase
+          .from('perfil_permisos')
+          .select('*')
+          .eq('id_perfil', update.id_perfil)
+          .eq('id_modulo', update.id_modulo)
+          .single();
   
-      // Actualizar permisos de personal
-      await supabase
-        .from('perfil_permisos')
-        .update({ permisos: permisosPersonal })
-        .eq('id_perfil', perfilId)
-        .eq('id_modulo', 1); // Asegúrate de que el id_modulo sea correcto
+        if (error) {
+          throw error;
+        }
   
-      // Actualizar permisos de evaluaciones
-      await supabase
-        .from('perfil_permisos')
-        .update({ permisos: permisosEvaluaciones })
-        .eq('id_perfil', perfilId)
-        .eq('id_modulo', 3); // Asegúrate de que el id_modulo sea correcto
-  
-      // Actualizar permisos de métricas
-      await supabase
-        .from('perfil_permisos')
-        .update({ permisos: permisosMetricas })
-        .eq('id_perfil', perfilId)
-        .eq('id_modulo', 4); // Asegúrate de que el id_modulo sea correcto
+        // Decide si actualizar o insertar
+        if (data) {
+          // Actualizar si el registro existe
+          await supabase
+            .from('perfil_permisos')
+            .update({ permisos: update.permisos })
+            .eq('id_perfil', update.id_perfil)
+            .eq('id_modulo', update.id_modulo);
+        } else {
+          // Insertar si el registro no existe
+          await supabase
+            .from('perfil_permisos')
+            .insert([update]);
+        }
+      }
   
       setNotification({
         titulo: "Permisos actualizados",
@@ -172,10 +177,15 @@ export function PerfilesUsuario({ perfilId }) {
     }
   };
   
+  
   const handleCloseNotification = () => {
     setNotification((prev) => ({ ...prev, visible: false }));
   };
   
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   
 
   return (
