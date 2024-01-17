@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/table";
 import Volver from "../ui/volver";
 import useUsuario from "@/lib/useUsuario";
+import { formatearFecha } from "@/lib/fechaService";
 
 export default function EvaluacionesResueltas() {
   const [evaluaciones, setEvaluaciones] = useState([]);
@@ -104,6 +105,7 @@ export default function EvaluacionesResueltas() {
     return <div>Cargando...</div>;
   }
 
+
   return (
     <>
       <div className="p-4 mx-auto w-full max-w-6xl mt-4">
@@ -116,8 +118,8 @@ export default function EvaluacionesResueltas() {
               <TableHeader>
                 <TableRow>
                   <TableHead className="w-[150px]">Nombre</TableHead>
-                  <TableHead className="w-[200px]">Estado</TableHead>
-                  <TableHead className="w-[250px]">Duracion</TableHead>
+                  <TableHead className="w-[200px]">Calificacion</TableHead>
+                  <TableHead className="w-[250px]">Fecha</TableHead>
                   <TableHead className="w-[100px]">Accion</TableHead>
                 </TableRow>
               </TableHeader>
@@ -126,10 +128,10 @@ export default function EvaluacionesResueltas() {
                   <TableRow key={index}>
                     <TableCell>{evaluacion.evaluaciones.nombre}</TableCell>
                     <TableCell>
-                      {evaluacion.evaluaciones.activa ? "Activa" : "Inactiva"}
+                      {evaluacion.calificacion ? evaluacion.calificacion : "N/A"}
                     </TableCell>
                     <TableCell>
-                      {evaluacion.evaluaciones.duracion} Mins
+                      {evaluacion.entrega_evaluacion ? formatearFecha( evaluacion.entrega_evaluacion )  : "N/A"} 
                     </TableCell>
                     <TableCell>
                       {" "}
@@ -143,9 +145,7 @@ export default function EvaluacionesResueltas() {
                 ))}
               </TableBody>
             </Table>
-            <div className="flex justify-between mt-4">
-                <Volver />
-            </div>
+            
           </div>
         </div>
       </div>
