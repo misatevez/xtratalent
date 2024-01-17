@@ -92,9 +92,9 @@ export default function Layout({children, params}) {
 
     return (
         <div>
-        <div className="flex justify-between items-center p-4">
-      <h1 className="text-lg font-semibold">Tiempo restante</h1>
-      <div className="flex items-center gap-2">
+        <div className="flex justify-start items-center p-4">
+      <h1 className="text-sm font-semibold">Tiempo restante:</h1>
+      <div className="flex items-center mx-2">
         <span className="text-sm">{tiempoRestante}</span>
       </div>
     </div>

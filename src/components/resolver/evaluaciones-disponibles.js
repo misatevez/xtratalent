@@ -66,19 +66,20 @@
       fetchEvaluaciones();
     }, []);
 
-    const iniciarEvaluacion = async (evaluacionId) => {
-      // Registra el momento de inicio en la base de datos
-      // Puedes usar new Date() para obtener la fecha y hora actual
-      const inicio = new Date();
-  
+    const iniciarEvaluacion = async (evaluacionId, duracion) => {
+      const inicio = new Date(); // Define la variable inicio
+      const finEvaluacion = new Date(inicio); // Usa la variable inicio para calcular finEvaluacion
+      finEvaluacion.setMinutes(finEvaluacion.getMinutes() + duracion);
+    
       await supabase
-      .from('usuarios_evaluaciones')
-      .update({ inicio_evaluacion: inicio })
-      .match({ id_evaluacion: evaluacionId, usuarios_id: usuario });
-  
+        .from('usuarios_evaluaciones')
+        .update({ inicio_evaluacion: inicio, final_evaluacion: finEvaluacion })
+        .match({ id_evaluacion: evaluacionId, usuarios_id: usuario });
+    
       // Redirige al usuario a la página de la evaluación
       router.push(`/dashboard/resolver/evaluaciones-disponibles/${evaluacionId}`);
     };
+    
 
     if (loading) {
       return <div>Cargando...</div>;
@@ -115,7 +116,7 @@
                         {" "}
                         <Button 
                         variant="link"
-                        onClick={() => iniciarEvaluacion(evaluacion.id_evaluacion)}>
+                        onClick={() => iniciarEvaluacion(evaluacion.id_evaluacion, evaluacion.evaluaciones.duracion)}>
               Resolver
             </Button>
                       </TableCell>
