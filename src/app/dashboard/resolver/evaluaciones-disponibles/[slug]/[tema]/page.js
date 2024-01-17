@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Volver from "@/components/ui/volver";
 import supabase from "@/lib/supabaseClient";
+import { Label } from "@/components/ui/label";
 
 export default function Page({ params }) {
     const id_tema = params.tema;
@@ -80,38 +81,57 @@ export default function Page({ params }) {
 
     const guardarOActualizarRespuestaUsuario = async () => {
         try {
-            const preguntaActualId = preguntas[preguntaActualIndex].id_pregunta;
-            const usuarioId = 25;
+            const preguntaActual = preguntas[preguntaActualIndex];
+            const usuarioId = 25; // Reemplaza 25 con el ID real del usuario
+    
+            // Verificar si el usuario ya ha respondido esta pregunta
             const { data: respuestasExistentes, error: consultaError } = await supabase
                 .from('usuario_evaluacion_respuesta')
                 .select('*')
-                .eq('id_pregunta', preguntaActualId)
+                .eq('id_pregunta', preguntaActual.id_pregunta)
                 .eq('usuario_id', usuarioId);
-
+    
             if (consultaError) throw consultaError;
-
-            if (respuestasExistentes.length === 0) {
+    
+            if (respuestasExistentes.length > 0) {
+                // Si la pregunta es revisable, actualizar la respuesta
+                if (preguntaActual.revisable) {
+                    const { error: actualizarError } = await supabase
+                        .from('usuario_evaluacion_respuesta')
+                        .update({ id_respuesta: respuestaSeleccionada })
+                        .eq('id_pregunta', preguntaActual.id_pregunta)
+                        .eq('usuario_id', usuarioId);
+    
+                    if (actualizarError) throw actualizarError;
+    
+                    console.log('Respuesta actualizada');
+                } else {
+                    console.log('El usuario ya ha respondido esta pregunta y no es revisable');
+                }
+            } else {
+                // Guardar la nueva respuesta
                 const { error: guardarError } = await supabase
                     .from('usuario_evaluacion_respuesta')
                     .insert([
-                        { 
+                        {
                             usuario_id: usuarioId,
-                            id_evaluacion: 22,
-                            id_pregunta: preguntaActualId,
+                            id_evaluacion: 22, // Asegúrate de reemplazar este valor si es necesario
+                            id_pregunta: preguntaActual.id_pregunta,
                             id_respuesta: respuestaSeleccionada
                         }
                     ]);
-
+    
                 if (guardarError) throw guardarError;
-
-                handleSiguientePregunta();
-            } else {
-                console.log('El usuario ya ha respondido esta pregunta');
+    
+                console.log('Respuesta guardada');
             }
+    
+            handleSiguientePregunta();
         } catch (error) {
             console.error('Error:', error);
         }
     };
+    
 
     return (
         <div className="p-4 mx-auto w-full max-w-6xl mt-4">
@@ -120,8 +140,9 @@ export default function Page({ params }) {
                     <h1 className="text-2xl font-medium mb-2">Preguntas:</h1>
                     {preguntas.length > 0 && (
                         <div>
-                            <p className="text-lg font-medium mb-2">{preguntas[preguntaActualIndex].pregunta}</p>
-                            <p className="text-lg font-medium mb-2">Respuestas:</p>
+                            <p className="text-lg font-medium mb-2">{preguntas[preguntaActualIndex].pregunta}  </p>
+                            <Label> {preguntas[preguntaActualIndex].revisable ? "Revisable" : "No Revisable"}</Label>
+                            <p className="text-lg font-medium my-2">Respuestas:</p>
                             <ul>
                                 {respuestas.map((respuesta, index) => (
                                     <li key={index}>
@@ -137,13 +158,17 @@ export default function Page({ params }) {
                                     </li>
                                 ))}
                             </ul>
-                            <Button className="mt-4" onClick={guardarOActualizarRespuestaUsuario} disabled={!respuestaSeleccionada}>
+                            <Button className="mt-4" onClick={guardarOActualizarRespuestaUsuario} disabled={!respuestaSeleccionada || !preguntas[preguntaActualIndex].revisable }>
                                 Guardar Respuesta
+                            </Button>
+                            <Button className="mx-4 mt-4" onClick={handleSiguientePregunta} >
+                                Siguiente Pregunta
                             </Button>
                             {nohaymaspreguntas ? (
                                 <>
+                                    <p className="text-lg font-medium my-2">Tema Finalizado</p>
                                     <Volver />
-                                    <p className="text-lg font-light mt-4">{mensajeRespuesta}</p>
+                                
                                 </>
                             ) : null}
                         </div>
