@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table"
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
+import Volver from "@/components/ui/volver";
 
 
 
@@ -14,7 +15,7 @@ export function CrearRenglon() {
     (
       <div className=" p-4 mx-auto w-full max-w-2xl mt-4">
       <div className="bg-white p-4 rounded-md shadow-md mt-4">
-        <h2 className="text-lg font-bold text-[#2c5282] mb-4">Nuevo Renglón</h2>
+        <h2 className="text-lg font-bold mb-4">Nuevo Renglón</h2>
         <div className="grid grid-cols-2 gap-4">
           <div>
           <label className="block text-sm font-medium mb-1" htmlFor="group-name">
@@ -46,8 +47,9 @@ export function CrearRenglon() {
             rows="4"
           />
         </div>
-        <div className="flex justify-end mt-4">
+        <div className="flex justify-around mt-4">
           <Button>Guardar</Button>
+          <Volver />
         </div>
       </div>
     </div>
@@ -55,25 +57,3 @@ export function CrearRenglon() {
   );
 }
 
-
-function SignalIcon(props) {
-  return (
-    (<svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round">
-      <path d="M2 20h.01" />
-      <path d="M7 20v-4" />
-      <path d="M12 20v-8" />
-      <path d="M17 20V8" />
-      <path d="M22 4v16" />
-    </svg>)
-  );
-}

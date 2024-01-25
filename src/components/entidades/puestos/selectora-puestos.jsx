@@ -18,8 +18,8 @@ export function SelectoraPuestos() {
           <div className="flex items-center space-x-4 justify-center">
             <Button disabled={!permisos.editarPuestos} onClick={() => router.push('/dashboard/entidades/puestos/crearpuestos')} className="bg-white text-purple-500 hover:bg-gray-200">Crear Puestos</Button>
             <Button disabled={!permisos.puestos} onClick={() => router.push('/dashboard/entidades/puestos/buscarpuestos')}className="bg-white text-purple-500 hover:bg-gray-200">Buscar Puestos</Button>
-            {/* <Button  onClick={() => router.push('/dashboard/entidades/puestos/renglones-presupuestarios')}className="bg-white text-purple-500 hover:bg-gray-200">Renglones presupuestarios</Button>
-            <Button  onClick={() => router.push('/dashboard/entidades/puestos/vacantes')}className="bg-white text-purple-500 hover:bg-gray-200">Vacantes</Button> */}
+            <Button  onClick={() => router.push('/dashboard/entidades/puestos/renglones-presupuestarios')}className="bg-white text-purple-500 hover:bg-gray-200">Renglones presupuestarios</Button>
+            <Button  onClick={() => router.push('/dashboard/entidades/puestos/vacantes')}className="bg-white text-purple-500 hover:bg-gray-200">Vacantes</Button> 
           </div>
         </main>
     )
