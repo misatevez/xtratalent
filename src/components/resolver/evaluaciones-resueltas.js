@@ -11,7 +11,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import Volver from "../ui/volver";
 import useUsuario from "@/lib/useUsuario";
 import { formatearFecha } from "@/lib/fechaService";
 
@@ -37,7 +36,8 @@ export default function EvaluacionesResueltas() {
             evaluaciones: id_evaluacion (
               nombre,
               activa,
-              duracion
+              duracion,
+              calificacion
             )
           `)
           .eq("usuarios_id", id_usuario)
@@ -58,46 +58,6 @@ export default function EvaluacionesResueltas() {
   
   
   
-
-  const iniciarEvaluacion = async (evaluacionId, duracion) => {
-    try {
-      // Verificar si ya existe un registro de inicio_evaluacion
-      const { data: evaluacionExistente, error } = await supabase
-        .from('usuarios_evaluaciones')
-        .select('inicio_evaluacion')
-        .match({ id_evaluacion: evaluacionId, usuarios_id: id_usuario })
-        .single();
-  
-      if (error) {
-        console.error('Error al verificar la evaluación existente:', error);
-        return;
-      }
-  
-      // Si inicio_evaluacion ya está registrado, no hacer nada
-      if (evaluacionExistente && evaluacionExistente.inicio_evaluacion) {
-          // Redirige al usuario a la página de la evaluación
-    router.push(`/dashboard/resolver/evaluaciones-disponibles/${evaluacionId}`);
-        return;
-      }
-  
-      // Si no, calcular finEvaluacion y actualizar la base de datos
-      const inicio = new Date(); 
-      const finEvaluacion = new Date(inicio); 
-      finEvaluacion.setMinutes(finEvaluacion.getMinutes() + duracion);
-  
-      await supabase
-        .from('usuarios_evaluaciones')
-        .update({ inicio_evaluacion: inicio, final_evaluacion: finEvaluacion })
-        .match({ id_evaluacion: evaluacionId, usuarios_id: id_usuario });
-  
-  
-    } catch (err) {
-      console.error('Error al iniciar la evaluación:', err);
-    }
-  
-    // Redirige al usuario a la página de la evaluación
-    router.push(`/dashboard/resolver/evaluaciones-disponibles/${evaluacionId}`);
-  };
   
   
 
@@ -128,18 +88,13 @@ export default function EvaluacionesResueltas() {
                   <TableRow key={index}>
                     <TableCell>{evaluacion.evaluaciones.nombre}</TableCell>
                     <TableCell>
-                      {evaluacion.calificacion ? evaluacion.calificacion : "N/A"}
+                      {evaluacion.calificacion ? evaluacion.calificacion + '%' : "N/A"}
                     </TableCell>
+                    <TableCell>
+  {evaluacion.calificacion >= evaluacion.evaluaciones.calificacion ? "Aprobaste" : "Desaprobaste"}
+</TableCell>
                     <TableCell>
                       {evaluacion.entrega_evaluacion ? formatearFecha( evaluacion.entrega_evaluacion )  : "N/A"} 
-                    </TableCell>
-                    <TableCell>
-                      {" "}
-                      <Button 
-                      variant="link"
-                      >
-            Ver reporte
-          </Button>
                     </TableCell>
                   </TableRow>
                 ))}

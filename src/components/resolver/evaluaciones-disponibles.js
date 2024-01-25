@@ -25,6 +25,7 @@ import useUsuario from "@/lib/useUsuario";
     useEffect(() => {
       const fetchEvaluaciones = async () => {
         if (!id_usuario) return;
+        console.log(id_usuario);
     
         try {
           const ahora = new Date();
@@ -41,7 +42,7 @@ import useUsuario from "@/lib/useUsuario";
             `)
             .eq("usuarios_id", id_usuario)
             .is('entrega_evaluacion', null) // Filtra las evaluaciones no entregadas
-            .gt('final_evaluacion', ahora.toISOString()) // Filtra las evaluaciones cuya fecha final es posterior a ahora
+            .or(`final_evaluacion.gt.${ahora.toISOString()},final_evaluacion.is.null`) // Filtra evaluaciones cuya fecha final es posterior a ahora o es null
     
           setEvaluaciones(evaluationsData);
         } catch (err) {
@@ -54,6 +55,7 @@ import useUsuario from "@/lib/useUsuario";
     
       fetchEvaluaciones();
     }, [id_usuario]);
+    
     
     
 

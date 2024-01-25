@@ -116,7 +116,7 @@ export default function Page({ params }) {
                     .from('usuario_evaluacion_respuesta')
                     .insert([
                         {
-                            usuario_id: usuario_id,
+                            usuario_id: id_usuario,
                             id_evaluacion: id_evaluacion,
                             id_pregunta: preguntaActual.id_pregunta,
                             id_respuesta: respuestaSeleccionada

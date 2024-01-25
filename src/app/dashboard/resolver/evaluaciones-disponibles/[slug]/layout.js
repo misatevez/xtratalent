@@ -70,7 +70,7 @@ export default function Layout({children, params}) {
         };
     
         let intervalo;
-        if (tiempo.inicio_evaluacion && tiempo.evaluaciones.duracion) {
+        if (tiempo?.inicio_evaluacion && tiempo?.evaluaciones?.duracion) {
             intervalo = setInterval(calcularTiempoRestante, 1000);
         }
     
@@ -79,7 +79,7 @@ export default function Layout({children, params}) {
                 clearInterval(intervalo);
             }
         };
-    }, [tiempo.inicio_evaluacion, tiempo.evaluaciones.duracion]);
+    }, [tiempo?.inicio_evaluacion, tiempo?.evaluaciones?.duracion]);
     
     
 
