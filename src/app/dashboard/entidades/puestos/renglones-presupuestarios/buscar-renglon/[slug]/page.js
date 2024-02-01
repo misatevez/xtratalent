@@ -1,69 +1,87 @@
 'use client'
-import { Notificacion } from "@/components/notification";
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import Volver from "@/components/ui/volver";
+import { useState, useEffect } from "react";
 import supabase from "@/lib/supabaseClient";
-import { useState } from "react";
+import { Notificacion } from "@/components/notification";
+import Volver from "@/components/ui/volver";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
+export default function page({params}) {
+    const id_renglon_presupuestario = params.slug;
+    const [formState, setFormState] = useState({
+        numero: '',
+        tipo: '',
+        nombre: '',
+        descripcion: ''
+      });
+    
+      const [notification, setNotification] = useState({
+        visible: false,
+        titulo: "",
+        mensaje: ""
+      });
 
+    useEffect(() => {
+        const fetchRenglonPresupuestario = async () => { 
 
-export function CrearRenglon() {
+            const { data, error } = await supabase
+                .from('renglon_presupuestario')
+                .select()
+                .eq('id_renglon_presupuestario', id_renglon_presupuestario)
+                .single();
 
-  const [formState, setFormState] = useState({
-    numero: '',
-    tipo: '',
-    nombre: '',
-    descripcion: ''
-  });
+        if(error){
+            console.log(error);
+        }
+        else {
+            setFormState(data);
+        }
+    }
+        fetchRenglonPresupuestario();
 
-  const [notification, setNotification] = useState({
-    visible: false,
-    titulo: "",
-    mensaje: ""
-  });
+    }, [id_renglon_presupuestario]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const { data, error } = await supabase
-      .from('renglon_presupuestario')
-      .insert([formState]);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const { data, error } = await supabase
+          .from('renglon_presupuestario')
+          .update(formState)
+          .match({id_renglon_presupuestario: id_renglon_presupuestario});
+    
+       
+      if (error) {
+        setNotification({
+          visible: true,
+          titulo: "Error",
+          mensaje: "Vuelva a intentar mas tarde: " + error.message // Ajusta según necesites
+        });
+      } else {
+        setNotification({
+          visible: true,
+          titulo: "Éxito",
+          mensaje: "Se ha actualizado su renglon presupuestarios" // Ajusta según necesites
+        });
+      }
+      }
 
-   
-  if (error) {
-    setNotification({
-      visible: true,
-      titulo: "Error",
-      mensaje: "Vuelva a intentar mas tarde: " + error.message // Ajusta según necesites
-    });
-  } else {
-    setNotification({
-      visible: true,
-      titulo: "Éxito",
-      mensaje: "Se ha creado su renglon presupuestarios" // Ajusta según necesites
-    });
-  }
-  }
-
-     // Manejar cambios en los inputs
+          // Manejar cambios en los inputs
 const handleInputChange = (e) => {
-  const { name, value } = e.target;
-  setFormState(prevState => ({
-    ...prevState,
-    [name]: value
-  }));
-};
+    const { name, value } = e.target;
+    setFormState(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+  
+  const handleCloseNotification = () => {
+    setNotification((prev) => ({ ...prev, visible: false }));
+  };
 
-const handleCloseNotification = () => {
-  setNotification((prev) => ({ ...prev, visible: false }));
-};
-
-  return (
-    (
-      <>
+    return (
+        <>
       <div className=" p-4 mx-auto w-full max-w-2xl mt-4">
       <form onSubmit={handleSubmit} className="bg-white p-4 rounded-md shadow-md mt-4">
-        <h2 className="text-lg font-bold mb-4">Nuevo Renglón</h2>
+        <h2 className="text-lg font-bold mb-4">Modificar Renglón</h2>
         <div className="grid grid-cols-2 gap-4">
           <div>
           <label className="block text-sm font-medium mb-1" htmlFor="group-name">
@@ -113,7 +131,6 @@ const handleCloseNotification = () => {
       />
     )}
     </>
-    )
-  );
+    );
 }
 
