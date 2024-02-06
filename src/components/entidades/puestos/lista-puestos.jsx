@@ -3,7 +3,7 @@ import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@
 import { useEffect, useState } from "react";
 import supabase from "@/lib/supabaseClient";
 
-export default function ListaPuesto( {  selectedTipoId, handleGrupoTipoChange}) {
+export default function ListaPuesto( {  selectedTipoId, handleGrupoTipoChange, disabled}) {
 
   const [puesto, setPuestos] = useState([]);
 
@@ -27,7 +27,7 @@ export default function ListaPuesto( {  selectedTipoId, handleGrupoTipoChange}) 
       <label className="block text-sm font-medium mb-1" htmlFor="group-type">
         Puestos:
       </label>
-      <Select onValueChange={handleGrupoTipoChange} value={selectedTipoId?.toString()} >
+      <Select onValueChange={handleGrupoTipoChange} value={selectedTipoId?.toString()} disabled={disabled} >
         <SelectTrigger id="group-type">
           <SelectValue placeholder="Seleccione uno" />
         </SelectTrigger>

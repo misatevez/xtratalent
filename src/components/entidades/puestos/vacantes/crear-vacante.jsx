@@ -12,10 +12,12 @@ import ListaPuesto from '../lista-puestos';
 import { format } from 'date-fns';
 import { Notificacion } from '@/components/notification';
 import supabase from '@/lib/supabaseClient';
+import { useRouter } from 'next/navigation';
 
 export default function CrearVacante() {
 
   const today = format(new Date(), 'yyyy-MM-dd');
+  const router = useRouter();
 
   // Estado inicial para el formulario
   const [formState, setFormState] = useState({
@@ -122,6 +124,12 @@ export default function CrearVacante() {
         mensaje: "Se ha creado su vacante" // Ajusta según necesites
       });
     }
+
+    setTimeout(() => {
+      router.push('/dashboard/entidades/puestos/vacantes/buscarvacante');
+    }, 2000);
+
+
   };
 
   const status = [
@@ -148,6 +156,7 @@ export default function CrearVacante() {
                 </div>
                 <div>
                   <ListaSubEntidad
+                    disabled={formState.id_entidad_empresa === ''}
                     filter={selectedEntidad}
                     selectedTipoId={formState.id_sub_entidad}
                     onGrupoTipoChange={handleSubEntidadChange}
@@ -155,6 +164,7 @@ export default function CrearVacante() {
                 </div>
                 <div>
                   <ListaDirecciones
+                    disabled={formState.id_sub_entidad === ''}
                     filter={selectedSubEntidad}
                     selectedTipoId={formState.id_direcciones}
                     onGrupoTipoChange={handleDireccionChange}
@@ -162,6 +172,7 @@ export default function CrearVacante() {
                 </div>
                 <div>
                   <ListaDepartamentos
+                    disabled={formState.id_direcciones === ''}
                     filter={formState.id_direcciones}
                     selectedTipoId={formState.id_departamentos}
                     onGrupoTipoChange={handleDepartamentoChange}
@@ -169,12 +180,14 @@ export default function CrearVacante() {
                 </div>
                 <div>
                   <ListaPuesto
+                    disabled={formState.id_departamentos === ''}
                     selectedTipoId={formState.id_puestos}
                     handleGrupoTipoChange={handlePuestoChange}
                   />
                 </div>
                 <div>
                   <ListaRenglones
+                    disabled={formState.id_puestos === ''}
                     selectedTipoId={formState.id_renglon_presupuestario}
                     handleGrupoTipoChange={handleRenglonesChange}
                   />

@@ -6,9 +6,13 @@ import { Input } from "@/components/ui/input"
 import Volver from "@/components/ui/volver";
 import { useEffect, useState } from "react";
 import supabase from "@/lib/supabaseClient";
+import { useRouter } from "next/navigation";
 
 
 export default function BuscarDireccionVacante() {
+
+  const router = useRouter();
+
   const [loading, setLoading] = useState(true);
   const [direcciones, setDirecciones] = useState([]);
   const [selectedGrupoId, setSelectedGrupoId] = useState(null);
@@ -148,9 +152,13 @@ if (loading) return <p>Cargando...</p>;
       </div>
       <div className="flex justify-around items-center mt-4">
 
-        <Button >Modificar</Button>
+        <Button 
+        onClick={() =>
+          router.push(`http://localhost:3000/dashboard/entidades/puestos/vacantes/buscardireccion/${selectedGrupoId}`)
+        }
+        disabled={!selectedGrupoId} >Modificar</Button>
         <Volver />
-        <Button onClick={handleDelete} >Eliminar</Button>
+        <Button disabled={!selectedGrupoId} onClick={handleDelete} >Eliminar</Button>
       
       </div>
     </div>

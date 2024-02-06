@@ -29,12 +29,14 @@ export default function page({ params }) {
     id_vacante: "",
 
   });
+
   const [loading, setLoading] = useState(false);
   const [carga, setCarga] = useState(false);
   const [selectedEvaluaciones, setSelectedEvaluaciones] = useState([]);
   const [selectedEvaluacion, setSelectedEvaluacion] = useState("");
   const [selectedToRemove, setSelectedToRemove] = useState("");
   const [selectedLink, setSelectedLink] = useState("");
+  const [selectedVacante, setSelectedVacante] = useState("");
 
   const [notification, setNotification] = useState({
     visible: false,
@@ -42,6 +44,29 @@ export default function page({ params }) {
     mensaje: ""
   });
 
+  useEffect(() => {
+    const fetchDireccionWeb = async () => {
+        const { data, error } = await supabase
+            .from("direcciones_web")
+            .select("*")
+            .eq("id", id)
+            .single();
+        if (error) {
+            console.log("Error: ", error);
+        } else {
+            setFormState(data)
+            setSelectedLink('http://localhost:3000/vacantes/registro/' + data.id);
+            setSelectedEvaluaciones(data.evaluaciones_asignadas);
+            setSelectedVacante(data.id_vacante);
+            setSelectedToRemove(data.evaluaciones_asignadas[0].id);
+            console.log(data.evaluaciones_asignadas[0].id);
+
+        }
+
+    }
+    setLoading(true);
+    fetchDireccionWeb();
+}, []);
 
 
 
@@ -79,7 +104,6 @@ export default function page({ params }) {
   
     const updatedFormState = {
       ...formState,
-      id_vacante: id,
       evaluaciones_asignadas: selectedEvaluaciones,
     };
   
@@ -87,18 +111,17 @@ export default function page({ params }) {
   
     const { data, error } = await supabase
       .from("direcciones_web")
-      .upsert(updatedFormState)
-      .select('id');
-  
+      .update(updatedFormState)
+      .eq("id", id);
+
     if (error) {
       console.log('Error: ', error);
     } else {
-      setSelectedLink('http://localhost:3000/vacantes/registro/' + data[0].id);
-
+    
       setNotification({
         visible: true,
-        titulo: "Dirección web creada",
-        mensaje: "La dirección web ha sido creada con éxito"
+        titulo: "Dirección web actualizada",
+        mensaje: "La dirección web ha sido actualizada con éxito"
       });
 
     }
@@ -131,6 +154,7 @@ export default function page({ params }) {
       ]);
     }
   };
+  
 
   const handleVacante = (id_vacante) => {
     handleInputChange({ target: { name: 'id_vacante', value: id_vacante } });
@@ -199,12 +223,12 @@ export default function page({ params }) {
         <div className="bg-white p-6 rounded-lg shadow-inner m-auto">
           <form onSubmit={handleGuardar}>
             <div>
-              <h2 className="text-lg font-bold mb-4">Crear dirección web</h2>
+              <h2 className="text-lg font-bold mb-4">Modificar dirección web</h2>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <ListaVacantes
                   readOnly
-                  selectedTipoId={id}
+                  selectedTipoId={selectedVacante}
                   onGrupoTipoChange={handleVacante}
                   disabled={true}
                   />

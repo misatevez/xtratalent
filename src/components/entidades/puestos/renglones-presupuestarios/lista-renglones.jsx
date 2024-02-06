@@ -3,7 +3,7 @@ import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@
 import { useEffect, useState } from "react";
 import supabase from "@/lib/supabaseClient";
 
-export default function ListaRenglones({  selectedTipoId, handleGrupoTipoChange }) {
+export default function ListaRenglones({  selectedTipoId, handleGrupoTipoChange, disabled }) {
 
   const [renglones, setRenglones] = useState([]);
 
@@ -28,7 +28,7 @@ export default function ListaRenglones({  selectedTipoId, handleGrupoTipoChange 
       <label className="block text-sm font-medium mb-1" htmlFor="group-type">
         Renglones numero:
       </label>
-      <Select onValueChange={handleGrupoTipoChange} value={ selectedTipoId?.toString()}>
+      <Select onValueChange={handleGrupoTipoChange} value={ selectedTipoId?.toString()} disabled={disabled} >
         <SelectTrigger id="group-type">
           <SelectValue placeholder="Seleccione uno" />
         </SelectTrigger>

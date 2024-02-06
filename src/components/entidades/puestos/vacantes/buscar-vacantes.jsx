@@ -63,6 +63,7 @@ const handleDelete = async (id) => {
   } else {
     console.log("Deleted vacante", data);
     setRelauch(!relauch);
+    setSelectedGrupoId(null);
   }
 }
 
@@ -70,7 +71,7 @@ const handleDelete = async (id) => {
 
   return (
     
-    <div className="bg-white p-4 rounded-md shadow-md m-auto w-full max-w-6xl text-center">
+    <div className="bg-white p-4 rounded-md shadow-md m-auto w-full max-w-7xl text-center">
       <h1 className="text-xl font-bold text-center mb-4">Buscar Vacante</h1>
 
       <div className="grid grid-cols-3 gap-4 mb-4"></div>
@@ -157,6 +158,7 @@ const handleDelete = async (id) => {
         >
           Eliminar
         </Button>
+        <Volver />
       </div>
     </div>
   );
