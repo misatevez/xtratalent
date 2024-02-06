@@ -14,7 +14,7 @@ import { format, set } from 'date-fns';
 import { Notificacion } from '@/components/notification';
 import supabase from '@/lib/supabaseClient';
 
-export default function page({ params }) {
+export default function Page({ params }) {
 
   const today = format(new Date(), 'yyyy-MM-dd');
 const id = params.slug;

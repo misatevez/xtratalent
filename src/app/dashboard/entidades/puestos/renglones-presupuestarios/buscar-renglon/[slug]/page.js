@@ -6,7 +6,7 @@ import Volver from "@/components/ui/volver";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-export default function page({params}) {
+export default function Page({params}) {
     const id_renglon_presupuestario = params.slug;
     const [formState, setFormState] = useState({
         numero: '',
