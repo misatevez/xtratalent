@@ -22,7 +22,7 @@ export default function ListaDepartamentos( { onGrupoTipoChange, selectedTipoId 
         if (error) {
           console.error("Error al obtener los departamentos: ", error);
         } else {
-          console.log(data);
+          console.log('Estos son los departamentos:', data)
           setDepartamentos(data);
         }
       } else {

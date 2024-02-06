@@ -19,7 +19,6 @@ export function SelectoraVacantes() {
           <div className="flex items-center space-x-4 justify-center">
             <Button onClick={() => router.push('/dashboard/entidades/puestos/vacantes/crearvacante')} className="bg-white text-purple-500 hover:bg-gray-200">Crear Vacantes</Button>
             <Button  onClick={() => router.push('/dashboard/entidades/puestos/vacantes/buscarvacante')}className="bg-white text-purple-500 hover:bg-gray-200">Buscar Vacantes</Button>
-            <Button  onClick={() => router.push('/dashboard/entidades/puestos/vacantes/nuevadireccion')}className="bg-white text-purple-500 hover:bg-gray-200">Crear Direccion Web</Button>
             <Button  onClick={() => router.push('/dashboard/entidades/puestos/vacantes/buscardireccion')}className="bg-white text-purple-500 hover:bg-gray-200">Buscar Direccion Web</Button>
           </div>
         </main>

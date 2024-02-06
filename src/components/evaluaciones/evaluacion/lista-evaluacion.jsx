@@ -3,44 +3,45 @@ import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@
 import { useEffect, useState } from "react";
 import supabase from "@/lib/supabaseClient";
 
-export default function ListaRenglones({  selectedTipoId, handleGrupoTipoChange }) {
-
-  const [renglones, setRenglones] = useState([]);
+export default function ListaEvaluaciones({ handleGrupoTipoChange }) {
+  const [evaluaciones, setEvaluaciones] = useState([]);
 
   useEffect(() => {
-    const fetchRenglones = async () => {
+    const fetchEvaluaciones = async () => {
       const { data, error } = await supabase
-        .from('renglon_presupuestario')
+        .from('evaluaciones')
         .select('*');
 
       if (error) {
         console.error("Error al obtener los renglones", error);
       } else {
-        setRenglones(data);
+        setEvaluaciones(data);
       }
     }
-    fetchRenglones();
+    fetchEvaluaciones();
   }, []);
 
-
-    return (
-      <>
+  return (
+    <>
       <label className="block text-sm font-medium mb-1" htmlFor="group-type">
-        Renglones numero:
+        Evaluaciones disponibles:
       </label>
-      <Select onValueChange={handleGrupoTipoChange} value={ selectedTipoId?.toString()}>
+      <Select onValueChange={(value) => handleGrupoTipoChange(value)} >
         <SelectTrigger id="group-type">
           <SelectValue placeholder="Seleccione uno" />
         </SelectTrigger>
-        
+
         <SelectContent position="popper">
-          {renglones.map((tipo, index) => (
-            <SelectItem key={index} value={tipo.id_renglon_presupuestario.toString()}>{tipo.numero}</SelectItem>
+          {evaluaciones.map((tipo, index) => (
+            <SelectItem
+              key={index}
+              value={`${tipo.id_evaluacion},${tipo.nombre}`} // Combinar id_evaluacion y tipo.nombre en un solo valor separado por coma
+            >
+              {tipo.nombre}
+            </SelectItem>
           ))}
         </SelectContent>
-
       </Select>
     </>
-    );
+  );
 }
-

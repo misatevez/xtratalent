@@ -3,38 +3,38 @@ import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@
 import { useEffect, useState } from "react";
 import supabase from "@/lib/supabaseClient";
 
-export default function ListaVacantes( {  selectedTipoId, handleGrupoTipoChange, disabled}) {
+export default function ListaPuesto( {  selectedTipoId, handleGrupoTipoChange}) {
 
-  const [vacantes, setVacantes] = useState([]);
+  const [puesto, setPuestos] = useState([]);
 
   useEffect(() => {
-    const fetchVacantes = async () => {
+    const fetchPuestos = async () => {
       const { data, error } = await supabase
-        .from('vacantes')
+        .from('puestos')
         .select('*');
 
       if (error) {
-        console.error("Error al obtener las vacantes", error);
+        console.error("Error al obtener los renglones", error);
       } else {
-        setVacantes(data);
+        setPuestos(data);
       }
     }
-    fetchVacantes();
+    fetchPuestos();
   }, []);
 
     return (
       <>
       <label className="block text-sm font-medium mb-1" htmlFor="group-type">
-        Vacantes:
+        Puestos:
       </label>
-      <Select onValueChange={handleGrupoTipoChange} value={selectedTipoId?.toString()} disabled={disabled} >
+      <Select onValueChange={handleGrupoTipoChange} value={selectedTipoId?.toString()} >
         <SelectTrigger id="group-type">
           <SelectValue placeholder="Seleccione uno" />
         </SelectTrigger>
         
         <SelectContent position="popper">
-          {vacantes.map((tipo, index) => (
-            <SelectItem key={index} value={tipo.id.toString()}>{tipo.nombre}</SelectItem>
+          {puesto.map((tipo, index) => (
+            <SelectItem key={index} value={tipo.id_puestos.toString()}>{tipo.nombre}</SelectItem>
           ))}
         </SelectContent>
 
