@@ -13,10 +13,12 @@ import {
 } from "@/components/ui/table";
 import useUsuario from "@/lib/useUsuario";
 import { formatearFecha } from "@/lib/fechaService";
+import Volver from "../ui/volver";
 
 export default function EvaluacionesResueltas() {
   const [evaluaciones, setEvaluaciones] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedUserId, setSelectedUserId] = useState(null);
   const [error, setError] = useState(null);
   const router = useRouter();
   const { id_usuario } = useUsuario();
@@ -59,6 +61,11 @@ export default function EvaluacionesResueltas() {
     fetchEvaluaciones();
   }, [id_usuario]);
 
+  const handleCheckboxChange = (userId) => {
+    setSelectedUserId(selectedUserId === userId ? null : userId); // Toggle selection
+  }
+
+
   if (loading) {
     return <div>Cargando...</div>;
   }
@@ -76,6 +83,7 @@ export default function EvaluacionesResueltas() {
                   <TableHead className="w-[200px]">Calificacion</TableHead>
                   <TableHead className="w-[200px]">Resultado</TableHead>
                   <TableHead className="w-[250px]">Fecha</TableHead>
+                  <TableHead className="w-[50px]">Seleccionar</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -98,10 +106,23 @@ export default function EvaluacionesResueltas() {
                         ? formatearFecha(evaluacion.entrega_evaluacion)
                         : "N/A"}
                     </TableCell>
+                    <TableCell>
+                    <input
+                  type="checkbox"
+                  checked={selectedUserId === evaluacion.id}
+                  onChange={() => handleCheckboxChange(evaluacion.id)}
+                  className="accent-black h-5 w-5"
+                />
+
+                      </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
+            <div className="flex justify-between mt-4">
+              <Button  onClick={() => router.push(`/dashboard/resolver/evaluaciones-resueltas/${selectedUserId}`)} disabled={!selectedUserId}  >Reporte</Button>
+              <Volver />
+              </div>
           </div>
         </div>
       </div>

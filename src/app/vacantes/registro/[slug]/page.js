@@ -5,7 +5,7 @@ import supabase from "@/lib/supabaseClient";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function page({ params }) {
+export default function Page({ params }) {
   const id = params.slug;
 const router = useRouter();
   const [direccion, setDireccion] = useState("");
