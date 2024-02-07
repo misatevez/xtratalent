@@ -93,7 +93,7 @@ export function Dashboard( {children} ) {
             className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
             href="/dashboard">
             <SettingsIcon className="w-6 h-6" />
-            {permisos.tipo_usuario !== 'Externo' ? 'Dashboard' : 'Métricas (Dashboard)'}
+            {permisos.tipo_usuario !== 'Externo' ? 'Métricas (Dashboard)' : 'Dashboard'}
           </Link>
 
         </nav>
