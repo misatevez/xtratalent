@@ -15,6 +15,12 @@ export function Login() {
 
   const router = useRouter();
   async function signInWithEmail() {
+
+    if (!email || !password) {
+      setMessage({ type: "error", content: "Por favor, ingresa tu correo y contraseña." });
+      return;
+    }
+
     const { data, error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password
@@ -90,7 +96,7 @@ export function Login() {
             height: "100%",
           }} />
       </div>
-      <div className="w-1/3 flex flex-col justify-center items-center px-12 ">
+      <form className="w-1/3 flex flex-col justify-center items-center px-12 ">
         <div className="w-full max-w-md">
           <div className="mb-6 text-center">
             <img
@@ -129,20 +135,20 @@ export function Login() {
             <label className="block text-sm font-semibold mb-2" htmlFor="email">
               Email *
             </label>
-            <Input id="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <Input id="email" placeholder="Email" value={email} required onChange={(e) => setEmail(e.target.value)} />
           </div>
           <div className="mb-4">
             <label className="block text-sm font-semibold mb-2" htmlFor="password">
               Contraseña *
             </label>
-            <Input id="password" placeholder="Contraseña" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <Input id="password" placeholder="Contraseña" type="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
           <div className="flex items-center justify-between mb-6">
-            <label className="flex items-center" htmlFor="remember">
+            <label className="flex items-center text-xs" htmlFor="remember">
               <Input className="mr-2" id="remember" type="checkbox" checked={rememberMe} onChange={handleRememberMeChange} />
               Recordarme
             </label>
-            <Link onClick={() => forgotPassword(email) } className="text-sm text-blue-600 hover:underline" href="#">
+            <Link onClick={() => forgotPassword(email) } className="text-xs text-blue-600 hover:underline" href="#">
               ¿Recuperar contraseña?
             </Link>
           </div>
@@ -188,7 +194,7 @@ export function Login() {
               </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>)
   );
 }
