@@ -19,7 +19,6 @@ const router = useRouter();
     fecha_nacimiento: "",
     numero_dpi: "",
     pais_origen: "",
-    correo_electronico: "",
   });
   const [notification, setNotification] = useState({
     visible: false,

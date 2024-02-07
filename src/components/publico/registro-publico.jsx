@@ -21,36 +21,36 @@ export function RegistroPublico( { formState, handleSubmit, handleInputChange } 
             <div className="grid grid-cols-2 gap-1">
               <div className="space-y-2">
                 <Label htmlFor="first-name">Primer nombre:</Label>
-                <Input name="primer_nombre" value={ formState.primer_nombre } onChange={handleInputChange} placeholder="Juan"  />
+                <Input name="primer_nombre" value={ formState.primer_nombre } onChange={handleInputChange} placeholder="Juan"  required />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="middle-name">Segundo nombre:</Label>
-                <Input name="segundo_nombre" value={formState.segundo_nombre} onChange={handleInputChange}  placeholder="Javier"  />
+                <Input name="segundo_nombre" value={formState.segundo_nombre} onChange={handleInputChange}  placeholder="Javier" required  />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="last-name">Apellido paterno:</Label>
-                <Input name="apellido_paterno" value={formState.apellido_paterno} onChange={handleInputChange} placeholder="Diaz"  />
+                <Input name="apellido_paterno" value={formState.apellido_paterno} onChange={handleInputChange} placeholder="Diaz" required  />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="last-name2">Apellido materno:</Label>
-                <Input name="apellido_materno" value={formState.apellido_materno} onChange={handleInputChange} placeholder="Gomez"  />
+                <Input name="apellido_materno" value={formState.apellido_materno} onChange={handleInputChange} placeholder="Gomez" required  />
               </div>
             </div>
             <div className="space-y-2">
               <Label htmlFor="date-of-birth">Fecha de nacimiento:</Label>
-              <Input name="fecha_nacimiento" value={formState.fecha_nacimiento} onChange={handleInputChange}  type="date" />
+              <Input name="fecha_nacimiento" value={formState.fecha_nacimiento} onChange={handleInputChange}  type="date" required />
             </div>
             <div className="space-y-2">
               <Label htmlFor="dpi-cui">DPI/CUI:</Label>
-              <Input name="numero_dpi" value={formState.numero_dpi} onChange={handleInputChange} placeholder="1234567891011"  />
+              <Input name="numero_dpi" value={formState.numero_dpi} onChange={handleInputChange} placeholder="1234567891011" required  />
             </div>
             <div className="space-y-2">
               <Label htmlFor="country">País de origen:</Label>
-              <Input name="pais_origen" value={formState.pais_origen} onChange={handleInputChange} placeholder="Guatemala"  />
+              <Input name="pais_origen" value={formState.pais_origen} onChange={handleInputChange} placeholder="Guatemala" required  />
             </div>
             <div className="space-y-2">
               <Label htmlFor="email">Email:</Label>
-              <Input name="correo_electronico" value={formState.correo_electronico} onChange={handleInputChange} placeholder="example@mail.com" required type="email" />
+              <Input name="correo_electronico" value={formState.correo_electronico} onChange={handleInputChange} placeholder="example@mail.com" required type="email"  />
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">Password:</Label>
