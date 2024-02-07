@@ -15,7 +15,7 @@ import { useEffect, useState, useRef } from "react";
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
-export default function page({ params }) {
+export default function Page({ params }) {
   const id = params.slug;
   const divRef = useRef(null);
 
