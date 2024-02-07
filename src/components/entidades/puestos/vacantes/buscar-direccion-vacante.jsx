@@ -96,28 +96,15 @@ const linkUrl = `http://localhost:3000/vacantes/registro/${direcciones.id}`;
 
 if (loading) return <p>Cargando...</p>;
 
+
+
     return (
       <div className="bg-white p-4 rounded-md shadow-md m-auto text-center">
       <h1 className="text-xl font-bold text-center  mb-4">
      Buscar direcciones web
       </h1>
       <div className="grid grid-cols-4 gap-4 mb-4">
-          {/* <div>
-          <ListaEntidadesEmpresa />
-          </div>
-          <div>
-          <ListaDirecciones />
-          </div>
-          <div>
-          <ListaDepartamentos />
-          </div> */}
-          <div>
-        
-          </div>
         </div>
-
-       
-
       <div className="overflow-x-auto mt-4">
         <Table>
           <TableHeader>
