@@ -90,7 +90,7 @@ export function Login() {
             height: "100%",
           }} />
       </div>
-      <div className="w-1/2 flex flex-col justify-center items-center px-12">
+      <div className="w-1/3 flex flex-col justify-center items-center px-12 ">
         <div className="w-full max-w-md">
           <div className="mb-6 text-center">
             <img
@@ -101,7 +101,7 @@ export function Login() {
               style={{
                 objectFit: "cover",
               }}
-              width="200" />
+              width="20" />
             <h1 className="text-3xl font-bold">¡Bienvenidos!</h1>
             <p className="text-sm text-gray-500 mt-3">
               <img
