@@ -58,6 +58,7 @@ const router = useRouter();
       password: formState.password,
     });
 
+    console.log(data);
     const usuario_id = data[0].usuario_id;
 
     if (error) {

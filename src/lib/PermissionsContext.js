@@ -12,10 +12,12 @@ export const PermissionsProvider = ({ children, user }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [usuario, setUsuario] = useState(null);
-
+  const [tipo_usuario, setTipoUsuario] = useState(null);
   useEffect(() => {
     const loadPermissions = async () => {
       try {
+        const tipo_usuario = user?.tipo_usuario;
+        setTipoUsuario(tipo_usuario);
         const userId = user?.usuario_id;
         setUsuario(userId);
 
@@ -65,7 +67,7 @@ export const PermissionsProvider = ({ children, user }) => {
   }, [user]);
 
   return (
-    <PermissionsContext.Provider value={{ permissions, usuario }}>
+    <PermissionsContext.Provider value={{ permissions, usuario, tipo_usuario }}>
       {children}
     </PermissionsContext.Provider>
   );

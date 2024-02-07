@@ -198,8 +198,8 @@ export function Metricas() {
     }
     {
       !permisos.metricas &&
-      <div>
-        <h1>Bienvenido</h1>
+      <div className="flex flex-col items-center justify-center h-full mt-4">
+        <p className="text-3xl font-semibold dark:text-gray-200">Bienvenidos</p>
       </div>
     }
     </>

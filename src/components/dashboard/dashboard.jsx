@@ -11,11 +11,12 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { useRouter } from 'next/navigation'
 import Image from "next/image"
 import supabase from "@/lib/supabaseClient"
+import useUsuario from "@/lib/useUsuario"
 
 
 export function Dashboard( {children} ) {
   const router = useRouter()
-
+  const permisos = useUsuario();
   // supabase logout
 
   const handleLogout = async () => {
@@ -23,6 +24,8 @@ export function Dashboard( {children} ) {
     if (error) console.log('Error logging out:', error.message)
     else router.push('/')
   }
+
+  console.log(permisos.tipo_usuario);
 
   return (
     (<div key="1" className="flex flex-col w-full min-h-screen">
@@ -38,33 +41,34 @@ export function Dashboard( {children} ) {
          />
         </div>
         <nav className="flex flex-col p-4">
-          <Link
+        {permisos.tipo_usuario !== 'Externo' && (<Link
+      
             className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
             href="/dashboard/seguridad">
             <LockIcon className="w-6 h-6" />
             Seguridad y acceso
-          </Link>
+          </Link>)}
 
-          <Link
+          {permisos.tipo_usuario !== 'Externo' && ( <Link
             className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
             href="/dashboard/entidades">
             <ServerIcon className="w-6 h-6" />
             Estructura Organizacional (Entidades)
-          </Link>
+          </Link>)}
 
-          <Link
+          {permisos.tipo_usuario !== 'Externo' && ( <Link
             className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
             href="/dashboard/personal">
             <UserIcon className="w-6 h-6" />
             Administración de Personal
-          </Link>
+          </Link>)}
          
-          <Link
+          {permisos.tipo_usuario !== 'Externo' && ( <Link
             className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
             href="/dashboard/evaluaciones">
             <FileQuestionIcon className="w-6 h-6" />
             Administración Evaluaciones
-          </Link>
+          </Link>  )}
          < Link
             className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
             href="/dashboard/resolver">
@@ -89,8 +93,8 @@ export function Dashboard( {children} ) {
             className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
             href="/dashboard">
             <SettingsIcon className="w-6 h-6" />
-            Métricas (Dashboard) 
-          </Link> 
+            {permisos.tipo_usuario !== 'Externo' ? 'Dashboard' : 'Métricas (Dashboard)'}
+          </Link>
 
         </nav>
       </aside>
