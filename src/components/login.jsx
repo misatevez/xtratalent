@@ -29,14 +29,6 @@ export function Login() {
       console.log(error);
       setMessage({ type: "error", content: error.message });
     } else if (data.user) {
-      // Verifica si el usuario marcó "Recordarme" y guarda las credenciales
-      if (rememberMe) {
-        saveCredentials(email, password);
-      } else {
-        // Opcional: Limpia las credenciales anteriores si el usuario no quiere ser recordado.
-        localStorage.removeItem("userEmail");
-        localStorage.removeItem("userPassword");
-      }
   
       setMessage({ type: "success", content: "Login successful!" });
       router.push("/dashboard"); // Redirige a la página del dashboard
