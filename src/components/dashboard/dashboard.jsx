@@ -17,6 +17,7 @@ import useUsuario from "@/lib/useUsuario"
 export function Dashboard( {children} ) {
   const router = useRouter()
   const permisos = useUsuario();
+  
   // supabase logout
 
   const handleLogout = async () => {
@@ -75,19 +76,6 @@ export function Dashboard( {children} ) {
             <FileIcon className="w-6 h-6" />
             Mis evaluaciones
           </Link>
-          {/* 
-          <Link
-            className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
-            href="/dashboard/licencia">
-            <CopyrightIcon className="w-6 h-6" />
-            Licencia y Soporte
-          </Link> 
-           <Link
-            className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
-            href="/dashboard/configuracion">
-            <SettingsIcon className="w-6 h-6" />
-            Configuracion
-          </Link>  */}
 
           <Link
             className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
