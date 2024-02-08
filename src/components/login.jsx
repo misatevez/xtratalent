@@ -68,21 +68,44 @@ export function Login() {
       setRememberMe(e.target.checked);
     }
 
-    // recuperar contraseña
     const forgotPassword = async (email) => {
-      const { data, error } = await supabase.auth.resetPasswordForEmail(
-        email
-      );
-      if (error) {
-        console.log(error);
-        setMessage({ type: "error", content: error.message });
-      } else if (data) {
-        setMessage({
-          type: "success",
-          content: "Te enviamos un correo para restablecer tu contraseña.",
-        });
+      try {
+        // Paso 1: Buscar el ID del usuario basado en el email
+        let { data: userData, error: userError } = await supabase
+          .from('usuarios') // Asumiendo que tu tabla se llama 'usuarios'
+          .select('usuario_id')
+          .eq('correo_electronico', email)
+          .single();
+    
+        if (userError) throw userError;
+    
+        // Asegúrate de que userData no esté vacío y contenga un ID
+        if (!userData || !userData.usuario_id) {
+          throw new Error("Usuario no encontrado.");
+        }
+    
+        // Paso 2: Enviar el correo de restablecimiento con el ID del usuario en el enlace
+        const { data, error } = await supabase.auth.resetPasswordForEmail(
+          email, {
+            redirectTo: `http://localhost:3000/resetear-contrasena/${userData.usuario_id}`
+          }
+        );
+    
+        if (error) {
+          console.log(error);
+          setMessage({ type: "error", content: error.message });
+        } else if (data) {
+          setMessage({
+            type: "success",
+            content: "Te enviamos un correo para restable cer tu contraseña.",
+          });
+        }
+      } catch (error) {
+        console.error("Error restableciendo contraseña:", error.message);
+        setMessage({ type: "error", content: error.message || "Un error ocurrió." });
       }
-    }
+    };
+    
 
 
   return (
