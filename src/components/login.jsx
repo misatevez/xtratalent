@@ -16,7 +16,7 @@ export function Login() {
   const router = useRouter();
 
   useEffect(() => {
-    const session = supabase.auth.session();
+    const session = supabase.auth.getSession();
     const rememberMePreference = localStorage.getItem("rememberMe") === "true";
 
     if (session && rememberMePreference) {
