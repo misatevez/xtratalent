@@ -84,20 +84,20 @@ export function Login() {
       // Paso 1: Buscar el ID del usuario basado en el email
       let { data: userData, error: userError } = await supabase
         .from("usuarios") // Asumiendo que tu tabla se llama 'usuarios'
-        .select("usuario_id")
+        .select("user_id")
         .eq("correo_electronico", email)
         .single();
 
       if (userError) throw userError;
 
       // Asegúrate de que userData no esté vacío y contenga un ID
-      if (!userData || !userData.usuario_id) {
+      if (!userData || !userData.user_id) {
         throw new Error("Usuario no encontrado.");
       }
 
       // Paso 2: Enviar el correo de restablecimiento con el ID del usuario en el enlace
       const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `http://localhost:3000/resetear-contrasena/${userData.usuario_id}`,
+        redirectTo: `http://localhost:3000/resetear/${userData.user_id}`,
       });
 
       if (error) {
