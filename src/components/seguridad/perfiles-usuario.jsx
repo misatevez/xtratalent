@@ -132,7 +132,6 @@ export function PerfilesUsuario({ perfilId }) {
         { id_perfil: perfilId, id_modulo: 3, permisos: permisosEvaluaciones },
         { id_perfil: perfilId, id_modulo: 4, permisos: permisosMetricas }
       ];
-  
       for (const update of updates) {
         // Verifica si existe un registro
         const { data, error } = await supabase
@@ -140,25 +139,27 @@ export function PerfilesUsuario({ perfilId }) {
           .select('*')
           .eq('id_perfil', update.id_perfil)
           .eq('id_modulo', update.id_modulo)
-          .single();
+          .maybeSingle(); // Cambiado a maybeSingle para manejar 0 o 1 resultado sin error
   
         if (error) {
-          throw error;
+          throw error; // Lanza el error para ser capturado por el catch
         }
   
         // Decide si actualizar o insertar
         if (data) {
           // Actualizar si el registro existe
-          await supabase
+          const { error: updateError } = await supabase
             .from('perfil_permisos')
             .update({ permisos: update.permisos })
             .eq('id_perfil', update.id_perfil)
             .eq('id_modulo', update.id_modulo);
+          if (updateError) throw updateError;
         } else {
           // Insertar si el registro no existe
-          await supabase
+          const { error: insertError } = await supabase
             .from('perfil_permisos')
             .insert([update]);
+          if (insertError) throw insertError;
         }
       }
   
@@ -176,6 +177,7 @@ export function PerfilesUsuario({ perfilId }) {
       });
     }
   };
+  
   
   
   const handleCloseNotification = () => {
