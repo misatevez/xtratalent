@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/select";
 
 
-function FormRegistro({ formState, handleInputChange, handleSubmit, titulo }) {
+function FormRegistro({ formState, handleInputChange, handleSubmit, titulo, handleSelectChange }) {
 
   const tipo_usuario = [
     { valor: "Interno", nombre: "Interno" },
@@ -39,12 +39,7 @@ function FormRegistro({ formState, handleInputChange, handleSubmit, titulo }) {
     handleInputChange({ target: { name: 'id_entidad_empresa', value: id_entidad_empresa } });
   };
 
-  const handleSelectChange = (value, fieldName) => {
-    setFormState(prevState => ({
-      ...prevState,
-      [fieldName]: value,
-    }));
-  };
+
 
   return (
     <div className="p-4 mx-auto w-full max-w-2xl mt-4">

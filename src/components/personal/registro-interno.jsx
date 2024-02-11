@@ -102,6 +102,13 @@ export function RegistroInterno() {
     }
   };
 
+  const handleSelectChange = (value, fieldName) => {
+    setFormState(prevState => ({
+      ...prevState,
+      [fieldName]: value,
+    }));
+  };
+
   if (permisoDenegado) {
     return permisoDenegado;
 }
@@ -112,7 +119,9 @@ export function RegistroInterno() {
       titulo={"Alta de usuarios"}
       formState={formState} 
       handleInputChange={handleInputChange} 
-      handleSubmit={handleSubmit} />  
+      handleSubmit={handleSubmit}
+      handleSelectChange={handleSelectChange}
+      />  
 
 {notification.visible && (
         <Notificacion
