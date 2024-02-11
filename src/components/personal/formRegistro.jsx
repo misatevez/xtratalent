@@ -273,7 +273,7 @@ function FormRegistro({ formState, handleInputChange, handleSubmit, titulo, hand
             <span className="block text-sm font-medium mb-1">Genero</span>
             
             <Select
-              onValueChange={(value) => handleSelectChange(value, "genero")}
+              onValueChange={(value) => handleSelectChange(value, "genero_sexo")}
               value={formState.genero_sexo}
             >
               <SelectTrigger id="group-type">
