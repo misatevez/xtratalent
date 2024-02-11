@@ -45,26 +45,59 @@ export default function AsignarPerfil({id_perfil}) {
       );
 
       const handleAsignarPerfil = async (id_usuario) => {
-        const { data, error } = await supabase
-          .from('perfiles_usuario')
-          .upsert([
-            { id_perfil: id_perfil, id_usuario: id_usuario }
-          ])
+        try {
+          // Primero, intenta obtener un registro existente para el usuario
+          const { data: existingData, error: selectError } = await supabase
+            .from('perfiles_usuario')
+            .select('*')
+            .eq('id_usuario', id_usuario)
+            .single(); // Asumiendo que cada usuario solo puede tener un perfil a la vez
       
-        if (error) {
+          if (selectError && selectError.message !== "JSON object requested, single row, multiple (or no) rows returned") {
+            throw selectError; // Lanza cualquier error que no sea el de múltiples o ningún resultado
+          }
+      
+          // Decide si actualizar o insertar
+          if (existingData) {
+            // Actualizar si el registro existe
+            const { error: updateError } = await supabase
+              .from('perfiles_usuario')
+              .update({ id_perfil: id_perfil })
+              .eq('id_usuario', id_usuario);
+      
+            if (updateError) throw updateError;
+      
+            setNotification({
+              visible: true,
+              titulo: "Éxito",
+              mensaje: "Perfil actualizado correctamente"
+            });
+          } else {
+            // Insertar si el registro no existe
+            const { error: insertError } = await supabase
+              .from('perfiles_usuario')
+              .insert([
+                { id_perfil: id_perfil, id_usuario: id_usuario }
+              ]);
+      
+            if (insertError) throw insertError;
+      
+            setNotification({
+              visible: true,
+              titulo: "Éxito",
+              mensaje: "Perfil asignado correctamente"
+            });
+          }
+        } catch (error) {
+          console.error('Error al asignar o actualizar el perfil:', error);
           setNotification({
             visible: true,
             titulo: "Error",
             mensaje: "Vuelva a intentar más tarde: " + error.message
           });
-        } else {
-          setNotification({
-            visible: true,
-            titulo: "Éxito",
-            mensaje: "Perfil asignado o actualizado correctamente"
-          });
         }
-      }
+      };
+      
       
 
       const handleCloseNotification = () => {

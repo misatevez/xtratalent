@@ -36,6 +36,7 @@ export const PermissionsProvider = ({ children, user }) => {
         }
 
         if (perfilData.length > 0) {
+          console.log(perfilData);
           const idPerfil = perfilData[0].id_perfil;
           const { data, error } = await supabase
             .from('perfil_permisos')
