@@ -18,6 +18,7 @@ export function SelectoraEvaluacion() {
             <Button disabled={!permisos.crearEvaluaciones} onClick={() => router.push('/dashboard/evaluaciones/evaluacion/crearevaluacion')} className="bg-white text-purple-500 hover:bg-gray-200">Crear evaluacion</Button>
             <Button disabled={!permisos.evaluaciones} onClick={() => router.push('/dashboard/evaluaciones/evaluacion/buscarevaluacion')} className="bg-white text-purple-500 hover:bg-gray-200">Catálogo de Evaluaciones</Button>
             <Button disabled={!permisos.temas} onClick={() => router.push('/dashboard/evaluaciones/temas')} className="bg-white text-purple-500 hover:bg-gray-200">Temas</Button>
+            <Button disabled={!permisos.evaluaciones} onClick={() => router.push('/dashboard/evaluaciones/evaluacion/asignaciones-resultados')} className="bg-white text-purple-500 hover:bg-gray-200">Asignaciones y resultados</Button>
           </div>
         </main>
     )
