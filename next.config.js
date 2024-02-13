@@ -8,6 +8,11 @@ const nextConfig = {
             hostname: 'i.ibb.co',
             port: '',
           },
+          {
+            protocol: 'https',
+            hostname: 'xzfcosekgkctmoepyywr.supabase.co',
+            port: '',
+          }
         ],
       },
 

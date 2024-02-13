@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select";
 import supabase from "@/lib/supabaseClient";
 
-export default function ListaEntidadesEmpresas( { onGrupoTipoChange, selectedTipoId } ) {
+export default function ListaEntidadesEmpresas( { onGrupoTipoChange, selectedTipoId, disabled } ) {
   const [tipos, setTipos] = useState([]);
 
 useEffect(() => {
@@ -26,7 +26,7 @@ useEffect(() => {
       <label className="block text-sm font-medium mb-1" htmlFor="group-type">
         Entidades Empresa:
       </label>
-      <Select onValueChange={onGrupoTipoChange} value={selectedTipoId?.toString()}>
+      <Select onValueChange={onGrupoTipoChange} value={selectedTipoId?.toString()} disabled={disabled}>
         <SelectTrigger id="group-type">
           <SelectValue placeholder="Seleccione uno" />
         </SelectTrigger>
