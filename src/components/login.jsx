@@ -16,18 +16,34 @@ export function Login() {
 
   const router = useRouter();
 
-  useEffect(() => {
-    const session = supabase.auth.getSession();
-    const rememberMePreference = localStorage.getItem("rememberMe") === "true";
 
-    if (session && rememberMePreference) {
-      router.push("/dashboard");
-    }
-    setLoading(false);
-  }, []);
+  
+
+
+      // Carga las credenciales cuando el componente se monta
+      useEffect(() => {
+        loadCredentials();
+        setLoading(false);
+      }, []);
+    
 
   const signInWithEmail = async (e) => {
     e.preventDefault();
+
+    // minimo 2 caracteres
+    if (email.length < 2) {
+      setMessage({
+        type: "error",
+        content: "El correo electrónico es requerido.",
+      });
+      return;
+    }
+
+    // minimo 6 caracteres
+    if (password.length < 2) {
+      setMessage({ type: "error", content: "La contraseña es requerida." });
+      return;
+    }
 
     try {
       const { user, session, error } = await supabase.auth.signInWithPassword({
@@ -35,8 +51,17 @@ export function Login() {
         password,
       });
 
+
       if (error) {
-        throw error;
+        let mensajeError = "Ocurrió un error desconocido.";
+        if (error.message.includes("Invalid login credentials")) {
+          mensajeError =
+            "Credenciales de inicio de sesión inválidas. Por favor, verifica tu correo electrónico y contraseña.";
+        } else if (error.message.includes("Email not confirmed")) {
+          mensajeError =
+            "Correo electrónico no confirmado. Por favor, verifica tu bandeja de entrada para el enlace de confirmación.";
+        }
+        throw new Error(mensajeError);
       }
 
       if (rememberMe) {
@@ -70,10 +95,6 @@ export function Login() {
     }
   };
 
-  // Carga las credenciales cuando el componente se monta
-  useEffect(() => {
-    loadCredentials();
-  }, []);
 
   const handleRememberMeChange = (e) => {
     setRememberMe(e.target.checked);
@@ -97,16 +118,29 @@ export function Login() {
 
       // Paso 2: Enviar el correo de restablecimiento con el ID del usuario en el enlace
       const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `http://localhost:3000/resetear/${userData.user_id}`,
+        redirectTo: `https://xtratalent.vercel.app/resetear/${userData.user_id}`,
       });
 
       if (error) {
-        console.log(error);
-        setMessage({ type: "error", content: error.message });
+       if (error.message.includes("No user found for this email")) {
+          throw new Error("Usuario no encontrado.");
+        }
+        else if 
+        (error.message.includes("Email not confirmed")) {
+          throw new Error("Correo electrónico no confirmado. Por favor, verifica tu bandeja de entrada para el enlace de confirmación.");
+        }
+        else if (
+          error.message.includes("For security purposes")
+        ) {
+          throw new Error("Por seguridad debera esperar unos minutos para volver a intentar.");
+        }
+        else {
+          throw new Error("Ocurrió un error desconocido.");
+        }
       } else if (data) {
         setMessage({
           type: "success",
-          content: "Te enviamos un correo para restable cer tu contraseña.",
+          content: "Te enviamos un correo para restablecer tu contraseña.",
         });
       }
     } catch (error) {
@@ -119,25 +153,23 @@ export function Login() {
   };
 
   if (loading) {
-    return (
-      <Loading message={"Cargando..."} />
-    );
+    return <Loading message={"Cargando..."} />;
   }
 
   return (
     <div key="1" className="flex h-screen">
-  <div className="hidden lg:flex w-full bg-[#f0f0f0] justify-center items-center">
+      <div className="hidden lg:flex w-full bg-[#f0f0f0] justify-center items-center">
         <img
           alt="Woman working"
-          className="rounded-lg object-cover w-full h-full"
+          className="rounded-lg object-cover  w-full h-full"
           src="https://xzfcosekgkctmoepyywr.supabase.co/storage/v1/object/public/assets/elegante-mujer-sonriente-gafas-camisa-rayas-usando-computadora-portatil-mientras-sienta-mesa-cocina.jpg?t=2024-01-04T22%3A30%3A38.522Z"
           style={{
             height: "100%",
           }}
         />
       </div>
-      <form className="flex flex-col justify-center items-center w-full lg:w-1/3 px-12">
-    <div className="w-full max-w-md">
+      <form className="flex flex-col justify-center items-center w-full lg:w-2/3 px-12">
+        <div className="w-full max-w-md">
           <div className="mb-6 text-center">
             <img
               alt="Gobierno de guatemala"

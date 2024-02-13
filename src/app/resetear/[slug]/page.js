@@ -104,11 +104,11 @@ const handleChangePassword = async => {
                 <label className="font-bold">
                   Introducir Nueva Contraseña:
                 </label>
-                <Input name="password" type="password" onChange={handleInputChange} value={formState?.password} placeholder="**********" />
+                <Input name="password"  autoComplete="off" type="password" onChange={handleInputChange} value={formState?.password} placeholder="**********" />
               </div>
               <div className="flex flex-col">
                 <label className="font-bold">Confirmar Contraseña:</label>
-                <Input name="confirmPassword" type="password" onChange={handleInputChange} value={formState?.confirmPassword} placeholder="**********" />
+                <Input name="confirmPassword"   autoComplete="off" type="password" onChange={handleInputChange} value={formState?.confirmPassword} placeholder="**********" />
               </div>
             </div>
             <p className="text-xs mt-2">
@@ -124,7 +124,6 @@ const handleChangePassword = async => {
 
             <div className="flex justify-around mt-4">
               <Button onClick={handleChangePassword} >Guardar</Button>
-              <Button onClick={() =>  router.push('/login') }>Login</Button>
             </div>
           </div>
         </div>
