@@ -85,6 +85,11 @@ export function RegistroInterno() {
     supabase.auth.signUp({
       email: formState.correo_electronico,
       password: formState.password,
+      options: {
+        data: {
+          first_name: 'John',
+        },
+      },
     });
 
     if (error) {
