@@ -81,30 +81,35 @@ export function RegistroInterno() {
     // Insertar en Supabase
     const { data, error } = await supabase.from('usuarios').insert([formState]);
 
-
-    supabase.auth.signUp({
-      email: formState.correo_electronico,
-      password: formState.password,
-      options: {
-        data: {
-          first_name: 'John',
-        },
-      },
-    });
-
     if (error) {
       setNotification({
         visible: true,
         titulo: "Error",
         mensaje: "Vuelva a intentar mas tarde: " + error.message // Ajusta según necesites
       });
-    } else {
+    }
+    else {
       setNotification({
         visible: true,
         titulo: "Éxito",
         mensaje: "Se ha creado su usuario" // Ajusta según necesites
       });
+
+
+      supabase.auth.signUp({
+        email: formState.correo_electronico,
+        password: formState.password,
+        options: {
+          data: {
+            first_name: formState.primer_nombre + " " + formState.segundo_nombre + " " + formState.apellido_paterno + " " + formState.apellido_materno,
+          },
+        },
+      });
+  
+
     }
+
+  
   };
 
   const handleSelectChange = (value, fieldName) => {
