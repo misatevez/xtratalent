@@ -101,6 +101,23 @@ export function Login() {
   };
 
   const forgotPassword = async (email) => {
+
+    if(email.length < 2) {
+      setMessage({
+        type: "error",
+        content: "El correo electrónico es requerido.",
+      });
+      return;
+    }
+
+    if (!email.includes("@") || !email.includes(".")) {
+      setMessage({
+        type: "error",
+        content: "El correo electrónico no es válido.",
+      });
+      return;
+    }
+
     try {
       // Paso 1: Buscar el ID del usuario basado en el email
       let { data: userData, error: userError } = await supabase
@@ -134,9 +151,11 @@ export function Login() {
         ) {
           throw new Error("Por seguridad debera esperar unos minutos para volver a intentar.");
         }
-        else {
+        else (error.message.includes("JSON object requested, multiple (or no) rows returned"))
+        {
           throw new Error("Ocurrió un error desconocido.");
         }
+          
       } else if (data) {
         setMessage({
           type: "success",
