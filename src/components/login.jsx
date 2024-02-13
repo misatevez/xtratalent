@@ -235,7 +235,7 @@ export function Login() {
               placeholder="Email"
               className="w-full h-10 px-3"
               value={email}
-              required
+
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -250,7 +250,7 @@ export function Login() {
               id="password"
               placeholder="Contraseña"
               type="password"
-              required
+
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -300,11 +300,10 @@ export function Login() {
                   <hr className="my-2" />
                 </h2>
                 <div className="flex space-x-2">
-                  <Link
-                    target="new_blank"
-                    href="https://api.whatsapp.com/send?phone=50245175020"
-                  >
-                    <Button className="bg-[#25D366] text-white w-full">
+                 
+                    <Button className="bg-[#25D366] text-white w-full"
+                    onClick={() => window.open("https://api.whatsapp.com/send?phone=50245175020", "_blank")}>
+                    
                       <svg
                         fill="white"
                         height="20px"
@@ -318,12 +317,15 @@ export function Login() {
                         />
                       </svg>
                     </Button>
-                  </Link>
-                  <Link target="new_blank" href="mailto:cprodess@hotmail.com">
-                    <Button className="bg-[#D44638] text-white w-full">
-                      <MailIcon className="w-4 h-4" />
-                    </Button>
-                  </Link>
+            
+                 
+                    <Button
+  onClick={() => window.location.href = "mailto:cprodess@hotmail.com"}
+  className="bg-[#D44638] text-white w-full"
+>
+  <MailIcon className="w-4 h-4" />
+</Button>
+                  
                 </div>
               </div>
             </div>
