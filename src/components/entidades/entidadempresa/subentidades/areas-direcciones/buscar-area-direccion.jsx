@@ -9,6 +9,8 @@ import { useRouter } from "next/navigation";
 import { Notificacion } from "@/components/notification";
 import { formatearFecha } from "@/lib/fechaService";
 import usePermisosOrganizacion from "@/lib/usePermisosOrganizacion";
+import ListaEntidadesEmpresas from "../../lista-entidad-empresa";
+import ListaSubEntidad from "../lista-subentidad";
 
 export default function   BuscarDireccion() {
   const router = useRouter();
@@ -16,37 +18,47 @@ export default function   BuscarDireccion() {
   const [grupos, setGrupos] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedGrupoId, setSelectedGrupoId] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [toggle, setToggle] = useState(false);
+
+    // Estado inicial para el formulario
+    const [formState, setFormState] = useState({
+      nombre: '',
+      descripcion: '',
+      id_sub_entidad: '',
+      id_entidad_empresa: ''
+    });
+
   const [notification, setNotification] = useState({
     visible: false,
     titulo: "",
     mensaje: ""
   });
 
+
   useEffect(() => {
-    async function fetchData() {
-      const { data, error } = await supabase.from('direcciones').select(`
-      id_direcciones,
-      nombre,
-      descripcion,
-      fecha_creado,
-      fecha_actualizado,
-      sub_entidad:sub_entidad (id_sub_entidad, nombre)
-    `);
+
+    if (!formState.id_sub_entidad) return;
+
+
+    const fetchGrupos = async () => {
+      const { data: grupos, error } = await supabase
+        .from('direcciones')
+        .select('*')
+        .eq('id_sub_entidad', formState.id_sub_entidad);
+
       if (error) {
-        console.error(error);
-        setNotification({
-          visible: true,
-          titulo: "Error",
-          mensaje: "Error al cargar grupos: " + error.message
-        });
+        console.error("Error fetching grupos: ", error);
       } else {
-        setGrupos(data);
-        setLoading(false);
+        setGrupos(grupos);
       }
-    }
-    fetchData();
-  }, []);
+      setLoading(false);
+    };
+    fetchGrupos();
+  }, [formState.id_sub_entidad, toggle]);
+  
+  
+
 
 
 
@@ -90,6 +102,32 @@ export default function   BuscarDireccion() {
     grupo.descripcion.toLowerCase().includes(searchTerm) 
   );
 
+
+     // Manejar cambios en los inputs
+const handleInputChange = (e) => {
+  const { name, value } = e.target;
+  setFormState(prevState => ({
+    ...prevState,
+    [name]: value
+  }));
+  setToggle(!toggle);
+};
+
+
+  const handleGrupoTipoChange = (id_sub_entidad) => {
+    // Actualiza el estado del formulario para incluir el nuevo id de tipo de grupo seleccionado
+    handleInputChange({ target: { name: 'id_sub_entidad', value: id_sub_entidad } });
+  };
+
+  const handleGrupoTipoChange2 = (id_entidad_empresa) => {
+    // Actualiza el estado del formulario para incluir el nuevo id de tipo de grupo seleccionado
+    handleInputChange({ target: { name: 'id_entidad_empresa', value: id_entidad_empresa } });
+
+  };
+
+
+
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -100,14 +138,22 @@ export default function   BuscarDireccion() {
                 <div className="rounded-lg shadow-lg">
                   <div className="bg-white p-6 rounded-lg shadow-inner m-auto">
         <h1 className="text-xl font-bold mb-4">BUSCAR ÁREAS – DIRECCIONES</h1>
-        <div className="flex justify-center">
-          <Input className="mr-2" placeholder="Buscar" type="text" onChange={handleSearchChange} />
+        <div className="flex flex-row gap-1">
+          <div className="flex-auto">
+        <ListaEntidadesEmpresas selectedTipoId={formState.id_entidad_empresa} onGrupoTipoChange={handleGrupoTipoChange2} />
         </div>
+        <div className="flex-auto">
+        <ListaSubEntidad disabled={formState.id_entidad_empresa ? false : true } selectedTipoId={formState.id_sub_entidad} onGrupoTipoChange={handleGrupoTipoChange} filter={formState.id_entidad_empresa} />
+        </div>
+        </div>
+        <div className="flex justify-center mt-4">
+          <Input  placeholder="Buscar" type="text" onChange={handleSearchChange} />
+        </div>
+        
         <div className="overflow-x-auto mt-4">
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[100px]">ÁREAS – DIRECCIONES</TableHead>
                 <TableHead className="w-[200px]">Nombre de Dirección</TableHead>
                 <TableHead className="w-[200px]">Descripcion de Dirección</TableHead>
                 <TableHead className="w-[150px]">Fecha Registro</TableHead>
@@ -118,7 +164,6 @@ export default function   BuscarDireccion() {
             <TableBody>
               {filteredGrupos.map((grupo, index) => (
                 <TableRow key={index}>
-                  <TableCell>{grupo.sub_entidad.nombre}</TableCell>
                   <TableCell>{grupo.nombre}</TableCell>
                   <TableCell>{grupo.descripcion}</TableCell>
                   <TableCell>{ formatearFecha( grupo.fecha_creado )}</TableCell>
@@ -136,19 +181,19 @@ export default function   BuscarDireccion() {
         </div>
         <div className="flex justify-between mt-4">
       <Button
-          className={`bg-blue-500 text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={` text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
           disabled={!selectedGrupoId || !permisos.editarAreasDirecciones }
           onClick={() => router.push(`/dashboard/entidades/entidadempresa/subentidades/area-direcciones/${selectedGrupoId}`)}
         >
-          Modificar tipo
+          Modificar
         </Button>
         
         <Button
-  className={`bg-red-500 text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
+  className={` text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
   disabled={!selectedGrupoId || !permisos.editarAreasDirecciones}
   onClick={handleDeleteGrupo}
 >
-  Eliminar tipo
+  Eliminar
 </Button>
 
 </div>
