@@ -8,7 +8,7 @@ import { DropdownMenuTrigger, DropdownMenuItem, DropdownMenuContent, DropdownMen
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import Image from "next/image"
 import supabase from "@/lib/supabaseClient"
 import useUsuario from "@/lib/useUsuario"
@@ -17,7 +17,10 @@ import useUsuario from "@/lib/useUsuario"
 export function Dashboard( {children} ) {
   const router = useRouter()
   const permisos = useUsuario();
-  
+
+  const pathname = usePathname()
+
+
   // supabase logout
 
   const handleLogout = async () => {
@@ -44,41 +47,41 @@ export function Dashboard( {children} ) {
         <nav className="flex flex-col p-4">
         {permisos.tipo_usuario !== 'Externo' && (<Link
       
-            className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
+            className={`flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200 link ${pathname === '/dashboard/seguridad' ? 'active' : ''}`}
             href="/dashboard/seguridad">
             <LockIcon className="w-6 h-6" />
             Seguridad y acceso
           </Link>)}
 
           {permisos.tipo_usuario !== 'Externo' && ( <Link
-            className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
+            className={`flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200 link ${pathname === '/dashboard/entidades' ? 'active' : ''}`}
             href="/dashboard/entidades">
             <ServerIcon className="w-6 h-6" />
             Estructura Organizacional (Entidades)
           </Link>)}
 
           {permisos.tipo_usuario !== 'Externo' && ( <Link
-            className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
+           className={`flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200 link ${pathname === '/dashboard/personal' ? 'active' : ''}`}
             href="/dashboard/personal">
             <UserIcon className="w-6 h-6" />
             Administración de Personal
           </Link>)}
          
           {permisos.tipo_usuario !== 'Externo' && ( <Link
-            className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
+            className={`flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200 link ${pathname === '/dashboard/evaluaciones' ? 'active' : ''}`}
             href="/dashboard/evaluaciones">
             <FileQuestionIcon className="w-6 h-6" />
             Administración Evaluaciones
           </Link>  )}
          < Link
-            className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
+            className={`flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200 link ${pathname === '/dashboard/resolver' ? 'active' : ''}`}
             href="/dashboard/resolver">
             <FileIcon className="w-6 h-6" />
             Mis evaluaciones
           </Link>
 
           <Link
-            className="flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200"
+            className={`flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200 link ${pathname === '/dashboard' ? 'active' : ''}`}
             href="/dashboard">
             <SettingsIcon className="w-6 h-6" />
             {permisos.tipo_usuario !== 'Externo' ? 'Métricas (Dashboard)' : 'Dashboard'}

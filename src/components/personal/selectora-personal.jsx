@@ -16,7 +16,6 @@ const permisos = usePermisosPersonal();
           <div className="flex items-center justify-center space-x-4">
             <Button  disabled={!permisos.altaPersonal} onClick={() => router.push('/dashboard/personal/altapersonal')} className="bg-white text-purple-500 hover:bg-gray-200">Alta personal</Button>
             <Button  disabled={!permisos.busquedaRapido} onClick={() => router.push('/dashboard/personal/buscarpersonal')} className="bg-white text-purple-500 hover:bg-gray-200">Busqueda rapida</Button>
-            <Button  disabled={!permisos.asignarContrasenas} onClick={() => router.push('/dashboard/personal/buscarpersonal')} className="bg-white text-purple-500 hover:bg-gray-200">Modificar contraseñas</Button>
           </div>
         </main>
     )

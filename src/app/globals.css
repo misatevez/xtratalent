@@ -15,3 +15,9 @@
   .spin-custom {
     animation: spin 5s linear infinite;
   }
+
+  .active {
+    color: #000;
+    text-decoration: underline;
+
+  }
