@@ -13,9 +13,8 @@ export default function SelectoraSeguridad() {
         <div className="flex items-center justify-center space-x-4">
           <Button disabled={!permisos.crearPerfilUsuario} onClick={() => router.push('/dashboard/seguridad/crearperfil')} className="bg-white text-purple-500 hover:bg-gray-200">Crear perfil de usuario</Button>
           <Button onClick={() => router.push('/dashboard/seguridad/buscarperfil')} className="bg-white text-purple-500 hover:bg-gray-200">Buscar perfiles de usuario</Button>
-          {/* <Button onClick={() => router.push('/dashboard/seguridad/asignarPerfil')} className="bg-white text-purple-500 hover:bg-gray-200">Asignacion de perfiles</Button>
-          <Button onClick={() => router.push('/dashboard/seguridad/reset')} className="bg-white text-purple-500 hover:bg-gray-200">Modificar contraseña</Button> */}
-          {/* <Button onClick={() => router.push('/dashboard/seguridad/estadousuario')} className="bg-white text-purple-500 hover:bg-gray-200">Usuario ON/OFF</Button> */}
+          <Button onClick={() => router.push('/dashboard/seguridad/reset')} className="bg-white text-purple-500 hover:bg-gray-200">Modificación contraseña</Button>
+           <Button onClick={() => router.push('/dashboard/seguridad/estadousuario')} className="bg-white text-purple-500 hover:bg-gray-200">Usuario ON/OFF</Button> 
         </div>
       </main>
     );

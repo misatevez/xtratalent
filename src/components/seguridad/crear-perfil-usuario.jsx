@@ -58,7 +58,23 @@ const handleSelectChange = (value, fieldName) => {
 const handleSubmit = async (e) => {
   e.preventDefault();
 
-  console.log(formState)
+ // mas de 2 caracteres
+  if (formState.nombre.length < 2) {
+    setNotification({
+      visible: true,
+      titulo: "Error",
+      mensaje: "El nombre del perfil debe tener al menos 2 caracteres"
+    });
+    return;
+  }
+  if (formState.descripcion.length < 2) {
+    setNotification({
+      visible: true,
+      titulo: "Error",
+      mensaje: "La descripcion del perfil debe tener al menos 2 caracteres"
+    });
+    return;
+  }
 
   // Insertar en Supabase
   const { data, error } = await supabase.from('perfil_tipo').upsert([formState]).select('id_perfil').single();

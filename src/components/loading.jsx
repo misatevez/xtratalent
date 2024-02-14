@@ -1,6 +1,10 @@
 
 
+
 export default function Loading({ message }) {
+
+
+
     return (
         <div className="flex justify-center items-center h-screen">
         <div role="status">

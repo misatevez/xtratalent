@@ -46,13 +46,6 @@ export default function Page() {
     setLoading(false);
   }, [user]);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setInformacion((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
 
 
   if (loading) {

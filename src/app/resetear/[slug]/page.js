@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import supabase from "@/lib/supabaseClient";
 
 import { useEffect, useState } from "react";
+import Volver from "@/components/ui/volver";
 
 export default function Page({ params }) {
   const router = useRouter();
@@ -124,6 +125,7 @@ const handleChangePassword = async => {
 
             <div className="flex justify-around mt-4">
               <Button onClick={handleChangePassword} >Guardar</Button>
+              <Volver />
             </div>
           </div>
         </div>

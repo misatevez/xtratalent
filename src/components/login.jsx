@@ -45,6 +45,36 @@ export function Login() {
       return;
     }
 
+  if( email || password)
+{
+  const {data , error} = await supabase
+  .from('usuarios')
+  .select("banned")
+  .eq('correo_electronico', email)
+  .single()
+
+
+   
+    if(data.banned === true){
+      setMessage({
+        type: "error",
+        content: "Tu cuenta ha sido deshabilitada."
+      });
+      return;
+    }
+
+    if (error) {
+      console.error("Error obteniendo datos de usuario:", error.message);
+      setMessage({
+        type: "error",
+        content: error.message || "Un error ocurrió.",
+      });
+      return;
+    }
+
+    
+}
+
     try {
       const { user, session, error } = await supabase.auth.signInWithPassword({
         email,
