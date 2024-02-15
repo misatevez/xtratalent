@@ -142,7 +142,7 @@ export default function BuscarPersonal() {
           disabled={!selectedUserId || !permisos.evaluaciones}
           onClick={() => router.push(`/dashboard/evaluaciones/evaluacion/asignaciones-resultados/${selectedUserId}`)}
         >
-          Ver informacion
+          Ver asignaciones y resultados
         </Button>
 <Volver />
 </div>
