@@ -9,6 +9,9 @@ import { useRouter } from "next/navigation";
 import { Notificacion } from "@/components/notification";
 import { formatearFecha } from "@/lib/fechaService";
 import usePermisosOrganizacion from "@/lib/usePermisosOrganizacion";
+import ListaEntidadesEmpresas from "../../../lista-entidad-empresa";
+import ListaSubEntidad from "../../lista-subentidad";
+import ListaDirecciones from "../lista-direcciones";
 
 export default function BuscarDepartamento() {
   const router = useRouter();
@@ -16,23 +19,32 @@ export default function BuscarDepartamento() {
   const [grupos, setGrupos] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedGrupoId, setSelectedGrupoId] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [toggle, setToggle] = useState(false);
   const [notification, setNotification] = useState({
     visible: false,
     titulo: "",
     mensaje: ""
   });
 
+      // Estado inicial para el formulario
+      const [formState, setFormState] = useState({
+        nombre: '',
+        descripcion: '',
+        id_sub_entidad: '',
+        id_entidad_empresa: '',
+        id_direcciones: ''
+      });
+
   useEffect(() => {
+
+    if (!formState.id_direcciones) return;
+
     async function fetchData() {
-      const { data, error } = await supabase.from('departamentos').select(`
-      id_departamentos,
-      nombre,
-      descripcion,
-      fecha_creado,
-      fecha_actualizado,
-      direcciones:direcciones (id_direcciones, nombre)
-    `);
+      const { data, error } = await supabase.from('departamentos')
+      .select('*')
+      .eq('id_direcciones', formState.id_direcciones)
+
       if (error) {
         console.error(error);
         setNotification({
@@ -46,7 +58,7 @@ export default function BuscarDepartamento() {
       }
     }
     fetchData();
-  }, []);
+  }, [toggle, formState.id_direcciones]);
 
 
 
@@ -91,6 +103,36 @@ export default function BuscarDepartamento() {
     
   );
 
+
+       // Manejar cambios en los inputs
+const handleInputChange = (e) => {
+  const { name, value } = e.target;
+  setFormState(prevState => ({
+    ...prevState,
+    [name]: value
+  }));
+  setToggle(!toggle);
+};
+
+
+  const handleGrupoTipoChange = (id_sub_entidad) => {
+    // Actualiza el estado del formulario para incluir el nuevo id de tipo de grupo seleccionado
+    handleInputChange({ target: { name: 'id_sub_entidad', value: id_sub_entidad } });
+  };
+
+  const handleGrupoTipoChange2 = (id_entidad_empresa) => {
+    // Actualiza el estado del formulario para incluir el nuevo id de tipo de grupo seleccionado
+    handleInputChange({ target: { name: 'id_entidad_empresa', value: id_entidad_empresa } });
+
+  };
+
+  const handleGrupoTipoChange3 = (id_direcciones) => {
+    // Actualiza el estado del formulario para incluir el nuevo id de tipo de grupo seleccionado
+    handleInputChange({ target: { name: 'id_direcciones', value: id_direcciones } });
+
+  };
+
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -101,15 +143,29 @@ export default function BuscarDepartamento() {
                 <div className="rounded-lg shadow-lg">
                   <div className="bg-white p-6 rounded-lg shadow-inner m-auto">
         <h1 className="text-xl font-bold  mb-4">BUSCAR DEPARTAMENTOS</h1>
-        <div className="flex justify-center">
-          <Input className="mr-2" placeholder="Search" type="text" onChange={handleSearchChange} />
-          <Button variant="outline">Buscar</Button>
+
+        <div className="flex flex-row gap-1">
+          <div className="flex-auto">
+        <ListaEntidadesEmpresas selectedTipoId={formState.id_entidad_empresa} onGrupoTipoChange={handleGrupoTipoChange2} />
+        </div>
+        <div className="flex-auto">
+        <ListaSubEntidad disabled={formState.id_entidad_empresa ? false : true } selectedTipoId={formState.id_sub_entidad} onGrupoTipoChange={handleGrupoTipoChange} filter={formState.id_entidad_empresa} />
+        </div>
+
+        <div className="flex-auto">
+        <ListaDirecciones disabled={formState.id_sub_entidad ? false : true } selectedTipoId={formState.id_direcciones} onGrupoTipoChange={handleGrupoTipoChange3} filter={formState.id_sub_entidad} />
+        </div>
+
+        </div>
+
+        <div className="flex justify-center mt-4">
+          <Input  placeholder="Buscar" type="text" onChange={handleSearchChange} />
+
         </div>
         <div className="overflow-x-auto mt-4">
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[100px]">Area - Dirección</TableHead>
                 <TableHead className="w-[200px]">Nombre de Departamento</TableHead>
                 <TableHead className="w-[200px]">Descripcion de Departamento</TableHead>
                 <TableHead className="w-[150px]">Fecha Registro</TableHead>
@@ -120,7 +176,6 @@ export default function BuscarDepartamento() {
             <TableBody>
               {filteredGrupos.map((grupo, index) => (
                 <TableRow key={index}>
-                  <TableCell>{grupo.direcciones.nombre}</TableCell>
                   <TableCell>{grupo.nombre}</TableCell>
                   <TableCell>{grupo.descripcion}</TableCell>
                   <TableCell>{ formatearFecha( grupo.fecha_creado )}</TableCell>
@@ -138,19 +193,19 @@ export default function BuscarDepartamento() {
         </div>
         <div className="flex justify-between mt-4">
       <Button
-          className={`bg-blue-500 text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={` text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
           disabled={!selectedGrupoId || !permisos.editarDepartamentos}
           onClick={() => router.push(`/dashboard/entidades/entidadempresa/subentidades/area-direcciones/departamentos/${selectedGrupoId}`)}
         >
-          Modificar tipo
+          Modificar
         </Button>
         
         <Button
-  className={`bg-red-500 text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
+  className={` text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
   disabled={!selectedGrupoId || !permisos.editarDepartamentos }
   onClick={handleDeleteGrupo}
 >
-  Eliminar tipo
+  Eliminar
 </Button>
 
 </div>
