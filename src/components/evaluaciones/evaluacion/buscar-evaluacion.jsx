@@ -104,18 +104,7 @@ export default function BuscarEvaluacion() {
   };
 
   const filteredEvaluaciones = evaluaciones.filter((evaluacion) => {
-    console.log('Este es el formState:', formState)
-    console.log('Esta es la evaluacion iterada:' ,evaluacion);
-    // Comprobar si el nombre de la evaluación incluye el término de búsqueda
-    const nombreIncludesSearchTerm = evaluacion.nombre
-      ? evaluacion.nombre.toLowerCase().includes(searchTerm)
-      : false;
-  
-    // Comprobar si la descripción de la evaluación incluye el término de búsqueda
-    const descripcionIncludesSearchTerm = evaluacion.descripcion
-      ? evaluacion.descripcion.toLowerCase().includes(searchTerm)
-      : false;
-  
+   
     // Comprobar si el nivel coincide con el nivel seleccionado en el formulario
     const nivelMatches = formState.nivel
       ? evaluacion.nivel.toLowerCase() === formState.nivel.toLowerCase()
@@ -138,8 +127,6 @@ export default function BuscarEvaluacion() {
   
     // Devolver true si todos los criterios de filtrado coinciden
     return (
-      nombreIncludesSearchTerm &&
-      descripcionIncludesSearchTerm &&
       nivelMatches &&
       claseMatches &&
       categoriaMatches &&
@@ -260,9 +247,7 @@ export default function BuscarEvaluacion() {
           </Select>
         </div>
       </div>
-      <div className="flex w-full max-w-full items-center space-x-2 mb-10 mt-4">
-        <Input placeholder="Search" type="text" onChange={handleSearchChange} />
-      </div>
+
       <div className="overflow-x-auto mt-4">
         <Table>
           <TableHeader>
@@ -274,6 +259,7 @@ export default function BuscarEvaluacion() {
               <TableHead className="w-[150px]">Clase</TableHead>
               <TableHead className="w-[150px]">Nivel</TableHead>
               <TableHead className="w-[150px]">Duracion</TableHead>
+              <TableHead className="w-[150px]">Calificación minima</TableHead>
               <TableHead className="w-[300px]">Acciones</TableHead>
             </TableRow>
           </TableHeader>
@@ -290,6 +276,8 @@ export default function BuscarEvaluacion() {
                 <TableCell>{evaluacion.clase}</TableCell>
                 <TableCell>{evaluacion.nivel}</TableCell>
                 <TableCell>{evaluacion.duracion} Mins</TableCell>
+                <TableCell>{evaluacion.calificacion} Puntos</TableCell>
+               
                 <TableCell>
                   <Button
                     disabled={!permisos.asignarEvaluaciones}
