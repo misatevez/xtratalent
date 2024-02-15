@@ -27,7 +27,7 @@ export default function ListaCategorias({ onGrupoTipoChange, selectedTipoId }) {
   return (
     <div className="flex justify-between items-start">
       <div className="w-full">
-      <h2 className="text-xl font-semibold mb-4 text-gray-700">Listas de familias disponibles</h2>
+      <h2 className="font-semibold">Listas de familias disponibles</h2>
         <Select 
           onValueChange={onGrupoTipoChange} 
           value={selectedTipoId?.toString()}

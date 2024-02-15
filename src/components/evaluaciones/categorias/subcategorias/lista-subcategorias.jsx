@@ -31,7 +31,7 @@ export default function ListaSubCategorias({ onGrupoTipoChange, selectedTipoId, 
   return (
     <div className="flex justify-between items-start">
       <div className="w-full">
-        <h2 className="text-xl font-semibold mb-4 text-gray-700">Listas de sub-familias disponibles</h2>
+        <h2 className="font-semibold">Listas de sub-familias disponibles</h2>
         <Select 
           key={selectedCategoryId || 'default-key'} 
           onValueChange={onGrupoTipoChange}

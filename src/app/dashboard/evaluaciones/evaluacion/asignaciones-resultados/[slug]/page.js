@@ -135,7 +135,7 @@ export default function Page({ params }) {
           <div className="rounded-lg ">
             <div className="bg-white p-6 rounded-lg  m-auto">
               <h1 className="text-2xl font-bold mb-2">
-                Evaluaciones disponibles
+                Evaluaciones asignadas
               </h1>
               {evaluacionesDisponibles && evaluacionesDisponibles.length > 0 ? (
                 <Table>
