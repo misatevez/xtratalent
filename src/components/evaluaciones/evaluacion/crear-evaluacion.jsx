@@ -41,7 +41,7 @@ export default function CrearEvaluacion() {
       limite_tiempo: null,
       calificacion:'',
       activa: null,
-      instrucciones:'',
+      instrucciones: 'Lea y evalúe detenidamente cada una de las siguientes preguntas y responda sobre las opciones de respuesta, de acuerdo a su forma de pensar, actuar en base a su conocimiento y/o experiencia. Asegúrese de completar todas las preguntas en el tiempo estimado para la Evaluación.',
       areas:'',
     });
     

@@ -106,9 +106,9 @@ export default function BuscarPersonal() {
     <div className="p-4 mx-auto w-full max-w-6xl mt-4">
     <div className="rounded-lg shadow-lg">
       <div className="bg-white p-6 rounded-lg shadow-inner m-auto">
-        <h1 className="text-2xl font-bold mb-2">Asignaciones y resultados</h1>
+        <h1 className="text-2xl font-bold mb-2">Asignaciones y resultados de usuarios</h1>
 
-      <div className="flex w-full max-w-full items-center space-x-2 mb-10">
+      <div className="flex w-full max-w-full items-center space-x-2 mb-10 mt-4">
         <Input placeholder="Buscar" type="text" onChange={handleSearchChange} />
       </div>
       <Table>

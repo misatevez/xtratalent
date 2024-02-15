@@ -136,6 +136,7 @@ const [toggleEffect, setToggleEffect] = useState(false);
             <h1 className="text-2xl font-bold mb-2">
               Evaluaciones disponibles
             </h1>
+            {evaluacionesDisponibles && evaluacionesDisponibles.length > 0 ? (
             <Table>
               <TableHeader>
                 <TableRow>
@@ -167,6 +168,9 @@ const [toggleEffect, setToggleEffect] = useState(false);
                 ))}
               </TableBody>
             </Table>
+            ) : (
+              <div className="mt-4"><h2>No hay evaluaciones disponibles.</h2></div>
+              )}
           </div>
         </div>
       </div>
@@ -175,17 +179,19 @@ const [toggleEffect, setToggleEffect] = useState(false);
         <div className="rounded-lg ">
           <div className="bg-white p-6 rounded-lg  m-auto">
             <h1 className="text-2xl font-bold mb-2">Evaluaciones resueltas</h1>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="w-[150px]">Nombre</TableHead>
-                  <TableHead className="w-[200px]">Calificacion</TableHead>
-                  <TableHead className="w-[200px]">Resultado</TableHead>
-                  <TableHead className="w-[250px]">Fecha</TableHead>
-                  <TableHead className="w-[50px]">Seleccionar</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
+            {EvaluacionesResueltas && EvaluacionesResueltas.length > 0 ? (
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[150px]">Nombre</TableHead>
+                <TableHead className="w-[200px]">Calificacion</TableHead>
+                <TableHead className="w-[200px]">Resultado</TableHead>
+                <TableHead className="w-[250px]">Fecha</TableHead>
+                <TableHead className="w-[50px]">Seleccionar</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+      
                 {EvaluacionesResueltas?.map((evaluacion, index) => (
                   <TableRow key={index}>
                     <TableCell>{evaluacion.evaluaciones.nombre}</TableCell>
@@ -217,6 +223,11 @@ const [toggleEffect, setToggleEffect] = useState(false);
                 ))}
               </TableBody>
             </Table>
+        
+            ) : (
+              <div className="mt-4"><h2>No hay evaluaciones resueltas disponibles.</h2></div>
+            )}
+
           </div>
         </div>
       </div>
@@ -232,11 +243,11 @@ const [toggleEffect, setToggleEffect] = useState(false);
           </Button>
           <Volver />
 
-          <Button 
+         { evaluacionesDisponibles && evaluacionesDisponibles.length < 0 ?  <Button 
           disabled={!selectedUserId}
           onClick={() => handleDelete(selectedUserId)}>
             Borrar evaluacion
-          </Button>
+          </Button> : null}
         </div>
       </div>
     </div>
