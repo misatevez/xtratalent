@@ -111,9 +111,9 @@ import useUsuario from "@/lib/useUsuario";
           <div className="rounded-lg shadow-lg">
             <div className="bg-white p-6 rounded-lg shadow-inner m-auto">
               <h1 className="text-2xl font-bold mb-2">
-                Evaluaciones disponibles
+                Evaluaciones asignadas
               </h1>
-              <Table>
+              { evaluaciones && evaluaciones.length > 0 ? (<Table>
                 <TableHeader>
                   <TableRow>
                     <TableHead className="w-[150px]">Nombre</TableHead>
@@ -143,7 +143,8 @@ import useUsuario from "@/lib/useUsuario";
                     </TableRow>
                   ))}
                 </TableBody>
-              </Table>
+              </Table>) : (<div>Usted no tiene evaluaciones asignadas</div>)
+              }
               <div className="flex justify-between mt-4">
                   <Volver />
               </div>

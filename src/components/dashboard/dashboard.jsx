@@ -81,12 +81,21 @@ export function Dashboard( {children} ) {
             Mis evaluaciones
           </Link>
 
+          {permisos.tipo_usuario == 'Externo' && (
           <Link
             className={`flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200 link ${pathname === '/dashboard' ? 'active' : ''}`}
-            href="/dashboard">
+            href="/dashboard/perfil">
+            <UserIcon className="w-6 h-6" />
+           Mis datos
+          </Link>)}
+
+          {permisos.tipo_usuario !== 'Externo' && (
+          <Link
+            className={`flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200 link ${pathname === '/dashboard' ? 'active' : ''}`}
+            href="/dashboard/metricas">
             <SettingsIcon className="w-6 h-6" />
-            {permisos.tipo_usuario !== 'Externo' ? 'Métricas (Dashboard)' : 'Dashboard'}
-          </Link>
+            Métricas (Dashboard)
+          </Link>)}
 
           {permisos.tipo_usuario !== 'Externo' && ( <Link
            className={`flex items-center gap-2 py-2 text-lg font-semibold text-gray-700 dark:text-gray-200 link ${pathname === '/dashboard/personal' ? 'active' : ''}`}

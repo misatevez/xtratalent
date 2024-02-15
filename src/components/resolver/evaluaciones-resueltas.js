@@ -76,7 +76,7 @@ export default function EvaluacionesResueltas() {
         <div className="rounded-lg shadow-lg">
           <div className="bg-white p-6 rounded-lg shadow-inner m-auto">
             <h1 className="text-2xl font-bold mb-2">Evaluaciones resueltas</h1>
-            <Table>
+            {evaluaciones && evaluaciones.length > 0 ? (<Table>
               <TableHeader>
                 <TableRow>
                   <TableHead className="w-[150px]">Nombre</TableHead>
@@ -118,9 +118,12 @@ export default function EvaluacionesResueltas() {
                   </TableRow>
                 ))}
               </TableBody>
-            </Table>
+            </Table>)
+          :
+          (<div>Usted no tiene evaluaciones resueltas</div>)  
+          }
             <div className="flex justify-between mt-4">
-              <Button  onClick={() => router.push(`/dashboard/resolver/evaluaciones-resueltas/${selectedUserId}`)} disabled={!selectedUserId}  >Reporte</Button>
+            {evaluaciones && evaluaciones.length > 0 ? (  <Button  onClick={() => router.push(`/dashboard/resolver/evaluaciones-resueltas/${selectedUserId}`)} disabled={!selectedUserId}  >Reporte</Button>) : null}
               <Volver />
               </div>
           </div>

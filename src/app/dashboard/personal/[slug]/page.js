@@ -94,12 +94,20 @@ export default function Page({ params }) {
     return permisoDenegado;
 }
 
+const handleSelectChange = (value, fieldName) => {
+  setUserDetails(prevState => ({
+    ...prevState,
+    [fieldName]: value,
+  }));
+};
+
 
   return (
     <>
     <FormRegistro
       titulo={"Editar usuario"}
       formState={userDetails}
+      handleSelectChange={handleSelectChange}
       handleInputChange={handleInputChange}
       handleSubmit={handleSubmit}
     />

@@ -99,7 +99,7 @@ export function Login() {
         saveCredentials(email, password);
       }
 
-      router.push("/dashboard");
+      router.push("/dashboard/metricas");
     } catch (error) {
       console.error("Error iniciando sesión:", error.message);
       setMessage({
