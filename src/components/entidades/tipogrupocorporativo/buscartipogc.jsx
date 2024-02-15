@@ -166,7 +166,7 @@ export default function BuscarTipoGC() {
             </div>
             <div className="flex justify-around mt-4">
               <Button
-                className={`bg-black text-white ${
+                className={` text-white ${
                   !selectedGrupoId ? "opacity-50 cursor-not-allowed" : ""
                 }`}
                 disabled={!selectedGrupoId || !permisos.editar_tipo_gc_subtipo}
@@ -176,17 +176,17 @@ export default function BuscarTipoGC() {
                   )
                 }
               >
-                Modificar tipo
+                Modificar 
               </Button>
 
               <Button
-                className={`bg-red-500 text-white ${
+                className={` text-white ${
                   !selectedGrupoId ? "opacity-50 cursor-not-allowed" : ""
                 }`}
                 disabled={!selectedGrupoId || !permisos.editar_tipo_gc_subtipo}
                 onClick={handleDeleteGrupo}
               >
-                Eliminar tipo
+                Eliminar 
               </Button>
             </div>
           </div>

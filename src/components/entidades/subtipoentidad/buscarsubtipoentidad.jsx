@@ -140,7 +140,7 @@ export default function BuscarSubTipoEntidad() {
         </div>
         <div className="flex justify-around mt-4">
       <Button
-          className={`bg-black text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={` text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
           disabled={!selectedGrupoId || !permisos.editar_tipo_gc_subtipo}
           onClick={() => router.push(`/dashboard/entidades/subtipoentidad/${selectedGrupoId}`)}
         >
@@ -148,7 +148,7 @@ export default function BuscarSubTipoEntidad() {
         </Button>
         
         <Button
-  className={`bg-red-500 text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
+  className={` text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
   disabled={!selectedGrupoId || !permisos.editar_tipo_gc_subtipo}
   onClick={handleDeleteGrupo}
 >

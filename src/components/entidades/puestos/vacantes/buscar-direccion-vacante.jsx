@@ -91,7 +91,7 @@ const handleDelete = async () => {
 
 
 
-const linkUrl = `http://localhost:3000/vacantes/registro/${direcciones.id}`;
+const linkUrl = `/vacantes/registro/${direcciones.id}`;
 
 
 if (loading) return <p>Cargando...</p>;
