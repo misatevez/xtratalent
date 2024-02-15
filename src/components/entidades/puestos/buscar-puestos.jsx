@@ -9,6 +9,10 @@ import { useRouter } from "next/navigation";
 import { Notificacion } from "@/components/notification";
 import { formatearFecha } from "@/lib/fechaService";
 import usePermisosOrganizacion from "@/lib/usePermisosOrganizacion";
+import ListaEntidadesEmpresas from "../entidadempresa/lista-entidad-empresa";
+import ListaSubEntidad from "../entidadempresa/subentidades/lista-subentidad";
+import ListaDirecciones from "../entidadempresa/subentidades/areas-direcciones/lista-direcciones";
+import ListaDepartamentos from "../entidadempresa/subentidades/areas-direcciones/departamento/lista-departamento";
 
 export default function BuscarPuesto() {
   const router = useRouter();
@@ -16,15 +20,31 @@ export default function BuscarPuesto() {
   const [grupos, setGrupos] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedGrupoId, setSelectedGrupoId] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [toggle, setToggle] = useState(false);
+
   const [notification, setNotification] = useState({
     visible: false,
     titulo: "",
     mensaje: ""
   });
 
+   // Estado inicial para el formulario
+   const [formState, setFormState] = useState({
+    nombre: '',
+    descripcion: '',
+    id_sub_entidad: '',
+    id_entidad_empresa: '',
+    id_direcciones: '',
+    id_departamentos: ''
+  });
+
+
   useEffect(() => {
     async function fetchData() {
+
+      if(!formState.id_departamentos) return;
+
       const { data, error } = await supabase.from('puestos').select(`
       id_puestos,
       nombre,
@@ -33,7 +53,9 @@ export default function BuscarPuesto() {
       fecha_actualizado,
       direcciones:direcciones (id_direcciones, nombre),
       departamentos:departamentos (id_departamentos, nombre)
-    `);
+    `).eq('id_departamentos', formState.id_departamentos);
+
+
       if (error) {
         console.error(error);
         setNotification({
@@ -47,7 +69,7 @@ export default function BuscarPuesto() {
       }
     }
     fetchData();
-  }, []);
+  }, [toggle, formState.id_departamentos]);
 
 
 
@@ -93,6 +115,40 @@ export default function BuscarPuesto() {
     grupo.departamentos.nombre.toLowerCase().includes(searchTerm)
   );
 
+         // Manejar cambios en los inputs
+const handleInputChange = (e) => {
+  const { name, value } = e.target;
+  setFormState(prevState => ({
+    ...prevState,
+    [name]: value
+  }));
+  setToggle(!toggle);
+};
+
+
+  const handleGrupoTipoChange = (id_sub_entidad) => {
+    // Actualiza el estado del formulario para incluir el nuevo id de tipo de grupo seleccionado
+    handleInputChange({ target: { name: 'id_sub_entidad', value: id_sub_entidad } });
+  };
+
+  const handleGrupoTipoChange2 = (id_entidad_empresa) => {
+    // Actualiza el estado del formulario para incluir el nuevo id de tipo de grupo seleccionado
+    handleInputChange({ target: { name: 'id_entidad_empresa', value: id_entidad_empresa } });
+
+  };
+
+  const handleGrupoTipoChange3 = (id_direcciones) => {
+    // Actualiza el estado del formulario para incluir el nuevo id de tipo de grupo seleccionado
+    handleInputChange({ target: { name: 'id_direcciones', value: id_direcciones } });
+
+  };
+
+  const handleGrupoTipoChange4 = (id_departamentos) => {
+    // Actualiza el estado del formulario para incluir el nuevo id de tipo de grupo seleccionado
+    handleInputChange({ target: { name: 'id_departamentos', value: id_departamentos } });
+
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -103,8 +159,27 @@ export default function BuscarPuesto() {
                 <div className="rounded-lg shadow-lg">
                   <div className="bg-white p-6 rounded-lg shadow-inner m-auto">
         <h1 className="text-xl font-bold mb-4">Buscar Puestos</h1>
-        <div className="flex justify-center">
-          <Input className="mr-2" placeholder="Search" type="text" onChange={handleSearchChange} />
+
+        <div className="flex flex-row gap-1">
+          <div className="flex-auto">
+        <ListaEntidadesEmpresas selectedTipoId={formState.id_entidad_empresa} onGrupoTipoChange={handleGrupoTipoChange2} />
+        </div>
+        <div className="flex-auto">
+        <ListaSubEntidad disabled={formState.id_entidad_empresa ? false : true } selectedTipoId={formState.id_sub_entidad} onGrupoTipoChange={handleGrupoTipoChange} filter={formState.id_entidad_empresa} />
+        </div>
+
+        <div className="flex-auto">
+        <ListaDirecciones disabled={formState.id_sub_entidad ? false : true } selectedTipoId={formState.id_direcciones} onGrupoTipoChange={handleGrupoTipoChange3} filter={formState.id_sub_entidad} />
+        </div>
+
+        <div className="flex-auto">
+        <ListaDepartamentos disabled={formState.id_direcciones ? false : true } selectedTipoId={formState.id_departamentos} onGrupoTipoChange={handleGrupoTipoChange4} filter={formState.id_direcciones} />
+        </div>
+
+        </div>
+
+        <div className="flex justify-center mt-4">
+          <Input  placeholder="Buscar" type="text" onChange={handleSearchChange} />
         </div>
         <div className="overflow-x-auto mt-4">
           <Table>
@@ -141,19 +216,19 @@ export default function BuscarPuesto() {
         </div>
         <div className="flex justify-between mt-4">
       <Button
-          className={`bg-blue-500 text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={` text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
           disabled={!selectedGrupoId || !permisos.editarPuestos }
           onClick={() => router.push(`/dashboard/entidades/puestos/${selectedGrupoId}`)}
         >
-          Modificar tipo
+          Modificar
         </Button>
         
         <Button
-  className={`bg-red-500 text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
+  className={` text-white ${!selectedGrupoId ? 'opacity-50 cursor-not-allowed' : ''}`}
   disabled={!selectedGrupoId || !permisos.editarPuestos}
   onClick={handleDeleteGrupo}
 >
-  Eliminar tipo
+  Eliminar
 </Button>
 
 
