@@ -53,6 +53,37 @@ export default function AsignarPregunta({ id_tema }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // comprobar campos
+
+    if (formState.pregunta.length < 2) {
+      setNotification({
+        visible: true,
+        titulo: "Error",
+        mensaje: "La pregunta es requerida",
+      });
+      return;
+    }
+
+    if (formState.tipo_pregunta.length < 2) {
+      setNotification({
+        visible: true,
+        titulo: "Error",
+        mensaje: "El tipo de pregunta es requerido",
+      });
+      return;
+    }
+
+    if (formState.pregunta_concepto.length < 2) {
+      setNotification({
+        visible: true,
+        titulo: "Error",
+        mensaje: "El concepto de pregunta es requerido",
+      });
+      return;
+    }
+
+
   
     // Verificar si estamos en modo de edición (es decir, si hay un id_pregunta)
     if (formState.id_pregunta) {
@@ -357,26 +388,21 @@ export default function AsignarPregunta({ id_tema }) {
           <TableHeader>
             <TableRow>
               <TableHead>Pregunta</TableHead>
-              <TableHead>Accion</TableHead>
-              
-              <TableHead>Respuestas</TableHead>
+              <TableHead>Acciones</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
           {preguntas.map((pregunta, index) => (
             <TableRow key={index}>
               <TableCell>{pregunta.pregunta}</TableCell>
-              <TableCell>
-                <Button onClick={() => handleEdit(pregunta.id_pregunta)} className="w-1/2" type="submit">
+              <TableCell className="flex flex-row gap-1">
+                <Button onClick={() => handleEdit(pregunta.id_pregunta)} className="w-full"  type="submit">
                   Edit
                   </Button>
-                  <Button onClick={() => handleDelete(pregunta.id_pregunta)} className="w-1/2" type="submit">
+                  <Button onClick={() => handleDelete(pregunta.id_pregunta)} className="w-full" type="submit">
                   Delete
                 </Button>
-              </TableCell>
-
-              <TableCell>
-                <Button onClick={() => router.push(`/dashboard/evaluaciones/respuestas/crear-respuesta/${pregunta.id_pregunta}`)} className="w-1/2" type="submit">
+                <Button onClick={() => router.push(`/dashboard/evaluaciones/respuestas/crear-respuesta/${pregunta.id_pregunta}`)}  className="w-full" type="submit">
                   Asignar Respuesta
                 </Button>
               </TableCell>
